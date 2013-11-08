@@ -1,0 +1,65 @@
+12.06.2013 00:14
+Exception(php): Undefined index: action;
+Line: 20;
+File: /Users/cleric/Sites/Default project/required/pages/test.php;
+	 line: 12 	 file: /Users/cleric/Sites/Default project/required/library/exceptions.php
+	 line: 20 	 file: /Users/cleric/Sites/Default project/required/pages/test.php
+	 line: 117 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 67 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 3 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 107 	 file: /Users/cleric/Sites/Default project/required/library/sky.php
+	 line: 13 	 file: /Users/cleric/Sites/Default project/html/index.php
+
+
+12.06.2013 00:15
+Exception(php): Undefined index: action;
+Line: 20;
+File: /Users/cleric/Sites/Default project/required/pages/test.php;
+	 line: 12 	 file: /Users/cleric/Sites/Default project/required/library/exceptions.php
+	 line: 20 	 file: /Users/cleric/Sites/Default project/required/pages/test.php
+	 line: 117 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 67 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 3 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 107 	 file: /Users/cleric/Sites/Default project/required/library/sky.php
+	 line: 13 	 file: /Users/cleric/Sites/Default project/html/index.php
+
+
+12.06.2013 00:17
+Exception(php): Undefined index: action;
+Line: 20;
+File: /Users/cleric/Sites/Default project/required/pages/test.php;
+	 line: 12 	 file: /Users/cleric/Sites/Default project/required/library/exceptions.php
+	 line: 20 	 file: /Users/cleric/Sites/Default project/required/pages/test.php
+	 line: 117 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 67 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 3 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 107 	 file: /Users/cleric/Sites/Default project/required/library/sky.php
+	 line: 13 	 file: /Users/cleric/Sites/Default project/html/index.php
+
+
+12.06.2013 00:19
+Exception(php): Undefined index: action;
+Line: 20;
+File: /Users/cleric/Sites/Default project/required/pages/test.php;
+	 line: 12 	 file: /Users/cleric/Sites/Default project/required/library/exceptions.php
+	 line: 20 	 file: /Users/cleric/Sites/Default project/required/pages/test.php
+	 line: 117 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 67 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 3 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 107 	 file: /Users/cleric/Sites/Default project/required/library/sky.php
+	 line: 13 	 file: /Users/cleric/Sites/Default project/html/index.php
+
+
+12.06.2013 00:19
+Exception(php): Undefined index: action;
+Line: 20;
+File: /Users/cleric/Sites/Default project/required/pages/test.php;
+	 line: 12 	 file: /Users/cleric/Sites/Default project/required/library/exceptions.php
+	 line: 20 	 file: /Users/cleric/Sites/Default project/required/pages/test.php
+	 line: 117 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 67 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 3 	 file: /Users/cleric/Sites/Default project/required/classes/content.php
+	 line: 107 	 file: /Users/cleric/Sites/Default project/required/library/sky.php
+	 line: 13 	 file: /Users/cleric/Sites/Default project/html/index.php
+
+

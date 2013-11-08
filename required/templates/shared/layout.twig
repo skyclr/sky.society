@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en-US" ng-app="skyApp">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ preferences.site.name }} | {{ page.title }}</title>
+</head>
+<body ng-controller="pageController">
+	{{ page.content|raw }}
+
+    <script type="text/javascript" src="{{ base }}jvs/external/angular.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/external/jquery.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/lib/sky.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/lib/ajax.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/lib/ajaxFiles.xhr.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/pages/{{ pageName }}.js"></script>
+</body>
+</html>
