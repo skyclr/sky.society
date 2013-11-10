@@ -27,21 +27,24 @@
         {% endblock %}
 
     </div>
-{# Scripts #}
-<script type="text/javascript" src="{{ base }}jvs/external/angular.js"></script>
-<script type="text/javascript" src="{{ base }}jvs/external/jquery.js"></script>
-<script type="text/javascript" src="{{ base }}jvs/lib/sky.js"></script>
-<script type="text/javascript" src="{{ base }}jvs/lib/ajax.js"></script>
-<script type="text/javascript" src="{{ base }}jvs/lib/ajaxFiles.xhr.js"></script>
-<script type="text/javascript" src="{{ base }}jvs/pages/{{ pageName }}.js"></script>
-{% for jsTemplate in page.jsTemplates %}
-    {% include "js/" ~ jsTemplate.realPath ~ "." ~ preferences.templates.jsTemplates.extension %}
-{% endfor %}
-<script type="text/javascript">
-    var page = page || { data: {} };
-    page.data.templates =  {{ jsTemplates|raw }};
-    page.data.url  		= "{{ (base ~ realPath)|escape("js") }}";
-    page.data.base 		= "{{ base|escape("js") }}";
-</script>
+
+    {# Scripts #}
+    <script type="text/javascript" src="{{ base }}jvs/external/angular.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/external/jquery.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/modules/skyApp.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/directives/forms.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/lib/sky.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/lib/ajax.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/lib/ajaxFiles.xhr.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/pages/{{ pageName }}.js"></script>
+    {% for jsTemplate in page.jsTemplates %}
+        {% include "js/" ~ jsTemplate.realPath ~ "." ~ preferences.templates.jsTemplates.extension %}
+    {% endfor %}
+    <script type="text/javascript">
+        var page = page || { data: {} };
+        page.data.templates =  {{ jsTemplates|raw }};
+        page.data.url  		= "{{ (base ~ realPath)|escape("js") }}";
+        page.data.base 		= "{{ base|escape("js") }}";
+    </script>
 </body>
 </html>
