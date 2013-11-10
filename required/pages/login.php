@@ -12,6 +12,8 @@ class page extends basePage {
 	 */
 	public $title 	 = "Вход";
 
+	public $parentTemplate = "simple";
+
 	/**
 	 * Page creation
 	 */

@@ -1,8 +1,11 @@
+/* Use strict mode to prevent errors */
+'use strict';
+
 angular.module("sky.directives")
-	.directive("smartLabel", [function() {
+	.directive("smartLabel", ["skyTemplates", function(templates) {
 		console.log(13);
 		return {
 			restrict: "E",
-			template: '<span>Hello</span>'
+			template: templates.getRaw("forms-label")
 		}
 	}]);

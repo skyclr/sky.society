@@ -26,7 +26,7 @@ $preferences["templates"] = array(
 		 * JS templates that would be included in all pages
 		 * @type {array|boolean}
 		 */
-		"default" => array("elements", "selectReplace", "tables"),
+		"default" => array("forms"),
 
 		/**
 		 * JS templates extension
