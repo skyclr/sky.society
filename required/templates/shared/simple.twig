@@ -1,0 +1,10 @@
+{% extends "shared/layout.twig" %}
+
+{# Set class #}
+{% block bodyClass %}simple{% endblock %}
+
+{# Make page content #}
+{% block content %}
+	{# Output page data #}
+	{{ page.content|raw }}
+{% endblock %}

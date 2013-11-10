@@ -1,0 +1,57 @@
+{# Some elements #}
+{% macro resultMessage(message, id = false) %}
+
+	<div class="notificationMessage {{ message.type }} {{ message.subtext ? "" : "oneline" }}" {% if id %}id="{{ id }}"{% endif %}>
+		<div class="icon"></div>
+		<b>{{ message.text|raw }}</b>
+		{{ message.subtext ? message.subtext|raw : "" }}
+	</div>
+
+{% endmacro %}
+
+{# Rounds content in big round border #}
+{% macro bigRoundedField(content) %}
+
+	<div class="bigRoundedField">
+		<div class="top">
+			<div class="left"></div>
+			<div class="right"></div>
+		</div>
+		<div class="content">
+			{{ content|raw }}
+		</div>
+		<div class="bottom">
+			<div class="left"></div>
+			<div class="right"></div>
+		</div>
+	</div>
+
+{% endmacro %}
+
+{# Convert array to JS object #}
+{% macro arrayToJsObject(array, key, value) %}
+
+	{# First item flag #}
+	{% set first = true %}
+
+	{# Compile object #}
+	{ {% for index, item in array %}
+	{% if not first %}, {% endif %}{{ key ? item[key] : index }}: '{{ (value ? item[value] : item)|escape("js") }}'
+	{% set first = false %}
+{% endfor %} }
+
+{% endmacro %}
+
+{# Convert array to JS array #}
+{% macro arrayToJsArray(array, key) %}
+
+	{# First item flag #}
+	{% set first = true %}
+
+	{# Compile object #}
+	[ {% for item in array %}
+	{% if not first %}, {% endif %}'{{ (key ? item[key] : item)|escape("js") }}'
+	{% set first = false %}
+{% endfor %} ]
+
+{% endmacro %}

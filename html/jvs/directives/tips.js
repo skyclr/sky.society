@@ -6,14 +6,20 @@ angular.module("sky.directives")
 
 			// Self construct
 			if(!this instanceof tip)
-				return new tip();
+				return new tip(object, align);
 
-
+			// Save object
+			this.object = $(object).data("tip", this);
 
 			// Return
 			return this;
 
 		};
+
+		// Set prototype
+		jQuery.extend(tip.prototype, {
+
+		});
 
 		// Self return
 		return tip;
@@ -38,6 +44,10 @@ angular.module("sky.directives")
 		}
 
 	}])
-	.directive("", [function() {
-
+	.directive("tip", [function() {
+		return {
+			link: function (scope, element) {
+				console.log(scope)
+			}
+		}
 	}]);
