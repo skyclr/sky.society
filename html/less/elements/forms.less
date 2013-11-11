@@ -2,32 +2,33 @@ input {
 	color     : #4c4c4c;
 	font-size : 12px;
 	&:-webkit-autofill {
-		color: #fff !important;
+		color : #fff !important;
 	}
 	&[type="text"], &[type="password"] {
-		width      : 186px;
-		background : url(../img/elements/inputs.png) 100% -1px;
-		height     : 20px;
-		padding    : 4px 7px;
-		float: left;
-		border-radius: 5px;
-		border: 1px solid #b1b1b1;
-		border-left-color: #dcdcdc;
-		border-right-color: #dcdcdc;
-		border-bottom: none;
+		width              : 186px;
+		background         : url(../img/elements/inputs.png) 100% -1px;
+		height             : 20px;
+		padding            : 4px 7px;
+		float              : left;
+		border-radius      : 5px;
+		border             : 1px solid #b1b1b1;
+		border-left-color  : #dcdcdc;
+		border-right-color : #dcdcdc;
+		border-bottom      : none;
 		&:focus {
 			outline             : none;
 			background-position : 100% -31px !important;
-			border-color: #78b8f8 !important;
+			border-color        : #78b8f8 !important;
 		}
 	}
 }
+
 form.ng-dirty {
 	input {
 		&[type="text"], &[type="password"] {
 			&.ng-invalid {
 				background-position : 100% -61px;
-				border-color: #fb8a74;
+				border-color        : #fb8a74;
 			}
 		}
 	}
@@ -36,7 +37,9 @@ form.ng-dirty {
 label.button {
 	padding : 0;
 	height  : 30px;
-	&:before { margin : 0 0 0 -5px; }
+	&:before {
+		margin : 0 0 0 -5px;
+	}
 }
 
 /* Base button class */
@@ -51,12 +54,12 @@ label.button {
 	display     : block;
 	padding     : 8px 10px 8px 5px;
 	margin-left : 5px;
-	text-align: center;
+	text-align  : center;
 	&.gray {
 		background : url(../img/elements/buttonGray.png) 100% 0 no-repeat;
 		&, > input {
-			text-shadow: 0 1px 0 #ddd;
-			color: #4c4c4c;
+			text-shadow : 0 1px 0 #ddd;
+			color       : #4c4c4c;
 		}
 		&:before {
 			background : url(../img/elements/buttonGray.png) 0 0 no-repeat;
@@ -70,7 +73,7 @@ label.button {
 		padding     : 0 10px 0 5px;
 		border      : none;
 		cursor      : pointer;
-		text-align: center;
+		text-align  : center;
 		background  : transparent;
 	}
 	&:before {
@@ -85,48 +88,54 @@ label.button {
 	}
 	&:hover {
 		background-position : 100% -30px;
-		&:before { background-position : 0 -30px; }
+		&:before {
+			background-position : 0 -30px;
+		}
 	}
 	&.hover {
 		background-position : 100% -60px;
-		&:before { background-position : 0 -60px; }
+		&:before {
+			background-position : 0 -60px;
+		}
 	}
 	&.disabled {
 		background-position : 100% -90px;
 		color               : #6b8999;
 		text-shadow         : 0 1px 0 #bdd5ee;
-		&:before { background-position : 0 -90px; }
+		&:before {
+			background-position : 0 -90px;
+		}
 	}
 }
 
-
-
 .switcher {
-	height: 30px;
+	height : 30px;
 	> * {
-		background : url(../img/elements/switcher.png) 100% 0 no-repeat;
-		float 		: left;
+		background  : url(../img/elements/switcher.png) 100% 0 no-repeat;
+		float       : left;
 		height      : 14px;
 		display     : block;
 		padding     : 8px 10px 8px 0px;
-		margin-left: 8px;
-		text-shadow: 0 1px 0 #ddd;
-		color: #4c4c4c;
+		margin-left : 8px;
+		text-shadow : 0 1px 0 #ddd;
+		color       : #4c4c4c;
 		&:before {
 			content     : "";
 			display     : block;
 			float       : left;
-			height 		: 30px;
+			height      : 30px;
 			width       : 8px;
 			margin-left : -8px;
 			margin-top  : -8px;
 			background  : url(../img/elements/switcher.png) 0 0 no-repeat;
 		}
 		&.first {
-			&:before { background-image: url(../img/elements/buttonGray.png); }
+			&:before {
+				background-image : url(../img/elements/buttonGray.png);
+			}
 		}
 		&.last {
-			background-image: url(../img/elements/buttonGray.png);
+			background-image : url(../img/elements/buttonGray.png);
 		}
 	}
 }
@@ -135,11 +144,11 @@ label.button {
 label {
 	display       : block;
 	margin-bottom : 5px;
-	overflow 	  : auto;
+	overflow      : auto;
 	span {
-		display: block;
-		float: left;
-		text-align: left;
+		display    : block;
+		float      : left;
+		text-align : left;
 		&.name {
 			height  : 21px;
 			padding : 5px 10px 5px 0;

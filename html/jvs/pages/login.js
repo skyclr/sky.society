@@ -1,12 +1,13 @@
 angular.module("skyApp")
 	.controller("pageController", ["$scope", function($scope) {
-		$scope.a = 13;
-		$scope.username = "Andrew"
 		$scope.submit = function(form, $event) {
 
-			$event.preventDefault();
+			/* Mark fields */
 			form.$setDirty();
-			if(!form.$invalid)
-				console.log("submit");
+
+			/* Check valid */
+			if(form.$invalid)
+				$event.preventDefault();
+
 		}
 	}]);
