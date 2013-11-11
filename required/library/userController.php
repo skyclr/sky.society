@@ -34,38 +34,24 @@ class userController implements arrayaccess {
 	public $isLoggedIn = false;
 
 	/**
-	 * User groups list
-	 * @var array
-	 */
-	public $groups = array();
-
-	/**
 	 * User object construct
 	 * @param array $userData User data to be based on
 	 */
 	public function __construct($userData) {
 
 
-		# Set allowed operations
-		$userData["allowed"]["sms"]		= (bool)$userData['sms_allowed'];
-		$userData["allowed"]["dispatch"]= (bool)$userData['sms_allowed'];
-		$userData["allowed"]["smsApi"]	= $userData['smsapi_allowed'];
-		$userData["allowed"]["pseudo"]	= (bool)($userData['direct_pseudo_subs'] || $userData['ifree_pseudo_subs']);
-		$userData["allowed"]["subs"]	= (bool)($userData['subscriptions0_allowed'] || $userData['subscriptions_direct_allowed']);
-		$userData["allowed"]["commerce"]= (bool)($userData['mcommerce_allowed']);
-
-
-		# Get support
-		if($userData["support"] > 0)
-			$userData["support"] = sky::$db->make("site_admin")->where($userData["support"])->get("single");
-
-
 		# Fill arrays
 		$this->userData = $userData;
 
 
-		# Get user groups
-		$this->getUserGroups($userData);
+		# Set info owner
+		if(!empty(sky::$config['login']['userInfo'])) {
+			$this->info["owner"] = $userData["id"];
+			if($userData['id'] && $info = sky::$db->make(sky::$config["login"]["userInfo"])->where("owner", $userData["id"])->get("single"))
+				$this->info = $info;
+		}
+		else
+			$this->info = false;
 
 
 		# Get logged flag
@@ -89,6 +75,7 @@ class userController implements arrayaccess {
 	}
 
 	/**
+	 * 
 	 * Gets users info
 	 * @return array user information
 	 * @throws systemErrorException
@@ -130,81 +117,7 @@ class userController implements arrayaccess {
 		if(auth::isLoggedIn() && !empty($this->userData["usertype"]) && mb_strtolower($this->userData["usertype"]) == "admin") return true;
 		else return false;
 	}
-
-	/**
-	 * Sends email
-	 * @param $subject
-	 * @param $text
-	 */
-	public function email($subject, $text) {
-		//TODO::write code here
-	}
-
-	/**
-	 * Gets list of user groups
-	 * @param $userData
-	 * @return bool
-	 */
-	public function getUserGroups($userData) {
-
-
-		# Base group
-		$groups = array("all");
-
-
-		# Check other groups only if user active
-		if($userData['active'] == 1) {
-
-			# Including messages for users with I-Free subscriptions
-			if($userData['subscriptions0_allowed'] == 1)
-				$groups[] = 'subs';
-
-
-			# Including messages for users with Direct subscriptions
-			if($userData['subscriptions_direct_allowed'] == 1)
-				$groups[] = 'direct';
-
-
-			# Including messages for users with Pseudo
-			if($userData['direct_pseudo_subs'] == 1)
-				$groups[] = 'pseudo';
-
-
-			# Including messages for users with Dispatch
-			if(!empty($userData['smsapi_allowed']))
-				$groups[] = 'dispatch';
-
-
-			# Selecting active projects
-			if(sky::$db->make("site_projects")->where("user_id", $userData['id'])->where("active", 1)->records("COUNT(*)")->get("value"))
-				$groups[] = 'active';
-
-
-			# Get spec project counters
-			if($projectCounts = sky::$db
-				->make("site_projects")->where("user_id", $userData['id'])->where("active", 1)->where("spec", array(1, 2, 4, 5, 9))
-				->records(array("count(*) as counter", "spec"))->group("spec")->get()) {
-
-				# Go through counters
-				foreach($projectCounts as $counter) {
-					if($counter['counter'] < 1) continue;
-					if($counter["spec"] == 1) $groups[] = "ifree";
-					if($counter["spec"] == 2) $groups[] = "a1";
-					if($counter["spec"] == 4) $groups[] = "project-direct";
-					if($counter["spec"] == 5) $groups[] = "project-streamline";
-					if($counter["spec"] == 9) $groups[] = "zero";
-				}
-
-			}
-
-		}
-
-
-		# Save groups to self
-		return $this->groups = $groups;
-
-	}
-
+	
 	/**
 	 * Initialize user preferences
 	 * @param array $preferences
@@ -276,9 +189,11 @@ class userController implements arrayaccess {
 	# Sets offset
 	public function offsetSet($offset, $value) {
         if (is_null($offset)) {
+			$_SESSION[] = $value;
 			$this->userData[] = $value;
 		}
         else {
+			$_SESSION[$offset] = $value;
 			$this->userData[$offset] = $value;
 		}
     }

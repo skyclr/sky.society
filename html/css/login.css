@@ -1,1 +1,45 @@
 /* Login page */
+body {
+  background: #16141b url(../img/backgrounds/funny.png);
+}
+.block {
+  width: 320px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px;
+  margin-top: -200px;
+  text-align: center;
+}
+.block .logo {
+  margin-bottom: 25px;
+  text-align: center;
+  display: block;
+}
+.block .logo img {
+  width: 150px;
+  margin: auto;
+}
+.block form {
+  background: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px black;
+  overflow: auto;
+  padding: 25px;
+}
+.block form label {
+  margin: 10px auto 10px auto;
+}
+.block form label .name {
+  width: 50px;
+}
+.block form .button {
+  width: 100px;
+  margin: auto;
+  float: none;
+  overflow: initial;
+}
+.block form .button > * {
+  width: 100px;
+}

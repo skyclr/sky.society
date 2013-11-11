@@ -2,17 +2,21 @@
 'use strict';
 
 angular.module("sky.directives")
-	.directive("smartLabel", ["skyTemplates", function(templates) {
+	.directive("smartLabel", ["skyTemplates", "$compile", function(templates, $compile) {
 		return {
 			replace: true,
 			restrict: "E",
 			scope: {
-				title: "@",
-				name : "@",
-				model: "=ngModel",
-				type: "@"
+				title: "@"
 			},
-			template: templates.getRaw("forms-label").template
+			template: "<input />",// templates.getRaw("forms-label").template
+			link: {
+				post: function(scope, element) {
+					var label = $compile(templates.getRaw("forms-label").template)(scope);
+						label.insertBefore(element);
+						label.children(":first").after(element);
+				}
+			}
 		}
 	}])
 	.directive("smartButton", ["skyTemplates", function(templates) {

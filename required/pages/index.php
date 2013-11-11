@@ -15,7 +15,7 @@ class page extends basePage {
 	/**
 	 * Page creation
 	 */
-	public function __construct() {
+	public function main() {
 
 		# render page
 		$this->content = $this->render();

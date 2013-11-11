@@ -26,13 +26,13 @@ $preferences = array(
 	 * if FALSE the not used
 	 */
 	"database" => array(
-		"use"	   => false, # Indicates that we shouldn't use it
-		"host"     => "", 	 # Host address
-		"name"     => "", 	 # Database name
-		"port"	   => "", 	 # Port
-		"user"     => "", 	 # Username
-		"password" => "", 	 # Password
-		"charset"  => "UTF8" # Default charset
+		"use"	   => true, 		# Indicates that we shouldn't use it
+		"host"     => "127.0.0.1", 	# Host address
+		"name"     => "society", 	# Database name
+		"port"	   => "3306", 	 	# Port
+		"user"     => "root", 	 	# Username
+		"password" => "150287", 	# Password
+		"charset"  => "UTF8" 		# Default charset
 	),
 
 	/**
@@ -40,8 +40,9 @@ $preferences = array(
 	 * If FALSE then not used
 	 */
 	"authenticate" => array(
-		"table"		=> "",			# Table that holds user data
-		"domain"	=> "",			# Domain name to save cookie auth for
+		"use"	    => true, 		# Indicates that we shouldn't use it
+		"table"		=> "users",		# Table that holds user data
+		"domain"	=> "/",			# Domain name to save cookie auth for
 		"redirect"	=> false,		# Where to redirect after login, false if no redirect needed
 		"guest"		=> array(		# Guest account parameters
 			"username" => "Гость"

@@ -1,3 +1,7 @@
+* {
+  font-family: Trebuchet MS;
+  font-size: 12px;
+}
 /* Compiled styles sheet */
 * {
   padding: 0;
@@ -57,4 +61,255 @@ a img {
 }
 form {
   margin: 0;
+}
+input {
+  color: #4c4c4c;
+  font-size: 12px;
+}
+input:-webkit-autofill {
+  color: #fff !important;
+}
+input[type="text"],
+input[type="password"] {
+  width: 186px;
+  background: url(../img/elements/inputs.png) 100% -1px;
+  height: 20px;
+  padding: 4px 7px;
+  float: left;
+  border-radius: 5px;
+  border: 1px solid #b1b1b1;
+  border-left-color: #dcdcdc;
+  border-right-color: #dcdcdc;
+  border-bottom: none;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  background-position: 100% -31px !important;
+  border-color: #78b8f8 !important;
+}
+form.ng-dirty input[type="text"].ng-invalid,
+form.ng-dirty input[type="password"].ng-invalid {
+  background-position: 100% -61px;
+  border-color: #fb8a74;
+}
+label.button {
+  padding: 0;
+  height: 30px;
+}
+label.button:before {
+  margin: 0 0 0 -5px;
+}
+/* Base button class */
+.button {
+  float: left;
+  color: white;
+  font-size: 12px;
+  text-shadow: 0 1px 0 #004665;
+  background: url(../img/elements/button.png) 100% 0 no-repeat;
+  cursor: pointer;
+  height: 14px;
+  display: block;
+  padding: 8px 10px 8px 5px;
+  margin-left: 5px;
+  text-align: center;
+}
+.button.gray {
+  background: url(../img/elements/buttonGray.png) 100% 0 no-repeat;
+}
+.button.gray,
+.button.gray > input {
+  text-shadow: 0 1px 0 #ddd;
+  color: #4c4c4c;
+}
+.button.gray:before {
+  background: url(../img/elements/buttonGray.png) 0 0 no-repeat;
+}
+.button > input {
+  text-shadow: 0 1px 0 #006287;
+  color: white;
+  float: left;
+  height: 30px;
+  padding: 0 10px 0 5px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  background: transparent;
+}
+.button:before {
+  content: "";
+  display: block;
+  float: left;
+  width: 5px;
+  height: 30px;
+  margin-left: -10px;
+  margin-top: -8px;
+  background: url(../img/elements/button.png) 0 0 no-repeat;
+}
+.button:hover {
+  background-position: 100% -30px;
+}
+.button:hover:before {
+  background-position: 0 -30px;
+}
+.button.hover {
+  background-position: 100% -60px;
+}
+.button.hover:before {
+  background-position: 0 -60px;
+}
+.button.disabled {
+  background-position: 100% -90px;
+  color: #6b8999;
+  text-shadow: 0 1px 0 #bdd5ee;
+}
+.button.disabled:before {
+  background-position: 0 -90px;
+}
+.switcher {
+  height: 30px;
+}
+.switcher > * {
+  background: url(../img/elements/switcher.png) 100% 0 no-repeat;
+  float: left;
+  height: 14px;
+  display: block;
+  padding: 8px 10px 8px 0px;
+  margin-left: 8px;
+  text-shadow: 0 1px 0 #ddd;
+  color: #4c4c4c;
+}
+.switcher > *:before {
+  content: "";
+  display: block;
+  float: left;
+  height: 30px;
+  width: 8px;
+  margin-left: -8px;
+  margin-top: -8px;
+  background: url(../img/elements/switcher.png) 0 0 no-repeat;
+}
+.switcher > *.first:before {
+  background-image: url(../img/elements/buttonGray.png);
+}
+.switcher > *.last {
+  background-image: url(../img/elements/buttonGray.png);
+}
+/* Labels elements */
+label {
+  display: block;
+  margin-bottom: 5px;
+  overflow: auto;
+}
+label span {
+  display: block;
+  float: left;
+  text-align: left;
+}
+label span.name {
+  height: 21px;
+  padding: 5px 10px 5px 0;
+  color: #727c7f;
+}
+.header {
+  background: #16141b url(../img/backgrounds/funny2.png) center bottom;
+  height: 220px;
+  overflow: auto;
+}
+.header .logo {
+  width: 230px;
+  height: 131px;
+  margin: 43px auto 0 auto;
+  display: block;
+}
+.header .logo.s0 {
+  background-image: url(../img/slides/0.png);
+}
+.header .logo.s1 {
+  background-image: url(../img/slides/1.png);
+}
+.header .logo.s2 {
+  background-image: url(../img/slides/2.png);
+}
+.header .logo.s3 {
+  background-image: url(../img/slides/3.png);
+}
+.header .logo.s4 {
+  background-image: url(../img/slides/4.png);
+}
+.header .logo.s5 {
+  background-image: url(../img/slides/5.png);
+}
+.header .logo.s6 {
+  background-image: url(../img/slides/6.png);
+}
+.header .logo.s7 {
+  background-image: url(../img/slides/7.png);
+}
+.header .logo.s8 {
+  background-image: url(../img/slides/8.png);
+}
+.header .logo.s9 {
+  background-image: url(../img/slides/9.png);
+}
+.header .logo.s10 {
+  background-image: url(../img/slides/10.png);
+}
+.toolbar {
+  background: #16141b url(../img/backgrounds/funny.png) center top;
+}
+.toolbar .holder {
+  width: 900px;
+  margin: auto;
+  padding: 10px 0;
+  overflow: auto;
+}
+.toolbar .holder a {
+  color: white;
+  font-size: 16px;
+  display: block;
+  margin-right: 25px;
+  float: left;
+}
+.toolbar .holder a:hover {
+  text-decoration: none;
+}
+.notificationMessage {
+  border: 1px solid #fa8464;
+  background: #fbf0f0;
+  color: #a90f0f;
+  font-size: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+  max-width: 800px;
+  overflow: hidden;
+}
+.notificationMessage h3 {
+  margin: 0 0 5px 0;
+  padding: 0;
+  font-size: 14px;
+}
+.notificationMessage .icon {
+  background: url(../img/icons/result.png) -5px -40px no-repeat;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  margin-left: -35px;
+}
+.notificationMessage.warning {
+  border-color: #eea915;
+  background: #f8e9ce;
+}
+.notificationMessage.warning .icon {
+  background-position: -5px -75px;
+}
+.notificationMessage.good,
+.notificationMessage.success {
+  border-color: #6ab84c;
+  background: #e9f2e2;
+  color: #318311;
+}
+.notificationMessage.good .icon,
+.notificationMessage.success .icon {
+  background-position: -5px -5px;
 }

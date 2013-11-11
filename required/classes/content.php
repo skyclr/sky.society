@@ -38,7 +38,7 @@ class content {
 		 * List of pages available without auth
 		 * @var array
 		 */
-		$noAuthPages = array("auth/login", "registration", "ajax", "password", "test");
+		$noAuthPages = array("login", "registration", "ajax", "password", "test");
 
 	/**
 	 * Make page and resolve addresses

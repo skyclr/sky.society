@@ -49,7 +49,7 @@ class auth {
 				self::authorisation($user, vars::post("autologin", "bool", "always"));
 
 				# After login redirect
-				if(!is_null($redirect = vars::fromArray(sky::$config["authenticate"], "redirect", "trim")))
+				if(!is_null($redirect = validator::single(sky::$config["authenticate"], "redirect", "trim")))
 					sky::goToPage($redirect);
 
 			}
@@ -116,8 +116,7 @@ class auth {
 
 
 		# Check
-		if(!vars::checkValue($usersTableAddress, "trim"))
-			throw new systemErrorException("Bad users table address");
+		validator::value($usersTableAddress, "trim", "Bad users table address");
 
 
 		# Set locals
@@ -177,7 +176,6 @@ class auth {
 	 * @throws databaseException
 	 */
 	static function authorisation($user = false, $autoLogin = false) {
-
 
 		# Check if initialised
 		if(!self::$isInit)
@@ -259,7 +257,6 @@ class auth {
 	 * @return array|bool FALSE on fail, user data array otherwise
 	 */
 	static function authentication($username = false, $password = false, $sessionId = false) {
-
 
 		# Check if initialised
 		if (!self::$isInit)
