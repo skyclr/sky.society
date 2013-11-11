@@ -157,9 +157,9 @@ class auth {
 
 
 		# Unset user cookies
-		setcookie('sessionId', '', time() - 3600, sky::$config["authenticate"]["cookieDomain"]);
-		setcookie('autoLogin', '', time() - 3600, sky::$config["authenticate"]["cookieDomain"]);
-		setcookie('username' , '', time() - 3600, sky::$config["authenticate"]["cookieDomain"]);
+		setcookie('sessionId', '', time() - 3600, sky::$config["authenticate"]["domain"]);
+		setcookie('autoLogin', '', time() - 3600, sky::$config["authenticate"]["domain"]);
+		setcookie('username' , '', time() - 3600, sky::$config["authenticate"]["domain"]);
 
 
 		# Page redirect
@@ -202,9 +202,9 @@ class auth {
 
 
 				# Cookies set
-				setcookie('sessionId', $uniqueId		, time() + 60 * 60 * 24 * 30, sky::$config["authenticate"]["cookieDomain"]);
-				setcookie('autoLogin', 'true'			, time() + 60 * 60 * 24 * 30, sky::$config["authenticate"]["cookieDomain"]);
-				setcookie('username' , $user['username'], time() + 60 * 60 * 24 * 30, sky::$config["authenticate"]["cookieDomain"]);
+				setcookie('sessionId', $uniqueId		, time() + 60 * 60 * 24 * 30, sky::$config["authenticate"]["domain"]);
+				setcookie('autoLogin', 'true'			, time() + 60 * 60 * 24 * 30, sky::$config["authenticate"]["domain"]);
+				setcookie('username' , $user['username'], time() + 60 * 60 * 24 * 30, sky::$config["authenticate"]["domain"]);
 
 
 				# Update database

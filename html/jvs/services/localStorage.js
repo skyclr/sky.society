@@ -91,8 +91,8 @@ angular.module("skyApp")
 			save: function(id, data) {
 
 				/* Save item */
-				console.log(data);
-				console.log([this.itemPrefix, id].join("-"), JSON.stringify(data));
+				//console.log(data);
+				//console.log([this.itemPrefix, id].join("-"), JSON.stringify(data));
 				localStorage.setItem([this.itemPrefix, id].join("-"), JSON.stringify(data));
 
 				/* Get ids */

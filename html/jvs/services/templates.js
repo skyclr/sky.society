@@ -38,13 +38,16 @@ angular.module("skyApp")
 		}
 
 	}])
-	.run(["skyTemplates", "$cookies", function(skyTemplates, $cookies) {
+	.run(["skyTemplates", "$cookieStore", function(skyTemplates, $cookieStore) {
+
+
 
 		/* Add to collection new templates */
-		if(page.data.templates && skyTemplates.supported) {
-			$.each(page.data.templates, function(_, template) {
+		if(page.data["templates"] && skyTemplates.supported) {
+			$.each(page.data["templates"], function(_, template) {
 				//noinspection JSUnresolvedVariable
-				$cookies["storedTemplates-" + template.path] =  template.date;
+				$cookieStore.put("storedTemplates-" + template.path, template.date);
+
 			});
 		}
 

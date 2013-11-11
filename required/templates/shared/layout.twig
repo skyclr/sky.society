@@ -16,17 +16,25 @@
         {# Content holder #}
         {% block content %}
 
-            {# Output page information #}
-            {% for message in resultMessages %}
-                {{ elements.resultMessage(message) }}
-            {% endfor %}
+            <div class="mainPageHolder">
 
-            {# Page main content #}
-            {{ page.content|raw }}
 
+                {# Main header #}
+                {% include "/shared/header.twig" %}
+
+                {# Output page information #}
+                {% for message in resultMessages %}
+                    {{ elements.resultMessage(message) }}
+                {% endfor %}
+
+                {# Page main content #}
+                {{ page.content|raw }}
+
+            </div>
         {% endblock %}
 
     </div>
+
     {# Scripts #}
     <script type="text/javascript" src="{{ base }}jvs/external/jquery.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/angular.min.js"></script>

@@ -1,20 +1,18 @@
-{% import "shared/forms.twig" as forms %}
 {% import "shared/elements.twig" as elements %}
-{% import "shared/tips.twig" as tips %}
+<div class="toolbar main">{% block toolbar %}{% endblock %}</div>
+<div class="contentHolder {{ menu ? "menu" : "" }}">
+    {% if menu %}
+        <div class="menu"></div>
+    {% endif %}
+    <div class="content">
+        {# Output page information #}
+        {% for message in resultMessages %}
+            {{ elements.resultMessage(message) }}
+        {% endfor %}
 
-{% block header %}
-	<h1>{{ page.title }}</h1>
-{% endblock %}
+        {# Main page data #}
+        {% block content %}{% endblock %}
 
-
-{# Output page information #}
-{% for message in resultMessages %}
-	{{ elements.resultMessage(message) }}
-{% endfor %}
-
-{# Main page data #}
-{% block content %}
-
-{% endblock %}
-
+    </div>
+</div>
 {% block javascript %}{% endblock %}
