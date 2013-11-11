@@ -1,6 +1,17 @@
 {% import "shared/forms.twig" as forms %}
-{% import "shared/elements.twig" as elements %}
 
-<div id="authForm" ng-controller="pageController">
-    <smart-label name="username" title="Логин" />
+{% import "shared/elements.twig" as elements %}
+<div class="block">
+    <a class="logo" href="{{ base }}"><img alt="storage" src="{{ base }}img/icons/logo2.png"/></a>
+
+    <form action="" method="post">
+        <input type="hidden" name="type" value="login">
+        {# Output page information #}
+        {% for message in resultMessages %}
+            {{ elements.resultMessage(message) }}
+        {% endfor %}
+        <smart-label name="username" title="Логин" ng-model="username"></smart-label>
+        <smart-label name="password" title="Пароль" ng-model="password" type="password"></smart-label>
+        <smart-button type="submit">Войти</smart-button>
+    </form>
 </div>

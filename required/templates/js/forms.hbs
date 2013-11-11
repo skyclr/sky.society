@@ -1,12 +1,21 @@
 {% verbatim %}
 
-{# This template contains help tip #}
 <script type="text/template" id="forms-label">
 	<label>
-		<span class="name">{{ name }}</span>
-		<input type="{{ type }}" />
+		<span class="name">{{ title }}</span>
+		<input type="{{ type }}" ng-model="model" name="{{ name }}" />
 		<span class="desc"></span>
 	</label>
+</script>
+
+<script type="text/template" id="forms-submit">
+	<label class="button">
+		<input type="submit" value="{{ html }}"/>
+	</label>
+</script>
+
+<script type="text/template" id="forms-button">
+	<a href="" ng-transclude></a>
 </script>
 
 {% endverbatim %}

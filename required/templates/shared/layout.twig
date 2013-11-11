@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ base }}css/{{ pagePath }}.css" type="text/css"/>
 </head>
 <body class="{% block bodyClass %}layout{% endblock %}" ng-app="skyApp">
-    <div id="pageContentHolder">
+    <div id="pageContentHolder" ng-controller="pageController">
 
         {# Content holder #}
         {% block content %}
@@ -31,13 +31,14 @@
     <script type="text/javascript" src="{{ base }}jvs/external/angular.min.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/angular-loader.min.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/external/angular-cookies.min.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/jquery.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/modules/skyApp.js"></script>
 
     <script type="text/javascript" src="{{ base }}jvs/services/localStorage.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/services/templates.js"></script>
 
-    <script type="text/javascript" src="{{ base }}jvs/directives/forms.nbs"></script>
+    <script type="text/javascript" src="{{ base }}jvs/directives/forms.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/lib/sky.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/lib/ajax.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/lib/ajaxFiles.xhr.js"></script>
