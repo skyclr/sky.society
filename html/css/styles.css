@@ -2,6 +2,10 @@
   font-family: Trebuchet MS;
   font-size: 12px;
 }
+.contentHolder {
+  width: 900px;
+  margin: auto;
+}
 /* Compiled styles sheet */
 * {
   padding: 0;

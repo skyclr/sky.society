@@ -105,9 +105,11 @@ class databaseQuery extends advancedDatabase {
 
 
 			# Prepare
-			foreach($tables as $i => $table)
+			foreach($tables as $i => $table) {
 				$tables[$i] = $this->addBackDashes($table);
-
+				if(!is_numeric($i))
+					$tables[$i] .= " as " . $this->addBackDashes($i);
+			}
 
 			# Compile tables list
 			$this->tables = implode(", ", $tables);

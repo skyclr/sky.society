@@ -1,7 +1,9 @@
 {% verbatim %}
 
 <script type="text/template" id="forms-simple">
-	<div class="tip"><div>{{ text }}</div></div>
+	<div class="tip" data-sky-tip-holder>
+		<div ng-bind-html-unsafe="text"></div>
+	</div>
 </script>
 
 {% endverbatim %}
