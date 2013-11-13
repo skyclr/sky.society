@@ -10,12 +10,12 @@ $preferences["templates"] = array(
 	/**
 	 * Pages location inside templates
 	 */
-	"pages" 	=> "pages/",
+	"pages" => "pages/",
 
 	/**
 	 * If true no Twig cache would be used
 	 */
-	"noCache" 	=> true,
+	"noCache" => true,
 
 	/**
 	 * JS templates preferences
@@ -26,7 +26,7 @@ $preferences["templates"] = array(
 		 * JS templates that would be included in all pages
 		 * @type {array|boolean}
 		 */
-		"default" => array("forms"),
+		"default"   => array("forms"),
 
 		/**
 		 * JS templates extension
