@@ -1,5 +1,7 @@
 {% import "shared/elements.twig" as elements %}
-<div class="toolbar main">{% block toolbar %}{% endblock %}</div>
+<div class="toolbar main">
+    <div class="holder">{% block toolbar %}{% endblock %}</div>
+</div>
 <div class="contentHolder {{ menu ? "menu" : "" }}">
     {% if menu %}
         <div class="menu"></div>

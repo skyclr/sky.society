@@ -259,25 +259,6 @@ label span.name {
 .header .logo.s10 {
   background-image: url(../img/slides/10.png);
 }
-.toolbar {
-  background: #16141b url(../img/backgrounds/funny.png) center top;
-}
-.toolbar .holder {
-  width: 900px;
-  margin: auto;
-  padding: 10px 0;
-  overflow: auto;
-}
-.toolbar .holder a {
-  color: white;
-  font-size: 16px;
-  display: block;
-  margin-right: 25px;
-  float: left;
-}
-.toolbar .holder a:hover {
-  text-decoration: none;
-}
 .notificationMessage {
   border: 1px solid #fa8464;
   background: #fbf0f0;
@@ -316,4 +297,51 @@ label span.name {
 .notificationMessage.good .icon,
 .notificationMessage.success .icon {
   background-position: -5px -5px;
+}
+.toolbar {
+  background: #16141b url(../img/backgrounds/funny.png) center top;
+}
+.toolbar.main {
+  background: #eee;
+}
+.toolbar.main .holder a {
+  color: #0066ff;
+}
+.toolbar .holder {
+  width: 900px;
+  margin: auto;
+  padding: 10px 0;
+  overflow: auto;
+}
+.toolbar .holder a {
+  color: white;
+  font-size: 16px;
+  display: block;
+  margin-right: 25px;
+  float: left;
+}
+.toolbar .holder a:hover {
+  text-decoration: none;
+}
+/* Modal window styles */
+.windowShadow {
+  background: url(../img/backgrounds/blackTransparent.png);
+  position: absolute;
+  z-index: 1500;
+  overflow: auto;
+  visibility: hidden;
+}
+.windowHolder {
+  background: white;
+  -webkit-box-shadow: 0 3px 10px black;
+  -moz-box-shadow: 0 3px 10px black;
+  box-shadow: 0 3px 10px black;
+  padding: 25px;
+  margin: 25px 0;
+  z-index: 1501;
+  max-width: 70%;
+  overflow: auto;
+}
+.windowData {
+  float: left;
 }

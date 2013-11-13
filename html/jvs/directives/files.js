@@ -6,6 +6,6 @@ angular.module("sky.directives")
 		return {
 			replace: true,
 			restrict: "E",
-			template: templates.getRaw("files-folder").template
+			template: templates.getRaw("folders-thumb").template
 		};
 	}]);

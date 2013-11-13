@@ -1,0 +1,28 @@
+// Link colors
+@linkColor: #0066ff;
+
+.toolbar {
+	background : #16141b url(../img/backgrounds/funny.png) center top;
+	&.main {
+		background: #eee;
+		.holder {
+			a {
+				color: @linkColor;
+			}
+		}
+	}
+	.holder {
+		width: 900px;
+		margin: auto;
+		padding: 10px 0;
+		overflow: auto;
+		a {
+			color: white;
+			font-size: 16px;
+			display: block;
+			margin-right: 25px;
+			float: left;
+			&:hover { text-decoration: none; }
+		}
+	}
+}
