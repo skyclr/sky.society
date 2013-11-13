@@ -9,7 +9,7 @@ angular.module("sky.directives")
 			scope: {
 				title: "@"
 			},
-			template: "<input />",// templates.getRaw("forms-label").template
+			template: "<input/>",// templates.getRaw("forms-label").template
 			link: {
 				post: function(scope, element) {
 					var label = $compile(templates.getRaw("forms-label").template)(scope);

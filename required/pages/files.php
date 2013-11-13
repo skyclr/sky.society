@@ -6,11 +6,21 @@
  */
 class page extends basePage {
 
-	/**
-	 * Page title
-	 * @var string|boolean
-	 */
-	public $title 	 = "файлы";
+
+	public
+
+		/**
+		 * Page title
+		 * @var string|boolean
+		 */
+		$title 	 = "файлы",
+
+
+		/**
+		 * List of templates used in page
+		 * @var array
+		 */
+		$jsTemplates = array("files");
 
 	/**
 	 * Page creation

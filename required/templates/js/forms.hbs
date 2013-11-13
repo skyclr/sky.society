@@ -1,5 +1,7 @@
 {% verbatim %}
 
+
+<!-- Input to label template -->
 <script type="text/template" id="forms-label">
 	<label>
 		<span class="name">{{ title }}</span>
@@ -7,12 +9,16 @@
 	</label>
 </script>
 
+
+<!-- Submit button template -->
 <script type="text/template" id="forms-submit">
 	<label class="button">
 		<input type="submit" value="{{ html }}"/>
 	</label>
 </script>
 
+
+<!-- Simple button  -->
 <script type="text/template" id="forms-button">
 	<a href="" ng-transclude></a>
 </script>
