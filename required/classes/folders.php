@@ -31,4 +31,26 @@ class folders {
 
 	}
 
+
+
+	public static function getByParent($id) {
+
+		# Get max revisions
+		$join = sky::$db->make("foldersRevisions")
+			->group("folderId")
+			->records(array("MAX(id) as `id`", "folderId"))
+			->get("query");
+
+		# Get list
+		return $folders = sky::$db->make("folders")
+			->join("($join) as temp", "temp.folderId = folders.id")
+			->join("foldersRevisions", "foldersRevisions.id = temp.id")
+			->where("temp.id", null, "!=")
+			->where("foldersRevisions.parentId", $id)
+			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
+			->get();
+
+	}
+
+
 }
