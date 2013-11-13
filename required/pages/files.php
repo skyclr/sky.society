@@ -17,8 +17,6 @@ class page extends basePage {
 	 */
 	public function main() {
 
-		var_dump(folders::getAll());
-
 		# render page
 		$this->content = $this->render();
 

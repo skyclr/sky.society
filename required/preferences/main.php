@@ -82,3 +82,8 @@ require_once "locations.php";
  * Holds templates information
  */
 require_once "templates.php";
+
+/**
+ * Holds pages information
+ */
+require_once "pages.php";

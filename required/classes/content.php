@@ -120,6 +120,7 @@ class content {
 			self::$page = basePage::baseInit();
 
 
+			# Make templates list
 			$jsTemplates = array();
 			foreach(self::$page->jsTemplates as $template) {
 				$jsTemplates[] = array(
