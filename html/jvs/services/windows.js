@@ -26,8 +26,6 @@ angular.module("skyApp")
 				/* Link */
 				this.template = templates.get(name)(data).appendTo(this.holder);
 
-				console.log(data);
-
 				/* Callbacks */
 				this.callbacks = new sky.Callbacks(["success", "error", "notSuccess", "always", "abort", "close"]);
 

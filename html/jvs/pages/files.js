@@ -18,9 +18,7 @@ angular.module("skyApp")
 				if(form.$invalid)
 					return;
 
-				console.log($scope);
-
-				folders.add($scope.save).success(function() {
+				folders.add($scope.save, $scope).success(function() {
 					$scope.save.window.close();
 				});
 
@@ -46,7 +44,7 @@ angular.module("skyApp")
 					})
 					.always(function() { $scope.$digest(); });
 			},
-			add: function(data) {
+			add: function(data, $scope) {
 
 				/* Request */
 				return $scope.ajax = sky.ajax("/ajax/folders?type=add", data)
