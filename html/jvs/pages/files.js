@@ -3,8 +3,9 @@ angular.module("skyApp")
 
 		$scope.loadFolder = function(id) { folders.load(id, $scope); };
 		$scope.loadFolder(0);
+
+
 		$scope.save = {
-			a: 1,
 			submit: function(form, $event) {
 
 				/* No real submit */
@@ -16,6 +17,8 @@ angular.module("skyApp")
 				/* Check valid */
 				if(form.$invalid)
 					return;
+
+				console.log($scope);
 
 				folders.add($scope.save).success(function() {
 					$scope.save.window.close();
