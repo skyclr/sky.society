@@ -1,17 +1,3 @@
-/* Base objects extend */
-String.prototype.camelCase = function() {
-
-    var text = "";
-    var names = (this.charAt(0).toLowerCase() + this.slice(1)).split("_");
-    for(i in names) {
-        var name = names[i];
-        if(i != 0) name = name.charAt(0).toUpperCase() + name.slice(1);
-        text += name;
-    }
-
-    return text;
-}
-
 /**
  * Extends base jquery functionality
  */
@@ -59,15 +45,6 @@ $.extend(jQuery.fn,
     },
 
     /** 
-     * Replaces selects inputs 
-     */
-    replaceSelect: function() {
-        this.filter("select").each(function() {
-            replaceSelect(this);
-        });
-    },
-
-    /** 
      * Formats elements on form or same
      */
     formatForm: function() {
@@ -102,11 +79,6 @@ $.extend(jQuery.fn,
         return this;
 
     },
-
-	/* Fast access to page.shared.showError */
-	showError: function(errorText, type, errorDescription) {
-		page.shared.showError(this, errorText, type, errorDescription);
-	},
 
 	/**
 	 * Centers object inside window or other one

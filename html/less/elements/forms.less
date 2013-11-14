@@ -34,79 +34,63 @@ form.ng-dirty {
 	}
 }
 
-label.button {
-	padding : 0;
-	height  : 30px;
-	&:before {
-		margin : 0 0 0 -5px;
+/* Button class */
+.button {
+	float       : left;
+	font-size   : 12px;
+	text-shadow : 0 1px 0 #004665;
+	background  : url(../img/elements/button.png) 0 0 no-repeat;
+	cursor      : pointer;
+	height      : 30px;
+	display     : block;
+	padding     : 0 0 0 5px;
+	margin-right: 5px;
+	text-align  : center;
+	&::-moz-focus-inner {
+		border  : 0;
+		padding : 0;
+	}
+	> * {
+		color       : white;
+		border      : 0 !important;
+		padding     : 8px 10px 8px 5px !important;
+		line-height : 15px;
+		height      : 14px;
+		background  : url(../img/elements/button.png) 100% -30px;
+		display     : block;
+		margin      : 0 !important;
+		float       : left;
+		text-align  : center;
+	}
+	> input {
+		height   : 30px;
+		width    : auto;
+		cursor   : pointer;
+		left     : 0;
+		position : relative;
+		-webkit-appearance: none;
+		-webkit-border-radius: 0;
+	}
+	&:hover {
+		background-position : 0 -60px;
+		> * { background-position : 100% -90px; }
+	}
+	&.hover {
+		background-position : 0 -120px;
+		> * { background-position : 100%  -150px;  }
+	}
+	&.disabled {
+		cursor              : default;
+		background-position : 0 -180px;
+		> * {
+			background-position : 100% -210px;
+			color               : #6b8999;
+			text-shadow         : 0 1px 0 #bdd5ee;
+			cursor              : default;
+		}
 	}
 }
 
-/* Base button class */
-.button {
-	float       : left;
-	color       : white;
-	font-size   : 12px;
-	text-shadow : 0 1px 0 #004665;
-	background  : url(../img/elements/button.png) 100% 0 no-repeat;
-	cursor      : pointer;
-	height      : 14px;
-	display     : block;
-	padding     : 8px 10px 8px 5px;
-	margin-left : 5px;
-	text-align  : center;
-	&.gray {
-		background : url(../img/elements/buttonGray.png) 100% 0 no-repeat;
-		&, > input {
-			text-shadow : 0 1px 0 #ddd;
-			color       : #4c4c4c;
-		}
-		&:before {
-			background : url(../img/elements/buttonGray.png) 0 0 no-repeat;
-		}
-	}
-	> input {
-		text-shadow : 0 1px 0 #006287;
-		color       : white;
-		float       : left;
-		height      : 30px;
-		padding     : 0 10px 0 5px;
-		border      : none;
-		cursor      : pointer;
-		text-align  : center;
-		background  : transparent;
-	}
-	&:before {
-		content     : "";
-		display     : block;
-		float       : left;
-		width       : 5px;
-		height      : 30px;
-		margin-left : -10px;
-		margin-top  : -8px;
-		background  : url(../img/elements/button.png) 0 0 no-repeat;
-	}
-	&:hover {
-		background-position : 100% -30px;
-		&:before {
-			background-position : 0 -30px;
-		}
-	}
-	&.hover {
-		background-position : 100% -60px;
-		&:before {
-			background-position : 0 -60px;
-		}
-	}
-	&.disabled {
-		background-position : 100% -90px;
-		color               : #6b8999;
-		text-shadow         : 0 1px 0 #bdd5ee;
-		&:before {
-			background-position : 0 -90px;
-		}
-	}
-}
 
 .switcher {
 	height : 30px;

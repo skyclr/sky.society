@@ -97,78 +97,65 @@ form.ng-dirty input[type="password"].ng-invalid {
   background-position: 100% -61px;
   border-color: #fb8a74;
 }
-label.button {
-  padding: 0;
-  height: 30px;
-}
-label.button:before {
-  margin: 0 0 0 -5px;
-}
-/* Base button class */
+/* Button class */
 .button {
   float: left;
-  color: white;
   font-size: 12px;
   text-shadow: 0 1px 0 #004665;
-  background: url(../img/elements/button.png) 100% 0 no-repeat;
+  background: url(../img/elements/button.png) 0 0 no-repeat;
   cursor: pointer;
-  height: 14px;
+  height: 30px;
   display: block;
-  padding: 8px 10px 8px 5px;
-  margin-left: 5px;
+  padding: 0 0 0 5px;
+  margin-right: 5px;
   text-align: center;
 }
-.button.gray {
-  background: url(../img/elements/buttonGray.png) 100% 0 no-repeat;
+.button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
 }
-.button.gray,
-.button.gray > input {
-  text-shadow: 0 1px 0 #ddd;
-  color: #4c4c4c;
-}
-.button.gray:before {
-  background: url(../img/elements/buttonGray.png) 0 0 no-repeat;
+.button > * {
+  color: white;
+  border: 0 !important;
+  padding: 8px 10px 8px 5px !important;
+  line-height: 15px;
+  height: 14px;
+  background: url(../img/elements/button.png) 100% -30px;
+  display: block;
+  margin: 0 !important;
+  float: left;
+  text-align: center;
 }
 .button > input {
-  text-shadow: 0 1px 0 #006287;
-  color: white;
-  float: left;
   height: 30px;
-  padding: 0 10px 0 5px;
-  border: none;
+  width: auto;
   cursor: pointer;
-  text-align: center;
-  background: transparent;
-}
-.button:before {
-  content: "";
-  display: block;
-  float: left;
-  width: 5px;
-  height: 30px;
-  margin-left: -10px;
-  margin-top: -8px;
-  background: url(../img/elements/button.png) 0 0 no-repeat;
+  left: 0;
+  position: relative;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 .button:hover {
-  background-position: 100% -30px;
-}
-.button:hover:before {
-  background-position: 0 -30px;
-}
-.button.hover {
-  background-position: 100% -60px;
-}
-.button.hover:before {
   background-position: 0 -60px;
 }
-.button.disabled {
+.button:hover > * {
   background-position: 100% -90px;
+}
+.button.hover {
+  background-position: 0 -120px;
+}
+.button.hover > * {
+  background-position: 100% -150px;
+}
+.button.disabled {
+  cursor: default;
+  background-position: 0 -180px;
+}
+.button.disabled > * {
+  background-position: 100% -210px;
   color: #6b8999;
   text-shadow: 0 1px 0 #bdd5ee;
-}
-.button.disabled:before {
-  background-position: 0 -90px;
+  cursor: default;
 }
 .switcher {
   height: 30px;
@@ -323,13 +310,20 @@ label span.name {
 .toolbar .holder a:hover {
   text-decoration: none;
 }
+h1 {
+  border-bottom: 1px solid #eee;
+  color: #2e4650;
+  font-size: 18px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  display: block;
+}
 /* Modal window styles */
 .windowShadow {
   background: url(../img/backgrounds/blackTransparent.png);
   position: absolute;
   z-index: 1500;
   overflow: auto;
-  visibility: hidden;
 }
 .windowHolder {
   background: white;
