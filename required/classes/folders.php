@@ -33,6 +33,8 @@ class folders {
 			->set("ownerId", auth::$me["id"])
 			->insert();
 
+		return $id;
+
 	}
 
 	public static function getAll() {

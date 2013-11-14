@@ -26,6 +26,8 @@ angular.module("skyApp")
 				/* Link */
 				this.template = templates.get(name)(data).appendTo(this.holder);
 
+				console.log(data);
+
 				/* Callbacks */
 				this.callbacks = new sky.Callbacks(["success", "error", "notSuccess", "always", "abort", "close"]);
 
@@ -34,13 +36,14 @@ angular.module("skyApp")
 				this.background.css({ opacity: 0 }).animate({opacity: 1}, 300, function() { $(window).trigger("resize"); });
 
 				/* Hide function */
-				this.hide = function() {
+				this.close = function() {
 					this.background.remove();
 				};
 
 				/* Add to list */
 				service.list.push(this);
 				$(window).trigger("resize");
+				this.callbacks.fire("success", this);
 				return this;
 			}
 		};
@@ -90,7 +93,7 @@ angular.module("skyApp")
 
 				/* Hide window */
 				if(modal)
-					modal.hide();
+					modal.close();
 
 			})
 

@@ -8,9 +8,9 @@
 
 <!-- Holds add folder form -->
 <script type="text/template" id="folders-windows-add">
-	<form>
+	<form action="{{ base }}files" method="post"  name="addForm" on-submit="save.submit(addForm, $event)">
 		<h1>Добавить альбом в {{ current.name }} </h1>
-		<smart-label type="text" title="Имя" ng-model="name"></smart-label>
+		<smart-label type="text" title="Имя" ng-model="name" required></smart-label>
 		<smart-button type="submit">Создать</smart-button>
 	</form>
 </script>
