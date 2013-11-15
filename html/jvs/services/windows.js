@@ -35,8 +35,28 @@ angular.module("skyApp")
 
 				/* Hide function */
 				this.close = function() {
+
+					/* Remove */
 					this.background.remove();
+
+					/* Save scroll position because it may reset */
+					var topOffset = $(window).scrollTop();
+
+					/* Make body scrollable */
+					$("body").css('overflow', '');
+
+					/* Restore position */
+					$(window).scrollTop(topOffset);
 				};
+
+				/* Save scroll position because it may reset */
+				var topOffset = $(window).scrollTop();
+
+				/* Make body scrollable */
+				$("body").css('overflow', 'hidden');
+
+				/* Restore position */
+				$(window).scrollTop(topOffset);
 
 				/* Add to list */
 				service.list.push(this);

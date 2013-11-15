@@ -69,7 +69,7 @@ class userFolders {
 			->join("foldersRevisions", "foldersRevisions.id = temp.id")
 			->where("temp.id", null, "!=")
 			->where($id)
-			->where("deleted", 0)
+			->where("foldersRevisions.deleted", 0)
 			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
 			->get("single"))
 			throw new userErrorException("Указанной папки не существует");
@@ -92,6 +92,7 @@ class userFolders {
 			->join("(" . self::$maxRevisionJoin .") as temp", "temp.folderId = folders.id")
 			->join("foldersRevisions", "foldersRevisions.id = temp.id")
 			->where("temp.id", null, "!=")
+			->where("foldersRevisions.deleted", 0)
 			->where("foldersRevisions.parentId", $id)
 			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
 			->get();

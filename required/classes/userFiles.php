@@ -5,8 +5,8 @@
  */
 class userFiles {
 
-
 	private static
+
 		/**
 		 * Max revision query
 		 * @var string
@@ -16,28 +16,46 @@ class userFiles {
 	/**
 	 * Adds file
 	 * @param $data
+	 * @throws userErrorException
 	 * @return array|Mixed
 	 */
 	public static function add($data) {
 
 		$record = $data;
 
-		$file = files::inputToFile(sky::location("files") . "files", "random", 0, "ajaxFile");
 
-		var_dump($file);
+		# Upload file
+		if(!$file = files::uploadFiles(sky::location("files") . "/files/", "random", 0, 1, "files"))
+			throw new userErrorException("Файл небыл загружен");
+
+
+		try {
+
+			# Get thumb
+			if($file[0]["type"] == "image");
+				images::makeSmallFromFiles($file, sky::location("files") . "/thumbs/", 300, 150, "random", "s_", true);
+
+		} catch(Exception $e) {
+			files::deleteFile($file[0]["fileLocation"]);
+		}
+
 
 		# Add file record
 		$id = sky::$db->make("files")
 			->set("owner", auth::$me["id"])
 			->set("created", "", "now")
+			->set("location", $file[0]["fileName"])
+			->set("thumb", $file[0]["smallFileName"])
+			->set("extension", $file[0]["extension"])
 			->insert();
 
 
 		# Add revision record
 		sky::$db->make("filesRevisions")
+			->set("ownerId", auth::$me["id"])
 			->set("fileId", $id)
 			->set("modified", "", "now")
-			->set("name", $file["name"])
+			->set("name", $file[0]["name"])
 			->insert();
 
 
@@ -61,14 +79,40 @@ class userFiles {
 			->join("filesRevisions", "filesRevisions.id = temp.id")
 			->where("temp.id", null, "!=")
 			->where($id)
-			->where("deleted", 0)
-			->records(array("filesRevisions.*", "files.owner", "files.created"))
+			->where("filesRevisions.deleted", 0)
+			->records(array("filesRevisions.*", "owner", "created", "thumb", "extension"))
 			->get("single"))
 			throw new userErrorException("Указанного файла не существует");
 
 
 		# Return
 		return $file;
+
+	}
+
+	/**
+	 * Gets file by folder id
+	 * @param int $id Folder id
+	 * @return array|Mixed
+	 * @throws userErrorException
+	 */
+	public static function getByFolder($id) {
+
+
+		# Get folder
+		if(!$files = sky::$db->make("files")
+			->join("(" . self::$maxRevisionJoin .") as temp", "temp.fileId = files.id")
+			->join("filesRevisions", "filesRevisions.id = temp.id")
+			->where("temp.id", null, "!=")
+			->where("filesRevisions.folderId", $id)
+			->where("filesRevisions.deleted", 0)
+			->records(array("filesRevisions.*", "owner", "created", "thumb", "extension"))
+			->get())
+			throw new userErrorException("Указанного файла не существует");
+
+
+		# Return
+		return $files;
 
 	}
 

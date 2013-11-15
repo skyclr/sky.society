@@ -15,3 +15,20 @@
   padding: 5px 10px;
   background: url(../img/backgrounds/blackTransparent.png);
 }
+.file {
+  width: 290px;
+  height: 150px;
+  background: #eee;
+  float: left;
+  margin: 2px;
+  overflow: hidden;
+}
+.file .meta {
+  width: 270px;
+  position: absolute;
+  margin-top: 125px;
+  color: #fff;
+  height: 15px;
+  padding: 5px 10px;
+  background: url(../img/backgrounds/blackTransparent.png);
+}

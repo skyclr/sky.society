@@ -67,7 +67,7 @@ class files {
 		if(!is_array($_FILES[$inputName]['tmp_name'])) {
 
 			# Upload file
-			if(!$fileData = self::uploadFile(array(
+			if($fileData = self::uploadFile(array(
 				"name"			=> $_FILES[$inputName]['name'],
 				"error"			=> $_FILES[$inputName]['error'],
 				"temporaryName"	=> $_FILES[$inputName]['tmp_name'],
@@ -413,8 +413,9 @@ class files {
 
 		# If single
 		} else {
-			if(!is_uploaded_file($_FILES[$inputName]['tmp_name']))
-				return 0;
+			if(!empty($_FILES[$inputName]['tmp_name']))
+				$filesUploaded = (int)is_uploaded_file($_FILES[$inputName]['tmp_name']);
+
 		}
 
 
@@ -422,7 +423,6 @@ class files {
 		return $filesUploaded;
 
 	}
-	
 	
 	/**
 	 * Creates new directory

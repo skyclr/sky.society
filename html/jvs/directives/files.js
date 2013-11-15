@@ -8,4 +8,11 @@ angular.module("sky.directives")
 			restrict: "E",
 			template: templates.getRaw("folders-thumb").template
 		};
+	}])
+	.directive("userFile", ["skyTemplates", function(templates) {
+		return {
+			replace: true,
+			restrict: "E",
+			template: templates.getRaw("files-thumb").template
+		};
 	}]);

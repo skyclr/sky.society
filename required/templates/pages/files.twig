@@ -7,5 +7,6 @@
 
 {% block content %}
     <user-folder ng-repeat="folder in folders"></user-folder>
-    <div ng-show="!folders || !folders.length">Этот альбом пуст</div>
+    <user-file ng-repeat="file in files"></user-file>
+    <div ng-show="(!folders || !folders.length) && (!files || !files.length)">Этот альбом пуст</div>
 {% endblock %}

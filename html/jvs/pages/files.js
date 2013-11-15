@@ -83,6 +83,7 @@ angular.module("skyApp")
 					.success(function(data) {
 						$scope.folders = data.folders;
 						$scope.current = data.current;
+						$scope.files   = data.files;
 					})
 					.always(function() { $scope.$digest(); $scope.ajax = false; });
 			},
