@@ -1,8 +1,17 @@
 .folder {
-  width: 200px;
-  height: 110px;
+  width: 290px;
+  height: 150px;
   background: #eee;
   float: left;
-  margin: 20px;
+  margin: 2px;
   overflow: hidden;
+}
+.folder .meta {
+  width: 270px;
+  position: absolute;
+  margin-top: 125px;
+  color: #fff;
+  height: 15px;
+  padding: 5px 10px;
+  background: url(../img/backgrounds/blackTransparent.png);
 }

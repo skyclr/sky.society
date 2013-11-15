@@ -4,9 +4,9 @@ angular.module("skyApp")
 		$scope.loadFolder = function(id) { folders.load(id, $scope); };
 		$scope.loadFolder(0);
 
-
 		$scope.save = {
-			submit: function(form, $event) {
+			data: {},
+			submit:  function(form, $event) {
 
 				/* No real submit */
 				$event.preventDefault();
@@ -18,8 +18,9 @@ angular.module("skyApp")
 				if(form.$invalid)
 					return;
 
-				folders.add($scope.save, $scope).success(function() {
+				folders.add($scope.save.data, $scope).success(function(data) {
 					$scope.save.window.close();
+					$scope.folders.push(data.folder);
 				});
 
 			}
@@ -27,7 +28,7 @@ angular.module("skyApp")
 
 		/* Add folder show window func */
 		$scope.addFolder = function() {
-			$scope.save.folderId  = $scope.current.id;
+			$scope.save.data.folderId  = $scope.current.id;
 			$scope.save.window = windows.Modal("folders-windows-add", $scope);
 		};
 
@@ -47,10 +48,8 @@ angular.module("skyApp")
 			add: function(data, $scope) {
 
 				/* Request */
-				return $scope.ajax = sky.ajax("/ajax/folders?type=add", data)
-					.success(function(data) {
-
-					})
+				return sky.ajax("/ajax/folders?type=add", data)
+					.success(function(data) { })
 					.always(function() { $scope.$digest(); });
 			}
 		}

@@ -33,7 +33,7 @@ class folders {
 			->set("ownerId", auth::$me["id"])
 			->insert();
 
-		return $id;
+		return self::getById($id);
 
 	}
 

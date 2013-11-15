@@ -8,7 +8,7 @@
 function jError($params, $name = false) {
 
 	# Converting
-	if(is_string($params))
+	if(is_string($params) && !$name)
 		$name = "text";
 
 	# Set ass array part
@@ -28,7 +28,7 @@ function jError($params, $name = false) {
 function jSend($params, $name = false) {
 
 	# Converting
-	if(is_string($params))
+	if(is_string($params) && !$name)
 		$name = "text";
 
 	# Set ass array part

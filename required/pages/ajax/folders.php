@@ -2,7 +2,7 @@
 
 
 if($type == "add")
-	jSend(folders::add($_POST), "id");
+	jSend(folders::add($_POST), "folder");
 
 
 # Get id
