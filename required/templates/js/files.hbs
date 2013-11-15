@@ -2,9 +2,9 @@
 
 <!-- Folder thumb -->
 <script type="text/template" id="files-thumb">
-	<div class="folder" ng-click="loadFolder(folder.id); update()">
+	<div class="file" ng-click="loadFile(file.id); update()">
 		<div class="meta">
-			{{ folder.name }}
+			{{ file.name }}
 		</div>
 	</div>
 </script>
@@ -12,9 +12,9 @@
 
 <!-- Holds add folder form -->
 <script type="text/template" id="files-windows-add">
-	<form method="post"  name="addForm" ng-submit="save.submit(addForm, $event)">
+	<form method="post"  name="addForm" ng-submit="saveFile.submit(addForm, $event)">
 		<h1>Загрузить в альбом {{ current.name }} </h1>
-		<smart-label type="file" title="Выберите файл(ы)" required></smart-label>
+		<smart-label name="files" type="file" title="Выберите файл(ы)" multiple="multiple" required></smart-label>
 		<smart-button type="submit" ng-class="{ disabled: ajax }">Загрузить</smart-button>
 	</form>
 </script>

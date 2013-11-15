@@ -77,6 +77,11 @@ try {
 			require_once "ajax/folders.php";
 			break;
 
+		# Files operations
+		case "files":
+			require_once "ajax/files.php";
+			break;
+
 		# If no proper type
 		default: throw new userErrorException("Не указан тип выполняемой операции");
 

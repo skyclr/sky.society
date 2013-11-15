@@ -332,12 +332,12 @@ class files {
 		# Make filename
 		$uploadFile = self::makeName($directory, $nameType, $prefix, self::getName($filename), $extension);
 
-		
+
 		# Open input
         if(!$input = fopen("php://input", "r"))
         	throw new systemErrorException("Cant open input stream");
-        	
-		
+
+
         # Open output
         if(!$target = fopen($uploadFile, "w"))
 	        throw new systemErrorException("Cant open file to write data $uploadFile");
@@ -355,7 +355,7 @@ class files {
 		# If no bytes were written
 		if(!$written) {
 			self::deleteFile($uploadFile);
-			throw new userErrorException("Файл пуст");
+			throw new userErrorException("Файл пуст, зaписано: $written");
 		}
 		
 		
