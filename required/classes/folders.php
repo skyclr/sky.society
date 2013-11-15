@@ -12,7 +12,7 @@ class folders {
 		 * Max revision query
 		 * @var string
 		 */
-		$maxRevisionJoin = "SELECT MAX(`id`) as `id`, `folderId` FROM foldersRevisions GROUP BY folderId DESC";
+		$maxRevisionJoin = "SELECT MAX(`id`) as `id`, `folderId` FROM `foldersRevisions` GROUP BY folderId DESC";
 
 	/**
 	 * Root folder data
@@ -72,6 +72,7 @@ class folders {
 			->join("foldersRevisions", "foldersRevisions.id = temp.id")
 			->where("temp.id", null, "!=")
 			->where($id)
+			->where("deleted", 0)
 			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
 			->get("single");
 
@@ -102,6 +103,23 @@ class folders {
 	public static function delete($id) {
 
 
+		# Get folder
+		$folder = self::getById($id);
+
+
+		# Add revision
+		sky::$db->make("foldersRevisions")
+			->set("folderId", $id)
+			->set("name", $folder["name"])
+			->set("parentId", $folder["parentId"])
+			->set("modified", "", "now")
+			->set("ownerId", auth::$me["id"])
+			->set("deleted", 1)
+			->insert();
+
+
+		# Return
+		return "Deleted";
 
 	}
 

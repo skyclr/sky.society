@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3966711235">
+    <data-source source="LOCAL" name="Data Source" uuid="6031b797-e699-46c9-abe3-b7f0b200832c">
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.NonRegisteringDriver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/society</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>df9bdf9fdf9adf98df92df9d</user-password>
+      <libraries>
+        <library>
+          <url>jar://$USER_HOME$/Downloads/mysql-connector-java-5.1.27/docs/mysql-connector-java-5.1.26-bin.jar!/</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/Downloads/mysql-connector-java-5.1.27/docs/mysql-connector-license.txt</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
+
