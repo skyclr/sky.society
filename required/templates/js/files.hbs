@@ -1,0 +1,23 @@
+{% verbatim %}
+
+<!-- Folder thumb -->
+<script type="text/template" id="files-thumb">
+	<div class="folder" ng-click="loadFolder(folder.id); update()">
+		<div class="meta">
+			{{ folder.name }}
+		</div>
+	</div>
+</script>
+
+
+<!-- Holds add folder form -->
+<script type="text/template" id="files-windows-add">
+	<form method="post"  name="addForm" ng-submit="save.submit(addForm, $event)">
+		<h1>Загрузить в альбом {{ current.name }} </h1>
+		<smart-label type="file" title="Выберите файл(ы)" required></smart-label>
+		<smart-button type="submit" ng-class="{ disabled: ajax }">Загрузить</smart-button>
+	</form>
+</script>
+
+
+{% endverbatim %}

@@ -3,7 +3,7 @@
 
 # Add folder
 if($type == "add")
-	jSend(userFolders::add($_POST), "folder");
+	jSend(userFiles::add($_POST), "file");
 
 
 # Get id
