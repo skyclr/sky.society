@@ -1,9 +1,18 @@
 <?php
 
+
+
 /**
  * Class folders
  */
 class folders {
+
+	private static
+		/**
+		 * Max revision query
+		 * @var string
+		 */
+		$maxRevisionJoin = "SELECT MAX(`id`) as `id`, `folderId` FROM foldersRevisions GROUP BY folderId DESC";
 
 	/**
 	 * Root folder data
@@ -39,15 +48,9 @@ class folders {
 
 	public static function getAll() {
 
-		# Get max revisions
-		$join = sky::$db->make("foldersRevisions")
-			->group("folderId")
-			->records(array("MAX(id) as `id`", "folderId"))
-			->get("query");
-
 		# Get list
 		return $folders = sky::$db->make("folders")
-			->join("($join) as temp", "temp.folderId = folders.id")
+			->join("(" . self::$maxRevisionJoin .") as temp", "temp.folderId = folders.id")
 			->join("foldersRevisions", "foldersRevisions.id = temp.id")
 			->where("temp.id", null, "!=")
 			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
@@ -58,38 +61,34 @@ class folders {
 
 	public static function getById($id) {
 
+		# Get root
 		if($id == 0)
 			return self::$root;
 
-		# Get max revisions
-		$join = sky::$db->make("foldersRevisions")
-			->group("folderId")
-			->records(array("MAX(id) as `id`", "folderId"))
-			->get("query");
 
 		# Get list
-		return $folder = sky::$db->make("folders")
-			->join("($join) as temp", "temp.folderId = folders.id")
+		$folder = sky::$db->make("folders")
+			->join("(" . self::$maxRevisionJoin .") as temp", "temp.folderId = folders.id")
 			->join("foldersRevisions", "foldersRevisions.id = temp.id")
 			->where("temp.id", null, "!=")
 			->where($id)
-			->limit(1)
 			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
 			->get("single");
+
+
+		# No such folder
+		if(!$folder)
+			throw new userErrorException("Указанной папки не существует");
+
+		return $folder;
 
 	}
 
 	public static function getByParent($id) {
 
-		# Get max revisions
-		$join = sky::$db->make("foldersRevisions")
-			->group("folderId")
-			->records(array("MAX(id) as `id`", "folderId"))
-			->get("query");
-
 		# Get list
 		$folders = sky::$db->make("folders")
-			->join("($join) as temp", "temp.folderId = folders.id")
+			->join("(" . self::$maxRevisionJoin .") as temp", "temp.folderId = folders.id")
 			->join("foldersRevisions", "foldersRevisions.id = temp.id")
 			->where("temp.id", null, "!=")
 			->where("foldersRevisions.parentId", $id)
@@ -97,6 +96,12 @@ class folders {
 			->get();
 
 		return $folders;
+
+	}
+
+	public static function delete($id) {
+
+
 
 	}
 

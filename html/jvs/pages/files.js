@@ -43,14 +43,14 @@ angular.module("skyApp")
 						$scope.folders = data.folders;
 						$scope.current = data.current;
 					})
-					.always(function() { $scope.$digest(); });
+					.always(function() { $scope.$digest(); $scope.ajax = false; });
 			},
 			add: function(data, $scope) {
 
 				/* Request */
-				return sky.ajax("/ajax/folders?type=add", data)
+				return $scope.ajax = sky.ajax("/ajax/folders?type=add", data)
 					.success(function(data) { })
-					.always(function() { $scope.$digest(); });
+					.always(function() { $scope.$digest(); $scope.ajax = false; });
 			}
 		}
 	}]);

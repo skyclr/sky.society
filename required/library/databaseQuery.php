@@ -625,7 +625,12 @@ class databaseQuery extends advancedDatabase {
 	 * @return Mixed
 	 */
 	public function select($return = false) {
-	
+
+
+		# Set limit
+		if($return == "single")
+			$this->limit(1);
+
 		
 		# Parameters generation
         $whereExpression	= $this->makeWhere($this->conditions, is_string($this->tablesRaw) ? $this->tablesRaw : false);
