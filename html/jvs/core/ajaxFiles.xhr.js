@@ -14,6 +14,7 @@ sky.AjaxFiles.XHR = function(options) {
 		callbacks   : options.callbacks,
 		toProceed   : options.files.length,
 		inProgress  : 0,
+		total		: options.files.length,
 		totalLoaded : 0,
 		totalSize	: 0,
 		totalPercent: 0,
@@ -90,7 +91,8 @@ jQuery.extend(sky.AjaxFiles.XHR.prototype, {
 				size        : file.size,
 				percent     : file.percent,
 				toProceed	: self.toProceed,
-				current		: self.current
+				current		: self.current,
+				total		: self.total
 			});
 		};
 

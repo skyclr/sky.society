@@ -1,6 +1,6 @@
 .folder {
   width: 290px;
-  height: 150px;
+  height: 200px;
   background: #eee;
   float: left;
   margin: 2px;
@@ -9,7 +9,7 @@
 .folder .meta {
   width: 270px;
   position: absolute;
-  margin-top: 125px;
+  margin-top: 175px;
   color: #fff;
   height: 15px;
   padding: 5px 10px;
@@ -17,16 +17,20 @@
 }
 .file {
   width: 290px;
-  height: 150px;
+  height: 200px;
   background: #eee;
   float: left;
   margin: 2px;
   overflow: hidden;
 }
+.file:hover .meta {
+  display: block;
+}
 .file .meta {
   width: 270px;
   position: absolute;
-  margin-top: 125px;
+  margin-top: 175px;
+  display: none;
   color: #fff;
   height: 15px;
   padding: 5px 10px;

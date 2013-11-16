@@ -13,10 +13,11 @@
 
 <!-- Holds add folder form -->
 <script type="text/template" id="files-windows-add">
-	<form method="post"  name="addForm" ng-submit="saveFile.submit(addForm, $event)">
+	<form method="post"  name="addForm" ng-submit="files.save.submit(addForm, $event)">
 		<h1>Загрузить в альбом {{ current.name }} </h1>
 		<smart-label name="files" type="file" title="Выберите файл(ы)" multiple="multiple" required></smart-label>
 		<smart-button type="submit" ng-class="{ disabled: ajax }">Загрузить</smart-button>
+		<div ng-show="files.save.toProceed">Осталось файлов {{ files.save.toProceed }}/{{ files.save.total }}</div>
 	</form>
 </script>
 

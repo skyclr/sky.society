@@ -25,6 +25,8 @@ class page extends basePage {
 
 		}
 
+		phpinfo();
+
 
 		//$image = vk::uploadWallPhotos(sky::location("files") . "1.jpg");
 		//$post = vk::wallPost("Тест фоток", array("from_group" => 1, "owner_id" => -60733873, "attachments" => $image[0]["id"]));

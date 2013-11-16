@@ -1,12 +1,10 @@
 {% extends "/shared/basePage.twig" %}
 
 {% block toolbar %}
-    <a href="#" ng-click="addFolder()">Создать директорию</a>
-    <a href="#" ng-click="addFiles()">Загрузить файлы</a>
+    <a href="#" ng-click="folders.add($event)">Создать директорию</a>
+    <a href="#" ng-click="files.add($event)">Загрузить файлы</a>
 {% endblock %}
 
 {% block content %}
-    <user-folder ng-repeat="folder in folders"></user-folder>
-    <user-file ng-repeat="file in files"></user-file>
-    <div ng-show="(!folders || !folders.length) && (!files || !files.length)">Этот альбом пуст</div>
+
 {% endblock %}

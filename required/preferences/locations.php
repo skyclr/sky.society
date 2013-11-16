@@ -21,7 +21,7 @@ $preferences['locations'] += array(
 	# Html paths
 	"css"         => $preferences['locations']['html'] . "css/",
 	"img"         => $preferences['locations']['html'] . "img/",
-	"javascript"  => $preferences['locations']['html'] . "jvs/",
+	"javascript"  => $preferences['locations']['html'] . "jvs_old/",
 
 	# Inner paths
 	"logs"        => $preferences['locations']['required'] . "logs/",

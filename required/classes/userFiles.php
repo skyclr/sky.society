@@ -33,7 +33,7 @@ class userFiles {
 
 			# Get thumb
 			if($file[0]["type"] == "image");
-				images::makeSmallFromFiles($file, sky::location("files") . "/thumbs/", 300, 150, "random", "s_", true);
+				images::makeSmallFromFiles($file, sky::location("files") . "/thumbs/", 300, 200, "random", "s_", true);
 
 		} catch(Exception $e) {
 			files::deleteFile($file[0]["fileLocation"]);
@@ -106,9 +106,10 @@ class userFiles {
 			->where("temp.id", null, "!=")
 			->where("filesRevisions.folderId", $id)
 			->where("filesRevisions.deleted", 0)
+			->order("id", "desc")
 			->records(array("filesRevisions.*", "owner", "created", "thumb", "extension"))
 			->get())
-			throw new userErrorException("Указанного файла не существует");
+			return array();
 
 
 		# Return

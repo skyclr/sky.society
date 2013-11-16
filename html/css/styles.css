@@ -6,6 +6,8 @@
   width: 900px;
   margin: auto;
   margin-top: 20px;
+  padding-bottom: 50px;
+  overflow: auto;
 }
 /* Compiled styles sheet */
 * {
@@ -317,6 +319,7 @@ h1 {
   font-size: 18px;
   padding-bottom: 10px;
   margin-bottom: 15px;
+  clear: both;
   display: block;
 }
 /* Modal window styles */
