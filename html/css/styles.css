@@ -9,6 +9,9 @@
   padding-bottom: 50px;
   overflow: auto;
 }
+.hidden {
+  display: none;
+}
 /* Compiled styles sheet */
 * {
   padding: 0;

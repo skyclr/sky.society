@@ -1,10 +1,15 @@
 {% extends "/shared/basePage.twig" %}
 
 {% block toolbar %}
-    <a href="#" ng-click="folders.add($event)">Создать директорию</a>
-    <a href="#" ng-click="files.add($event)">Загрузить файлы</a>
+    <a href="#" class="addFolder">+ Альбом</a>
+    <a href="#" class="addFiles">+ Файлы</a>
 {% endblock %}
 
 {% block content %}
-
+    <div id="folders" class="hidden">
+        <h1>Альбомы</h1>
+    </div>
+    <div id="files" class="hidden">
+        <h1>Файлы</h1>
+    </div>
 {% endblock %}

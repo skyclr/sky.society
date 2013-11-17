@@ -37,16 +37,28 @@
 
     {# Externals #}
     <script type="text/javascript" src="{{ base }}jvs/external/jquery.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/external/jquery.cookie.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/extends.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/handlebars.js"></script>
 
     {# Core #}
     <script type="text/javascript" src="{{ base }}jvs/core/sky.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/core/callbacks.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/core/ajax.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/core/ajaxFiles.xhr.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/core/history.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/core/tips.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/core/windows.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/core/localStorage.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/core/templates.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/core/directives.js"></script>
+
+    {# Directives #}
+    <script type="text/javascript" src="{{ base }}jvs/directives/forms.js"></script>
+
+    {# Services #}
+    <script type="text/javascript" src="{{ base }}jvs/services/folders.js"></script>
+    <script type="text/javascript" src="{{ base }}jvs/services/files.js"></script>
 
     <script type="text/javascript" src="{{ base }}jvs/pages/{{ pageName }}.js"></script>
     {% for jsTemplate in page.jsTemplates %}

@@ -34,6 +34,8 @@ DirectoryIndex index.php
 	RewriteRule ^less/(.*) %{ENV:BASE} [R=301,L]
 
 
+    RewriteRule ^jvs/.* - [L]
+
     # If the requested filename exists, simply serve it.
     # We only want to let Apache serve files and not directories.
     RewriteCond %{REQUEST_FILENAME} -f

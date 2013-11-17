@@ -2,9 +2,9 @@
 
 <!-- Folder thumb -->
 <script type="text/template" id="folders-thumb">
-	<div class="folder" ng-click="folders.load(folder.folderId)">
+	<div class="folder" folderId="{{ folderId }}">
 		<div class="meta">
-			{{ folder.name }}
+			{{ name }} | <a href="#" class="deleteFolder">Удалить</a>| <a href="#" class="editFolder">Изменить</a>
 		</div>
 	</div>
 </script>
@@ -12,12 +12,22 @@
 
 <!-- Holds add folder form -->
 <script type="text/template" id="folders-windows-add">
-	<form method="post"  name="addForm" ng-submit="folders.save.submit(addForm, $event)">
-		<h1>Добавить альбом в {{ current.name }} </h1>
-		<smart-label type="text" title="Имя" ng-model="folders.save.data.name" required></smart-label>
+	<form method="post" id="addFolderForm">
+		<input type="hidden" name="parentId" value="{{ folderId }}" />
+		<h1>Добавить альбом в {{ name }} </h1>
+		<smart-label type="text" title="Имя" name="name" required></smart-label>
 		<smart-button type="submit" ng-class="{ disabled: ajax }">Создать</smart-button>
 	</form>
 </script>
 
+<!-- Holds edit folder form -->
+<script type="text/template" id="folders-windows-edit">
+	<form method="post" id="editFolderForm">
+		<input type="hidden" name="folderId" value="{{ folderId }}" />
+		<h1>Редиктирование альбома {{ name }} </h1>
+		<smart-label type="text" title="Имя" name="name" required></smart-label>
+		<smart-button type="submit" ng-class="{ disabled: ajax }">Создать</smart-button>
+	</form>
+</script>
 
 {% endverbatim %}

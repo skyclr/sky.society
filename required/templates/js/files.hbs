@@ -2,22 +2,23 @@
 
 <!-- Folder thumb -->
 <script type="text/template" id="files-thumb">
-	<div class="file" ng-click="loadFile(file.id); update()">
+	<div class="file"">
 		<div class="meta">
-			{{ file.name }}
+			{{ name }}
 		</div>
-		<img src="../files/thumbs/{{ file.thumb }}" />
+		<img src="../files/thumbs/{{ thumb }}" />
 	</div>
 </script>
 
 
 <!-- Holds add folder form -->
 <script type="text/template" id="files-windows-add">
-	<form method="post"  name="addForm" ng-submit="files.save.submit(addForm, $event)">
-		<h1>Загрузить в альбом {{ current.name }} </h1>
+	<form method="post" name="addForm" id="addFilesForm">
+		<input type="hidden" name="parentId" value="{{ folderId }}" />
+		<h1>Загрузить в альбом {{ name }} </h1>
 		<smart-label name="files" type="file" title="Выберите файл(ы)" multiple="multiple" required></smart-label>
-		<smart-button type="submit" ng-class="{ disabled: ajax }">Загрузить</smart-button>
-		<div ng-show="files.save.toProceed">Осталось файлов {{ files.save.toProceed }}/{{ files.save.total }}</div>
+		<smart-button type="submit">Загрузить</smart-button>
+		<div>Осталось файлов <span>0<span>/<span>0</span></div>
 	</form>
 </script>
 

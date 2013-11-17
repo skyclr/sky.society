@@ -4,7 +4,7 @@
 <div class="block">
     <a class="logo" href="{{ base }}"><img alt="storage" src="{{ base }}img/icons/logo2.png"/></a>
 
-    <form action="{{ base }}login" name="loginForm" method="post" ng-submit="submit(loginForm, $event)">
+    <form action="{{ base }}login" name="loginForm" method="post">
         <input type="hidden" name="type" value="login">
         {# Output page information #}
         {% for message in resultMessages %}

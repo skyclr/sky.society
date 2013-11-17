@@ -2,69 +2,54 @@
  * Holds classes to work with modal/new windows
  * @type {object|{}}
  */
-sky.windows = sky.windows || {};
+sky.windows = sky.windows || { list: [] };
 
 $.extend(sky.windows, {
 
 	/**
 	 * Creates new modal window
-	 * @param {object|string}	what Object to show in window or ajax url
+	 * @param {object|string}	name Window name
 	 * @param {object}			[data] Data to send with request
 	 * @param {object|string}	[lock] Object or selector objects to be locked until end
 	 * @type {{ holder: jQuery }}
 	 */
-	Modal: function(what, data, lock) {
+	Modal: function(name, data, lock) {
 
 
 		/* Self construct */
 		if(!(this instanceof sky.windows.Modal))
-			return new sky.windows.Modal(what, data, lock);
+			return new sky.windows.Modal(name, data, lock);
 
-
-		/* Back link */
-		var self = this;
-
-
-		/* Add handler to window resize */
-		$(window).on("resize.Modal scroll.Modal", { self: this }, this.rePosition);
-
-
-		/* Create objects */
-		this.background 	= $("<div/>").addClass(this.classes.background);
-		this.holder			= $('<div/>').css("float", "left");
-		this.dataContainer 	= $("<div/>").addClass(this.classes.window).append(this.holder).appendTo(this.background).on({
-									mouseenter: function() { $(window).off("click.Modal"); },
-									mouseleave: function() { $(window).on("click.Modal", function() { self.close() }); }
-								});
-
+		/* Create window */
+		this.background 	= sky.templates.render("windows-modal", {}).appendTo("body").data("modalWindow", this);;
+		this.dataContainer 	= this.background.children();
+		this.holder 		= this.dataContainer.children();
 
 		/* Callbacks */
-		this.Callbacks = new sky.Callbacks();
+		this.callbacks = new sky.Callbacks(["success", "error", "notSuccess", "always", "abort", "close"]);
 
+		/* Link */
+		this.template = sky.templates.render(name, data).appendTo(this.holder);
 
-		/* If we insert jQuery object */
-		if(what instanceof jQuery) {
+		/* Save scroll position because it may reset */
+		var topOffset = $(window).scrollTop();
 
-			this.insert(what);
-			
-		/* If we need to get url */
-		} else {
+		/* Make body scrollable */
+		$("body").css('overflow', 'hidden');
 
-			/* Perform ajax */
-			this.ajax = sky.ajax(what, data, false, lock)
-				.success(function(response) {
-					self.insert(response.text);
-				}).error(function(error, code) {
-					self.Callbacks.onError(error, code);
-				}).notSuccess(function() {
-					self.Callbacks.onNotSuccess();
-				}).always(function() {
-					self.Callbacks.onAlways();
-				}).abort(function() {
-					self.Callbacks.onAbort();
-				});
-		}
-		
+		/* Restore position */
+		$(window).scrollTop(topOffset);
+
+		/* Add to list */
+		sky.windows.list.push(this);
+
+		/* Resize to full */
+		$(window).trigger("resize");
+
+		/* Success */
+		this.callbacks.fire("success", this);
+
+		/* Return */
 		return this;
 	
 	},
@@ -126,7 +111,7 @@ $.extend(sky.windows.Modal.prototype, {
 		this.background.fadeOut("fast", function() { $(this).remove() });
 
 		/* Call close callback */
-		this.Callbacks.onClose(!!byUser);
+		this.callbacks.fire("close", { byUser: !!byUser });
 
 	},
 
@@ -186,3 +171,48 @@ $.extend(sky.windows.Modal.prototype, {
 
 	}
 });
+
+/* Add handler to window resize */
+$(window)
+	.on("resize.modal scroll.modal", function() {
+
+		/* If no windows */
+		if(!sky.windows["list"].length)
+			return;
+
+		/* Get sizes */
+		var jWindow	  = $(window),
+			jBody	  = $("body"),
+			topOffset = jWindow.scrollTop() > jBody.scrollTop() ? jWindow.scrollTop() : jBody.scrollTop();
+
+		/* Apply for windows */
+		$.each(sky.windows.list, function(_, modal) {
+
+			/* Min values set because of this field document may be bigger */
+			modal.background.css({ height: jWindow.height(), width: jWindow.width(), top: topOffset });
+
+			/* Set dimensions and position */
+			modal.dataContainer.css({ height: "auto", width: "auto" });
+			modal.dataContainer
+				.width(modal.holder.outerWidth())
+				.center(modal.background, true);
+
+		});
+
+	});
+
+/* Add handler to black area click */
+$(document)
+	.on("click", function(event) {
+
+		/* Get element */
+		var element = $(event.target || event.srcElement);
+
+		/* Get window */
+		var modal = element.data("modalWindow");
+
+		/* Hide window */
+		if(modal)
+			modal.close();
+
+	})

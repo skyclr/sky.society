@@ -212,5 +212,9 @@ class userController implements arrayaccess {
     public function offsetGet($offset) {
         return isset($this->userData[$offset]) ? $this->userData[$offset] : null;
     }
-	
+
+	public function inGroup($restrictionId) {
+		return false;
+	}
+
 }

@@ -5,6 +5,7 @@
 <script type="text/template" id="forms-label">
 	<label>
 		<span class="name">{{ title }}</span>
+		<input type="{{ type }}" name="{{ name }}" value="{{ value }}" />
 		<span class="desc"></span>
 	</label>
 </script>
@@ -13,7 +14,7 @@
 <!-- Submit button template -->
 <script type="text/template" id="forms-submit">
 	<label class="button">
-		<input type="submit" value="{{ html }}"/>
+		<input type="submit" value="{{ value }}"/>
 	</label>
 </script>
 

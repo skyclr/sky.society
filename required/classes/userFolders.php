@@ -20,7 +20,8 @@ class userFolders {
 		$root = array(
 			"name"     => "Корень",
 			"id"       => 0,
-			"parentId" => false
+			"parentId" => false,
+			"folderId" => 0
 		);
 
 	/**
@@ -40,7 +41,7 @@ class userFolders {
 		sky::$db->make("foldersRevisions")
 			->set("folderId", $id)
 			->set("name", $record["name"])
-			->set("parentId", $record["folderId"])
+			->set("parentId", $record["parentId"])
 			->set("modified", "", "now")
 			->set("ownerId", auth::$me["id"])
 			->insert();
@@ -58,6 +59,10 @@ class userFolders {
 	public static function getById($id) {
 
 
+		# Validation
+		validator::value($id, "natural", "Неверно указан номер альбома");
+
+
 		# Get root
 		if($id == 0)
 			return self::$root;
@@ -72,7 +77,7 @@ class userFolders {
 			->where("foldersRevisions.deleted", 0)
 			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
 			->get("single"))
-			throw new userErrorException("Указанной папки не существует");
+			throw new userErrorException("Указанного альбома не существует");
 
 
 		# Return
@@ -103,6 +108,30 @@ class userFolders {
 
 	}
 
+	public static function change($data) {
+
+		$record = $data;
+
+
+		# Get folder
+		$folder = self::getById($data["folderId"]);
+
+
+		# Add revision
+		sky::$db->make("foldersRevisions")
+			->set("folderId", $folder["folderId"])
+			->set("name", $record["name"])
+			->set("parentId", $folder["parentId"])
+			->set("modified", "", "now")
+			->set("ownerId", auth::$me["id"])
+			->insert();
+
+
+		# Get changed
+		return self::getById($folder["folderId"]);
+
+	}
+
 	/**
 	 * Deletes specified folder
 	 * @param int $id Folder id
@@ -113,6 +142,20 @@ class userFolders {
 
 		# Get folder
 		$folder = self::getById($id);
+
+
+		# Delete all files
+		if($sub = self::getByParent($id)) {
+			foreach($sub as $s)
+				self::delete($s["folderId"]);
+		}
+
+
+		# Delete children
+		if($files = userFiles::getByFolder($id)) {
+			foreach($files as $file)
+				userFiles::delete($file["fileId"]);
+		}
 
 
 		# Add revision

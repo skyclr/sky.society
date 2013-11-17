@@ -57,17 +57,16 @@ $.extend(sky.LocalStorage.prototype, {
 	/**
 	 * Loads item form database
 	 * @param {*} id Unique id
-	 * @param {sky.Callbacks} [events] Events handler
 	 * @param {function} [onLoad] Calls when load complete
 	 */
-	load: function(id, events, onLoad) {
+	load: function(id, onLoad) {
 
 		/* Try to get item from storage */
 		var item = localStorage.getItem([this.itemPrefix, id].join("-"));
 
 		/* Trigger error */
 		if(item === null)
-			events.fire("storage.load.error", { id: id, storage: this });
+			this.events.fire("load.error", { id: id, storage: this });
 
 		/* Call function */
 		if(onLoad)
@@ -108,10 +107,9 @@ $.extend(sky.LocalStorage.prototype, {
 
 	/**
 	 * Loads all element from storage
-	 * @param {sky.Callbacks} [events] Events handler
 	 * @param onLoad
 	 */
-	loadAll: function(events, onLoad) {
+	loadAll: function(onLoad) {
 
 		/* Item holder */
 		var self = this, items = [];
@@ -120,7 +118,7 @@ $.extend(sky.LocalStorage.prototype, {
 		$.each(this.getIds(), function(_, id) {
 
 			/* Get item */
-			self.load(id, events, function(item) {
+			self.load(id, function(item) {
 
 				/* Add parsed */
 				if(item) items.push(item);
@@ -132,7 +130,7 @@ $.extend(sky.LocalStorage.prototype, {
 
 		/* Trigger error */
 		if(!items.length)
-			events.fire("storage.empty", { storage: this });
+			this.events.fire("empty", { storage: this });
 
 		/* Return */
 		onLoad.call(this, items);
@@ -143,10 +141,9 @@ $.extend(sky.LocalStorage.prototype, {
 	 * Save data to storage
 	 * @param id
 	 * @param data
-	 * @param {sky.Callbacks} [events] Events handler
 	 * @returns {*}
 	 */
-	save: function(id, data, events) {
+	save: function(id, data) {
 
 		/* Save item */
 		console.log(data);
@@ -164,7 +161,7 @@ $.extend(sky.LocalStorage.prototype, {
 		localStorage.setItem(this.fullName, ids.join(", "));
 
 		/* Trigger event */
-		events.fire("storage.save.success", { storage: this, data: data, id: id });
+		this.events.fire("save.success", { storage: this, data: data, id: id });
 
 		/* Self return */
 		return this;
@@ -175,15 +172,14 @@ $.extend(sky.LocalStorage.prototype, {
 	 * Saves all
 	 * @param index
 	 * @param models
-	 * @param {sky.Callbacks} [events] Events handler
 	 * @returns {*}
 	 */
-	saveAll: function(index, models, events) {
+	saveAll: function(index, models) {
 		var self = this;
 
 		/* Go through */
 		$.each(models, function() {
-			self.save(this.attr(index), this.attributes, events);
+			self.save(this.attr(index), this.attributes);
 		});
 
 		return this;
@@ -192,10 +188,9 @@ $.extend(sky.LocalStorage.prototype, {
 	/**
 	 * Removes from storage
 	 * @param id
-	 * @param {sky.Callbacks} [events] Events handler
 	 * @returns {*}
 	 */
-	remove: function(id, events) {
+	remove: function(id) {
 
 		/* Init */
 		var index,
@@ -214,12 +209,12 @@ $.extend(sky.LocalStorage.prototype, {
 			localStorage.setItem(this.fullName, ids.join(", "));
 
 			/* Trigger event */
-			events.fire("storage.success.remove", { storage: this, id: id });
+			this.events.fire("success.remove", { storage: this, id: id });
 
 		}
 		/* If no id */
 		else
-			events.fire("storage.remove.error", { storage: this, id: id });
+			this.events.fire("remove.error", { storage: this, id: id });
 
 
 		/* Self return */

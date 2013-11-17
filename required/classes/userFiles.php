@@ -117,4 +117,31 @@ class userFiles {
 
 	}
 
+	/**
+	 * Deletes file by id
+	 * @param int $id File id
+	 * @return string
+	 */
+	public static function delete($id) {
+
+		# Get folder
+		$file = self::getById($id);
+
+
+		# Add revision
+		sky::$db->make("filesRevisions")
+			->set("fileId", $id)
+			->set("name", $file["name"])
+			->set("folderId", $file["folderId"])
+			->set("modified", "", "now")
+			->set("ownerId", auth::$me["id"])
+			->set("deleted", 1)
+			->insert();
+
+
+		# Return
+		return "Deleted";
+
+	}
+
 }
