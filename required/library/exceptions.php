@@ -2,6 +2,11 @@
 
 /** Errors handler */
 function errorHandler($errno, $errstr, $errfile, $errline) {
+
+	# Skip pdo gone aways
+	if(stripos($errstr, "MySQL server has gone away") !== false)
+		return;
+
 	switch ($errno) {
 	    case E_ERROR	: $type = "php error";  break;
 	    case E_PARSE	: $type = "php parse"; 	break;
