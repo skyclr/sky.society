@@ -6,6 +6,9 @@
 		<div class="meta">
 			{{ name }} | <a href="#" class="deleteFolder">Удалить</a>| <a href="#" class="editFolder">Изменить</a>
 		</div>
+		{{#if thumb}}
+		<img src="../files/thumbs/{{ thumb }}" />
+		{{/if}}
 	</div>
 </script>
 
@@ -15,7 +18,7 @@
 	<form method="post" id="addFolderForm">
 		<input type="hidden" name="parentId" value="{{ folderId }}" />
 		<h1>Добавить альбом в {{ name }} </h1>
-		<smart-label type="text" title="Имя" name="name" required></smart-label>
+		<smart-label type="text" title="Название" name="name" required></smart-label>
 		<smart-button type="submit" ng-class="{ disabled: ajax }">Создать</smart-button>
 	</form>
 </script>
@@ -25,8 +28,8 @@
 	<form method="post" id="editFolderForm">
 		<input type="hidden" name="folderId" value="{{ folderId }}" />
 		<h1>Редиктирование альбома {{ name }} </h1>
-		<smart-label type="text" title="Имя" name="name" required></smart-label>
-		<smart-button type="submit" ng-class="{ disabled: ajax }">Создать</smart-button>
+		<smart-label type="text" title="Название" name="name" value="{{ name }}" required></smart-label>
+		<smart-button type="submit" ng-class="{ disabled: ajax }">Изменить</smart-button>
 	</form>
 </script>
 

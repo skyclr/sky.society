@@ -7,7 +7,7 @@ sky.services = sky.services || {};
  */
 sky.services.files = {
 	init: function() {
-
+1
 		/* Get holder */
 		this.render.holder = $("#files");
 
@@ -15,7 +15,45 @@ sky.services.files = {
 
 	windows: {
 		add: function() {
+
+			/* Close previous */
+			if(this.window)
+				this.window.close();
+
+			/* Create window */
 			return this.window = sky.windows.Modal("files-windows-add", page.gallery.current);
+
+		},
+		file: function(file) {
+
+			/* Close previous */
+			if(this.window)
+				this.window.close();
+
+			if(file.type == "video")
+				file.video = true;
+			else file.image = true;
+
+			/* Create window */
+			this.window = sky.windows.Modal("files-windows-file", file);
+
+			/* Resize on image load */
+			this.window.holder.find("img").on("load", function() {
+				if($(this).is(":visible"))
+					$(window).trigger("resize").trigger("resize");
+			});
+
+			this.window.holder.find("video").on("loadeddata", function() {
+				if($(this).is(":visible"))
+					$(window).trigger("resize").trigger("resize");
+			});
+
+			/* Special class for file window */
+			this.window.dataContainer.addClass("fillView");
+
+			/* Return */
+			return this.window;
+
 		}
 	},
 
@@ -53,13 +91,13 @@ sky.services.files = {
 			this.holder.removeClass("hidden");
 
 			/* Render */
-			var render = sky.templates.render("files-thumb", file);
+			file.render = sky.templates.render("files-thumb", file).data("file", file);
 
 			/* Append */
 			if(first)
-				this.holder.children("h1").after(render);
+				this.holder.children("h1").after(file.render);
 			else
-				this.holder.append(render);
+				this.holder.append(file.render);
 		}
 	},
 

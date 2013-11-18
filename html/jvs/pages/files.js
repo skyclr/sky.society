@@ -74,14 +74,26 @@ $(document)
 		event.preventDefault();
 
 		/*  Create sender */
-		var filesAjax = sky.AjaxFiles($("input[name=files]", this), "/ajax/files", { type: "add" });
+		var form = $(this),
+			button = form.find(".button"),
+			filesAjax = sky.AjaxFiles($("input[name=files]", this), "/ajax/files", { type: "add", folderId: form.find("[name=folderId]").val()  });
+
+		/* Already in progress */
+		if(!button.disable(true))
+			return;
 
 		/*  Bind events */
 		filesAjax.callbacks
 			.on("success", function(data) {
 				sky.services.files.render.single(data.file, true);
 			})
-			.on("always, begin", function(toProceed, total) {})
+			.on("begin", function() {
+				form.find(".progress").show();
+			})
+			.on("always, begin", function(toProceed, total) {
+				form.find(".toProceed").html(toProceed);
+				form.find(".total").html(total);
+			})
 			.on("always", function(toProceed) {
 				if(!toProceed)
 					sky.services.files.windows.window.close();
@@ -101,8 +113,18 @@ $(document)
 		var element = $(event.target || event.srcElement);
 
 		/* Load folder */
-		if(element.hasClass("folder"))
+		if(!element.is("a"))
 			sky.services.folders.ajax.load($(this).attr("folderId"));
+
+	})
+	.on("click", ".file", function(event) {
+
+		/* Get element */
+		var element = $(event.target || event.srcElement);
+
+		/* Load folder */
+		if(!element.is("a"))
+			sky.services.files.windows.file($(this).data("file"))
 
 	})
 	.on("submit", "#addFolderForm", function(event) {
@@ -122,4 +144,27 @@ $(document)
 		/* Ajax request */
 		sky.services.folders.ajax.edit($(this).readForm(), $(".button", this));
 
+	})
+	.on("click", "video", function() {
+
+		if(this.ended)
+			this.play();
+		else if(this.paused)
+			this.play();
+		else
+			this.pause();
+	})
+	.on("keypress", "body", function(event) {
+
+
+		var video = $("video").get(0);
+		if((event.keyCode && event.keyCode != 32) || !video)
+			return;
+
+		if(video.ended)
+			video.play();
+		else if(video.paused)
+			video.play();
+		else
+			video.pause();
 	});

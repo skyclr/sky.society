@@ -3,7 +3,7 @@
 	overflow: hidden;
 }
 
-.folder {
+#folders .folder {
 	width      : 290px;
 	height     : 200px;
 	background : #eee;
@@ -20,7 +20,7 @@
 		background : url(../img/backgrounds/blackTransparent.png);
 	}
 }
-.file {
+#files .file {
 	width      : 290px;
 	height     : 200px;
 	background : #eee;
@@ -41,5 +41,18 @@
 		height     : 15px;
 		padding    : 5px 10px;
 		background : url(../img/backgrounds/blackTransparent.png);
+	}
+}
+.meta a {
+	color: #55ccff;
+}
+
+
+.windowHolder.fillView {
+	padding: 0;
+	max-height: 95%;
+	.photo {
+		display: block;
+		max-height: 100%;
 	}
 }

@@ -6,6 +6,11 @@ if($type == "add")
 	jSend(userFolders::add($_POST), "folder");
 
 
+# Add folder
+if($type == "change")
+	jSend(userFolders::change($_POST), "folder");
+
+
 # Get id
 $id = vars::post("id", "numeric", "always");
 

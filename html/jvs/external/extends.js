@@ -125,7 +125,7 @@ $.extend(jQuery.fn,
 			if(sizes.width  > this.outerWidth()  + 50) this.css("marginLeft", (sizes.width  - this.outerWidth() )  / 2 + "px");
 			else this.css("marginLeft", 25);
             if(sizes.height > this.outerHeight() + 50) this.css("marginTop" , (sizes.height - this.outerHeight() ) / 2 + "px");
-			else this.css("marginTop", 25);
+			else this.css("marginTop", "");
 
 		/* If absolute we just center */
         } else {

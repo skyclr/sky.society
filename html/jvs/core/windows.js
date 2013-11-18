@@ -46,9 +46,6 @@ $.extend(sky.windows, {
 		/* Resize to full */
 		$(window).trigger("resize");
 
-		/* Success */
-		this.callbacks.fire("success", this);
-
 		/* Return */
 		return this;
 	
@@ -193,6 +190,8 @@ $(window)
 
 			/* Set dimensions and position */
 			modal.dataContainer.css({ height: "auto", width: "auto" });
+
+			/* Set width */
 			modal.dataContainer
 				.width(modal.holder.outerWidth())
 				.center(modal.background, true);
@@ -209,10 +208,11 @@ $(document)
 		var element = $(event.target || event.srcElement);
 
 		/* Get window */
-		var modal = element.data("modalWindow");
+		var modal = element.data("modalWindow")
+
 
 		/* Hide window */
 		if(modal)
 			modal.close();
 
-	})
+	});

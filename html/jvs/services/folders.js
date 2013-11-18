@@ -78,7 +78,7 @@ sky.services.folders = {
 			/* Append */
 			if(first instanceof jQuery)
 				first.after(folder.render);
-			if(first)
+			else if(first)
 				this.holder.children("h1").after(folder.render);
 			else
 				this.holder.append(folder.render);
@@ -204,11 +204,13 @@ sky.services.folders = {
 		 */
 		edit: function(folder, lock) {
 
+			var old = $("[folderId="+ folder.folderId +"]");
+
 			/* Perform ajax request */
 			this.ajax = sky.ajax("/ajax/folders?type=change", folder, lock)
 				.success(function(data) {
-					sky.services.folders.render.single(data["folder"], folder.render);
-					folder.render.remove();
+					sky.services.folders.render.single(data["folder"], old);
+					old.remove();
 					sky.services.folders.windows.window.close();
 				});
 

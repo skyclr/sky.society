@@ -1,6 +1,6 @@
 {% verbatim %}
 
-<!-- Folder thumb -->
+<!-- File thumb -->
 <script type="text/template" id="files-thumb">
 	<div class="file"">
 		<div class="meta">
@@ -11,15 +11,28 @@
 </script>
 
 
-<!-- Holds add folder form -->
+<!-- Holds add files form -->
 <script type="text/template" id="files-windows-add">
 	<form method="post" name="addForm" id="addFilesForm">
-		<input type="hidden" name="parentId" value="{{ folderId }}" />
+		<input type="hidden" name="folderId" value="{{ folderId }}" />
 		<h1>Загрузить в альбом {{ name }} </h1>
 		<smart-label name="files" type="file" title="Выберите файл(ы)" multiple="multiple" required></smart-label>
 		<smart-button type="submit">Загрузить</smart-button>
-		<div>Осталось файлов <span>0<span>/<span>0</span></div>
+		<div class="progress" style="clear:both; display: none">
+			Осталось файлов <span class="toProceed">0</span>/<span class="total">0</span>
+		</div>
 	</form>
+</script>
+
+
+<!-- Holds file info form -->
+<script type="text/template" id="files-windows-file">
+	{{#if video}}
+	<video src="../files/files/{{ location }}" autoplay="autoplay" class="photo"></video>
+	{{/if}}
+	{{#if image}}
+	<img src="../files/files/{{ location }}" style="max-width: 100%" class="photo" />
+	{{/if}}
 </script>
 
 

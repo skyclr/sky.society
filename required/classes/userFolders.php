@@ -81,7 +81,7 @@ class userFolders {
 
 
 		# Return
-		return $folder;
+		return self::compile($folder);
 
 	}
 
@@ -101,6 +101,11 @@ class userFolders {
 			->where("foldersRevisions.parentId", $id)
 			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
 			->get();
+
+
+		# Compiling
+		foreach($folders as $i => $folder)
+			$folders[$i] = self::compile($folder);
 
 
 		# Return
@@ -171,6 +176,20 @@ class userFolders {
 
 		# Return
 		return "Deleted";
+
+	}
+
+	/**
+	 * Compiles
+	 * @param $folder
+	 */
+	private static function compile($folder) {
+
+		# Add thumb
+		if($thumb = userFiles::getByFolder($folder["folderId"], true))
+			$folder["thumb"] = $thumb[0]["thumb"];
+
+		return $folder;
 
 	}
 
