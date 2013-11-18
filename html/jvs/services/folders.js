@@ -135,6 +135,8 @@ sky.services.folders = {
 		 */
 		load: function(id, lock) {
 
+			lock = $(".folder, .file");
+
 			/* Stop previous request */
 			if(this.ajax)
 				this.ajax.stop();
