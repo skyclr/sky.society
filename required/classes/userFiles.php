@@ -5,7 +5,7 @@
  */
 class userFiles {
 
-	private static
+	public static
 
 		/**
 		 * Max revision query

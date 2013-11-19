@@ -4,6 +4,33 @@
 class utilities {
 
 	/**
+	 * Un serialised specified data
+	 * @param string  Data to un serialise
+	 * @return mixed
+	 * @throws systemErrorException
+	 */
+	public static function unSerialise($data) {
+
+		# Empty data
+		if(empty($data))
+			throw new systemErrorException("Data is empty");
+
+
+		# Un serialise
+		$result = @unserialize($data);
+
+
+		# If failed
+		if($result === false && $result != serialize(false))
+			throw new systemErrorException("Can't unserialise data: ".var_export($data, true));
+
+
+		# Return
+		return $result;
+
+	}
+
+	/**
 	 * Generates dates information like associated array, keys:<br/>
 	 * today,<br/> yesterday,<br/> thisWeekStart,<br/> thisWeekEnd,<br/> lastWeekStart,<br/> lastWeekEnd,<br/> thisWeekNo,<br/> lastWeekNo
 	 */

@@ -4,6 +4,7 @@
   overflow: hidden;
 }
 #folders .folder {
+  cursor: pointer;
   width: 290px;
   height: 200px;
   background: #eee;
@@ -21,6 +22,7 @@
   background: url(../img/backgrounds/blackTransparent.png);
 }
 #files .file {
+  cursor: pointer;
   width: 290px;
   height: 200px;
   background: #eee;

@@ -14,11 +14,18 @@ $preferences = array(
 	),
 
 	/**
+	 *
+	 */
+	"preferences" => array(
+		"external" => "preferences" # table with external preferences
+	),
+
+	/**
 	 * Main site preferences
 	 */
 	"site"         => array(
 		"name" => "SKY.society",
-		"base" => "/society/sky.society/html/"
+		"base" => "/society/html/"
 	),
 
 	/**

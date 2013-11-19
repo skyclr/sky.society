@@ -170,6 +170,20 @@ class sky {
 				self::$config["database"]["password"]);
 
 
+			# If user external configs
+			if(!empty(self::$config["preferences"]["external"])) {
+
+				# Get configs
+				if($configs = self::$db->make(self::$config["preferences"]["external"])->get()) {
+
+					# Go through
+					foreach($configs as $config)
+						self::$config[$config["section"]][$config["name"]] = $config["serialised"] ? utils::unSerialise($config["data"]) : $config["data"];
+
+				}
+			}
+
+
 			# Init authentication
 			if($type !== "console" && !empty(self::$config["authenticate"])  && (!isset(self::$config["authenticate"]["use"]) || self::$config["authenticate"]["use"] !== false)) {
 				auth::initialization(
