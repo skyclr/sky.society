@@ -12,11 +12,11 @@ $id = vars::post("id", "numeric", "always");
 
 # Delete folder
 if($type == "delete")
-	jSend(userFolders::delete($id));
+	jSend(userFiles::delete($id));
 
 
-# Get folders list
-jSend(array(
-	"folders" => userFolders::getByParent($id),
-	"current" => userFolders::getById($id)
-));
+# Delete folder
+if($type == "more")
+	jSend(userFiles::getByFolder($id, false, vars::post("offset", "numeric", "always")), "files");
+
+jError("Не указана операция для выполнения");

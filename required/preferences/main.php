@@ -54,7 +54,10 @@ $preferences = array(
 		"guest"       => array(     # Guest account parameters
 			"username" => "Гость"
 		),
-		"preferences" => array()    # Preferences for guests and new users
+		"preferencesTable" => "userSettings",
+		"preferences" => array(
+			"perPage" => 30
+		)    # Preferences for guests and new users
 	),
 
 	/**

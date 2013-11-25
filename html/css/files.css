@@ -3,9 +3,13 @@
   margin-bottom: 25px;
   overflow: hidden;
 }
+#files > .list,
+#folders > .list {
+  overflow: auto;
+}
 #folders .folder {
   cursor: pointer;
-  width: 290px;
+  width: 296px;
   height: 200px;
   background: #eee;
   float: left;
@@ -13,7 +17,7 @@
   overflow: hidden;
 }
 #folders .folder .meta {
-  width: 270px;
+  width: 276px;
   position: absolute;
   margin-top: 175px;
   color: #fff;
@@ -22,8 +26,9 @@
   background: url(../img/backgrounds/blackTransparent.png);
 }
 #files .file {
+  display: inline-block;
   cursor: pointer;
-  width: 290px;
+  width: 296px;
   height: 200px;
   background: #eee;
   float: left;
@@ -34,7 +39,7 @@
   display: block;
 }
 #files .file .meta {
-  width: 270px;
+  width: 276px;
   position: absolute;
   margin-top: 175px;
   display: none;
@@ -45,6 +50,22 @@
 }
 .meta a {
   color: #55ccff;
+  float: right;
+  display: block;
+  margin-left: 5px;
+}
+.more {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid #bdd5ee;
+  color: #6b8999;
+  cursor: pointer;
+}
+.more:hover {
+  background: #ddf5ff;
 }
 .windowHolder.fillView {
   padding: 0;

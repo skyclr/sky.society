@@ -49,7 +49,7 @@ class auth {
 				self::authorisation($user, vars::post("autologin", "bool", "always"));
 
 				# After login redirect
-				if(!is_null($redirect = validator::single(sky::$config["authenticate"], "redirect", "trim")))
+				if(self::isLoggedIn() && !is_null($redirect = validator::single(sky::$config["authenticate"], "redirect", "trim")))
 					sky::goToPage($redirect);
 
 			}
@@ -66,7 +66,7 @@ class auth {
 		# Create user controller
 		if(self::isLoggedIn()) {
 			self::$me = new userController($_SESSION);
-			if(sky::$config["authenticate"]["preferences"])
+			if(!empty(sky::$config["authenticate"]["preferences"]))
 				self::$me->setPreferences($_SESSION['preferences']);
 			return;
 		}
@@ -93,7 +93,7 @@ class auth {
 
 
 		# Set guest preferences
-		if(!empty(sky::$config["authenticate"]["preferences"]) && self::$defaultPreferences) {
+		if(!empty(sky::$config["authenticate"]["preferencesTable"]) && self::$defaultPreferences) {
 
 			# Set if none
 			if(empty($_SESSION['preferences']))
@@ -214,12 +214,12 @@ class auth {
 
 
 			# If we don't use preferences
-			if(!sky::$config["authenticate"]["preferences"])
+			if(empty(sky::$config["authenticate"]["preferences"]))
 				return;
 
 
 			# Get user preferences
-			$preferences = sky::$db->make(sky::$config["authenticate"]["preferences"])->where($user["id"], "owner")->get("single");
+			$preferences = sky::$db->make(sky::$config["authenticate"]["preferencesTable"])->where($user["id"], "owner")->get("single");
 
 
 			# Save all preferences to storage
@@ -231,7 +231,7 @@ class auth {
 			elseif(self::$defaultPreferences) {
 
 				# Save default preferences
-				sky::$db->make(sky::$config["authenticate"]["preferences"])->set(self::$defaultPreferences)->set("owner", $user["id"])->insert();
+				sky::$db->make(sky::$config["authenticate"]["preferencesTable"])->set(self::$defaultPreferences)->set("owner", $user["id"])->insert();
 
 				# Save to session
 				$_SESSION['preferences'] = self::$defaultPreferences;
@@ -242,7 +242,7 @@ class auth {
 
 			# In case of error
 			self::logout(false);
-			info::error("Ошибка во время авторизации", "error");
+			info::error("Ошибка во время авторизации");
 
 		}
 	}

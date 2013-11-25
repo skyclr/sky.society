@@ -111,11 +111,12 @@ class userFiles {
 
 	/**
 	 * Gets file by folder id
-	 * @param $id
-	 * @param $lastThumb
+	 * @param      $id
+	 * @param bool $lastThumb
+	 * @param int  $offset
 	 * @return array|Mixed
 	 */
-	public static function getByFolder($id, $lastThumb = false) {
+	public static function getByFolder($id, $lastThumb = false, $offset = 0) {
 
 
 		# Prepare request
@@ -127,6 +128,12 @@ class userFiles {
 			->where("filesRevisions.deleted", 0)
 			->order("created", "desc")
 			->records(array("filesRevisions.*", "owner", "created", "thumb", "extension", "location", "type"));
+
+
+		# Set page offset
+		$request
+			->limit(auth::$me->pref("perPage"))
+			->offset($offset);
 
 
 		# Last with thumb

@@ -144,7 +144,6 @@ class userFolders {
 	 */
 	public static function delete($id) {
 
-
 		# Get folder
 		$folder = self::getById($id);
 

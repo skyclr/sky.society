@@ -68,6 +68,19 @@ $(document)
 		sky.services.files.windows.add();
 
 	})
+	.on("click", ".deleteFile", function(event) {
+
+		/* No # go */
+		event.preventDefault();
+
+		/* No disabled buttons go */
+		if($(this).isDisabled())
+			return;
+
+		/* Show add window */
+		sky.services.files.ajax.remove($(this).parents(".file").attr("fileId"), $(this));
+
+	})
 	.on("submit", "#addFilesForm", function() {
 
 		/* No action go */

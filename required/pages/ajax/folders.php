@@ -11,8 +11,9 @@ if($type == "change")
 	jSend(userFolders::change($_POST), "folder");
 
 
+
 # Get id
-$id = vars::post("id", "numeric", "always");
+$id = vars::post("id", "numeric");
 
 
 # Delete folder
@@ -24,5 +25,5 @@ if($type == "delete")
 jSend(array(
 	"folders" => userFolders::getByParent($id),
 	"current" => userFolders::getById($id),
-	"files"   => userFiles::getByFolder($id)
+	"files"   => userFiles::getByFolder($id, false, vars::get("offset", "numeric", "always"))
 ));

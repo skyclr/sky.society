@@ -4,7 +4,9 @@
 <script type="text/template" id="folders-thumb">
 	<div class="folder" folderId="{{ folderId }}">
 		<div class="meta">
-			{{ name }} | <a href="#" class="deleteFolder">Удалить</a>| <a href="#" class="editFolder">Изменить</a>
+			{{ name }}
+			<a href="#" class="deleteFolder">Удалить</a>
+			<a href="#" class="editFolder">Изменить</a>
 		</div>
 		{{#if thumb}}
 		<img src="../files/thumbs/{{ thumb }}" />

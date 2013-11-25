@@ -2,9 +2,10 @@
 
 <!-- File thumb -->
 <script type="text/template" id="files-thumb">
-	<div class="file"">
+	<div class="file" fileId="{{ fileId }}">
 		<div class="meta">
 			{{ name }}
+			<a href="#" class="deleteFile">Удалить</a>
 		</div>
 		<img src="../files/thumbs/{{ thumb }}" />
 	</div>
@@ -28,7 +29,7 @@
 <!-- Holds file info form -->
 <script type="text/template" id="files-windows-file">
 	{{#if video}}
-	<video src="../files/files/{{ location }}" autoplay="autoplay" class="photo"></video>
+	<video src="../files/files/{{ location }}" autoplay="autoplay" class="photo" controls></video>
 	{{/if}}
 	{{#if image}}
 	<img src="../files/files/{{ location }}" style="max-width: 100%" class="photo" />
@@ -37,3 +38,4 @@
 
 
 {% endverbatim %}
+{# <video src="../files/files/{{ location }}" autoplay="autoplay" class="photo" controls></video> #}

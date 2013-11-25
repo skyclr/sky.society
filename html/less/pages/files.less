@@ -1,18 +1,21 @@
 #files, #folders {
 	margin-bottom: 25px;
 	overflow: hidden;
+	> .list {
+		overflow: auto;
+	}
 }
 
 #folders .folder {
 	cursor     : pointer;
-	width      : 290px;
+	width      : 296px;
 	height     : 200px;
 	background : #eee;
 	float      : left;
 	margin     : 2px;
 	overflow   : hidden;
 	.meta {
-		width     : 270px;
+		width     : 276px;
 		position   : absolute;
 		margin-top : 175px;
 		color      : #fff;
@@ -22,8 +25,9 @@
 	}
 }
 #files .file {
+	display: inline-block;
 	cursor     : pointer;
-	width      : 290px;
+	width      : 296px;
 	height     : 200px;
 	background : #eee;
 	float      : left;
@@ -35,7 +39,7 @@
 		}
 	}
 	.meta {
-		width     : 270px;
+		width     : 276px;
 		position   : absolute;
 		margin-top : 175px;
 		display: none;
@@ -47,8 +51,24 @@
 }
 .meta a {
 	color: #55ccff;
+	float: right;
+	display: block;
+	margin-left: 5px;
 }
 
+.more {
+	display: block;
+	margin-top: 10px;
+	padding: 10px;
+	text-align: center;
+	font-size: 14px;
+	border-top: 1px solid #bdd5ee;
+	color: #6b8999;
+	cursor: pointer;
+	&:hover {
+		background: #ddf5ff;
+	}
+}
 
 .windowHolder.fillView {
 	padding: 0;

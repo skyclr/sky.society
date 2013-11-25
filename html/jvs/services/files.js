@@ -7,9 +7,35 @@ sky.services = sky.services || {};
  */
 sky.services.files = {
 	init: function() {
-1
+
 		/* Get holder */
 		this.render.holder = $("#files");
+		this.render.list =  this.render.holder.find(".list");
+
+
+		/* Give me more button */
+		var more = this.render.more = $("<a/>").addClass("more").html("Показать еще"),
+
+			/* Back link */
+		 	self = this,
+
+			/* Bind */
+			win = $(window).on("scroll", function() {
+				if(more.is(":visible") && more.hasClass("clicked") && win.scrollTop() + win.innerHeight() > more.offset().top)
+					more.trigger("click");
+			});
+
+
+		/* Bind */
+		$(document).on("click", "a.more", function() {
+
+			/* Load more */
+			sky.services.files.ajax.more(self.render.list.find(".file").length);
+
+			/* Add class */
+			more.addClass("clicked");
+
+		});
 
 	},
 
@@ -62,6 +88,24 @@ sky.services.files = {
 	 */
 	render: {
 
+		append: function(files) {
+
+			/* Append thumbs */
+			$.each(files, function() { sky.services.files.render.single(this); });
+
+			/* Remove more link */
+			if(files.length < 30)
+				this.more.remove();
+
+		},
+
+		drawMore: function() {
+
+			/* Append */
+			this.more.appendTo(this.holder).removeClass("clicked");
+
+		},
+
 		/**
 		 * Render files
 		 * @param files
@@ -69,14 +113,19 @@ sky.services.files = {
 		files: function(files) {
 
 			/* Remove old */
-			this.holder.find(".file").remove();
+			this.list.find(".file").remove();
 
 			/* If no files */
 			if(!files.length)
 				this.holder.addClass("hidden");
 
+			if(files.length > 29)
+				this.drawMore(); /* Draws more button */
+			else this.more.remove();
+
 			/* Append thumbs */
 			$.each(files, function() { sky.services.files.render.single(this); });
+
 
 		},
 
@@ -95,10 +144,27 @@ sky.services.files = {
 
 			/* Append */
 			if(first)
-				this.holder.children("h1").after(file.render);
+				this.list.prepend(file.render);
 			else
-				this.holder.append(file.render);
+				this.list.append(file.render);
+		},
+
+
+		/**
+		 * Delete
+		 * @param id
+		 */
+		remove: function(id) {
+
+			/* Delete */
+			this.list.find("[fileId=" + id + "]").remove();
+
+			/* If no folders */
+			if(!this.list.find(".file").length)
+				this.holder.addClass("hidden");
+
 		}
+
 	},
 
 	/**
@@ -121,6 +187,29 @@ sky.services.files = {
 			return ajax
 				.on("error", function(error) { alert(error + "(" + type + ")"); })
 				.on("always", function() { self.ajax = false; });
+
+		},
+
+		more: function(offset) {
+
+			/* Stop previous request */
+			if(this.ajax)
+				this.ajax.stop();
+
+			/* Create new request */
+			this.ajax = sky.ajax("/ajax/files", { type: "more", id: page.gallery.current.folderId, offset: offset })
+				.success(function(data) {
+
+					/* Save offset */
+					page.gallery.current.offset = offset;
+
+					/* Render */
+					sky.services.files.render.append(data["files"]);
+
+				});
+
+			/* Set default ajax callbacks */
+			return this.setCallbacks(this.ajax, "more");
 
 		},
 
@@ -155,16 +244,17 @@ sky.services.files = {
 		},
 
 		/**
-		 * Removes file
-		 * @param {int} id file id
+		 * Removes folder
+		 * @param {int} id Folder id
 		 * @returns {*}
+		 * @param [lock]
 		 */
-		remove: function(id) {
+		remove: function(id, lock) {
 
 			/* Create new request */
-			page.gallery.ajax = sky.ajax("/ajax/files?type=delete", { id: id})
+			this.ajax = sky.ajax("/ajax/files?type=delete", { id: id }, lock)
 				.success(function() {
-					$("[fileId=" + id + "]").remove();
+					sky.services.files.render.remove(id);
 				});
 
 			/* Set default ajax callbacks */
