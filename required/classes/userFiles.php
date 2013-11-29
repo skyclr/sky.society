@@ -22,7 +22,7 @@ class userFiles {
 	public static function add($data) {
 
 		$record = $data;
-		$thumb = "";
+		$thumb = ""; $out = "";
 
 		# Upload file
 		if(!$file = files::uploadFiles(sky::location("files") . "/files/", "random", 0, 1, "files"))
@@ -41,9 +41,10 @@ class userFiles {
 				$out = null;
 				$ret = 0;
 				$name = utils::getRandomString(10);
-				exec(sky::location("external") . "ffmpeg -i {$file[0]["fileLocation"]} -ss 00:00:01.000 -f image2 -vframes 1 /tmp/$name.jpg", $out, $ret);
+				$exec = sky::location("external") . "ffmpeg -i {$file[0]["fileLocation"]} -ss 00:00:01.000 -f image2 -vframes 1 /tmp/$name.jpg 2&>1";
+				exec($exec, $out, $ret);
 				if($ret)
-					systemException::log("Can't create thumb for video {$file[0]["fileName"]}, reason: " . var_export($out, true));
+					systemException::log("Can't create thumb for video {$file[0]["fileName"]}, reason: " . var_export($out, true) . "\n$exec");
 				else {
 
 					$thumbName = files::makeName(sky::location("files") . "/thumbs/", "random", "sv_", "", "jpg");
@@ -58,18 +59,36 @@ class userFiles {
 
 
 		# Add file record
-		$id = sky::$db->make("files")
+		$query = sky::$db->make("files")
 			->set("owner", auth::$me["id"])
 			->set("created", "", "now")
 			->set("location", $file[0]["fileName"])
 			->set("thumb", $thumb)
 			->set("extension", $file[0]["extension"])
 			->set("type", $file[0]["type"])
-			->insert();
+			->set("size", $file[0]["size"]);
+
+
+		# If video
+		if($file[0]["type"] == "video")
+			$query->set("meta", implode("\n", $out));
+
+
+		# Set image specific
+		if($file[0]["type"] == "image") {
+			$query
+			->set("width", $file[0]["width"])
+			->set("height", $file[0]["height"]);
+		}
+
+
+		# Insert
+		$id = $query->insert();
 
 
 		# Add revision record
 		sky::$db->make("filesRevisions")
+			->set("revision", versionControl::getRevision())
 			->set("ownerId", auth::$me["id"])
 			->set("folderId", $data["folderId"])
 			->set("fileId", $id)
@@ -164,6 +183,7 @@ class userFiles {
 
 		# Add revision
 		sky::$db->make("filesRevisions")
+			->set("revision", versionControl::getRevision())
 			->set("fileId", $id)
 			->set("name", $file["name"])
 			->set("folderId", $file["folderId"])

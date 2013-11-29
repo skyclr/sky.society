@@ -508,7 +508,7 @@ class DB2 extends advancedDatabase {
 	 * @return PDO
 	 * @throws databaseException
 	 */
-	private function connect() {
+	public function connect() {
 
         # Checks connection parameters
         if (!isset($this->databaseHost) || !isset($this->databaseName) || !isset($this->databaseUser) || !isset($this->databasePassword))
