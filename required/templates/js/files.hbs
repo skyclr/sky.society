@@ -2,7 +2,10 @@
 
 <!-- File thumb -->
 <script type="text/template" id="files-thumb">
-	<div class="file" fileId="{{ fileId }}">
+	<div class="file {{type}}" fileId="{{ fileId }}">
+		{{#if video}}
+			<div class="icon"></div>
+		{{/if}}
 		<div class="meta">
 			{{ name }}
 			<a href="#" class="deleteFile">Удалить</a>
@@ -16,7 +19,7 @@
 <script type="text/template" id="files-windows-add">
 	<form method="post" name="addForm" id="addFilesForm">
 		<input type="hidden" name="folderId" value="{{ folderId }}" />
-		<h1>Загрузить в альбом {{ name }} </h1>
+		<h1>Загрузить в альбом "{{ name }}"</h1>
 		<smart-label name="files" type="file" title="Выберите файл(ы)" multiple="multiple" required></smart-label>
 		<smart-button type="submit">Загрузить</smart-button>
 		<div class="progress" style="clear:both; display: none">

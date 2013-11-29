@@ -89,9 +89,11 @@ class request {
 	/**
 	 * Sets current address
 	 * @param string $address Correct address
+	 * @return string New path
 	 */
 	public static function setAddress($address) {
-		$_SERVER["REDIRECT_REQUEST_PATH"] = $address;
+		$_SERVER["REDIRECT_REQUEST_PATH"] = $_SERVER["REQUEST_PATH"] = $address;
+		return self::getPath("index");
 	}
 
 	/**

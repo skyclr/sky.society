@@ -19,7 +19,7 @@
 <script type="text/template" id="folders-windows-add">
 	<form method="post" id="addFolderForm">
 		<input type="hidden" name="parentId" value="{{ folderId }}" />
-		<h1>Добавить альбом в {{ name }} </h1>
+		<h1>Добавить альбом в "{{ name }}"</h1>
 		<smart-label type="text" title="Название" name="name" required></smart-label>
 		<smart-button type="submit" ng-class="{ disabled: ajax }">Создать</smart-button>
 	</form>
@@ -29,7 +29,7 @@
 <script type="text/template" id="folders-windows-edit">
 	<form method="post" id="editFolderForm">
 		<input type="hidden" name="folderId" value="{{ folderId }}" />
-		<h1>Редиктирование альбома {{ name }} </h1>
+		<h1>Редиктирование альбома "{{ name }}"</h1>
 		<smart-label type="text" title="Название" name="name" value="{{ name }}" required></smart-label>
 		<smart-button type="submit" ng-class="{ disabled: ajax }">Изменить</smart-button>
 	</form>

@@ -35,6 +35,7 @@ try {
 
 
 	# Upload photos
+	$uploaded = array();
 	foreach($files as $photo) {
 		$data = vk::uploadWallPhotos(sky::location("files") . "thumbs/{$photo["thumb"]}");
 		$uploaded[] = $data[0]["id"];

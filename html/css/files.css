@@ -11,7 +11,7 @@
   cursor: pointer;
   width: 296px;
   height: 200px;
-  background: #eee;
+  background: #eeeeee url(../img/icons/logoTransparent.png) 50% 40% no-repeat;
   float: left;
   margin: 2px;
   overflow: hidden;
@@ -38,6 +38,14 @@
 #files .file:hover .meta {
   display: block;
 }
+#files .file.video .icon {
+  position: absolute;
+  margin-top: 55px;
+  margin-left: 120px;
+  width: 65px;
+  height: 75px;
+  background: url(../img/icons/play.png) no-repeat;
+}
 #files .file .meta {
   width: 276px;
   position: absolute;
@@ -49,7 +57,7 @@
   background: url(../img/backgrounds/blackTransparent.png);
 }
 .meta a {
-  color: #55ccff;
+  color: #5cf;
   float: right;
   display: block;
   margin-left: 5px;
@@ -74,4 +82,5 @@
 .windowHolder.fillView .photo {
   display: block;
   max-height: 100%;
+  max-width: 100%;
 }

@@ -18,11 +18,11 @@ class userFolders {
 	 */
 	public static
 		$root = array(
-			"name"     => "Корень",
-			"id"       => 0,
-			"parentId" => false,
-			"folderId" => 0
-		);
+		"name"     => "Корень",
+		"id"       => 0,
+		"parentId" => false,
+		"folderId" => 0
+	);
 
 	/**
 	 * Creates new folder

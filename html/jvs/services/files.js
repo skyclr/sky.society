@@ -139,6 +139,9 @@ sky.services.files = {
 			/* Make visible */
 			this.holder.removeClass("hidden");
 
+			/* Set video flag */
+			file.video = file.type == "video";
+
 			/* Render */
 			file.render = sky.templates.render("files-thumb", file).data("file", file);
 

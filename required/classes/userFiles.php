@@ -37,21 +37,32 @@ class userFiles {
 				$thumb = $file[0]["smallFileName"];
 			}
 
+
+			# If video we get special thumb
 			if($file[0]["type"] == "video") {
+
+				/* Init */
 				$out = null;
 				$ret = 0;
 				$name = utils::getRandomString(10);
-				$exec = sky::location("external") . "ffmpeg -i {$file[0]["fileLocation"]} -ss 00:00:01.000 -f image2 -vframes 1 /tmp/$name.jpg 2&>1";
+
+
+				# FFmpeg thumb making string
+				$exec = sky::location("external") . "ffmpeg -i {$file[0]["fileLocation"]} -ss 00:00:01.000 -f image2 -vframes 1 /tmp/$name.jpg 2>&1";
+
+				# perform shell command
 				exec($exec, $out, $ret);
+
+				# If error
 				if($ret)
 					systemException::log("Can't create thumb for video {$file[0]["fileName"]}, reason: " . var_export($out, true) . "\n$exec");
-				else {
 
+				# If ok
+				else {
 					$thumbName = files::makeName(sky::location("files") . "/thumbs/", "random", "sv_", "", "jpg");
 					images::resizeToFile("/tmp/$name.jpg", $thumbName, 300, 200, true);
 					$thumb = files::getName($thumbName) . ".jpg";
 				}
-
 			}
 		} catch(Exception $e) {
 			files::deleteFile($file[0]["fileLocation"]);
@@ -164,6 +175,10 @@ class userFiles {
 		if(!$files = $request->get())
 			return array();
 
+		foreach($files as $i => $file) {
+			if(mb_strlen($file["name"]) > 30)
+				$files[$i]["name"] = substr($file["name"], 0 , 30) . "...";
+		}
 
 		# Return
 		return $files;

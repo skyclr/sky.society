@@ -164,7 +164,7 @@ class auth {
 
 		# Page redirect
 		if($redirect)
-			sky::goToPage("Location: ./");
+			sky::goToPage("");
 
 	}
 

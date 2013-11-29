@@ -1,8 +1,8 @@
 #files, #folders {
-	margin-bottom: 25px;
-	overflow: hidden;
+	margin-bottom : 25px;
+	overflow      : hidden;
 	> .list {
-		overflow: auto;
+		overflow : auto;
 	}
 }
 
@@ -10,12 +10,12 @@
 	cursor     : pointer;
 	width      : 296px;
 	height     : 200px;
-	background : #eee;
+	background : #eee url(../img/icons/logoTransparent.png) 50% 40% no-repeat;
 	float      : left;
 	margin     : 2px;
 	overflow   : hidden;
 	.meta {
-		width     : 276px;
+		width      : 276px;
 		position   : absolute;
 		margin-top : 175px;
 		color      : #fff;
@@ -24,8 +24,9 @@
 		background : url(../img/backgrounds/blackTransparent.png);
 	}
 }
+
 #files .file {
-	display: inline-block;
+	display    : inline-block;
 	cursor     : pointer;
 	width      : 296px;
 	height     : 200px;
@@ -35,46 +36,58 @@
 	overflow   : hidden;
 	&:hover {
 		.meta {
-			display: block;
+			display : block;
+		}
+	}
+	&.video {
+		.icon {
+			position    : absolute;
+			margin-top  : 55px;
+			margin-left : 120px;
+			width       : 65px;
+			height      : 75px;
+			background  : url(../img/icons/play.png) no-repeat;
 		}
 	}
 	.meta {
-		width     : 276px;
+		width      : 276px;
 		position   : absolute;
 		margin-top : 175px;
-		display: none;
+		display    : none;
 		color      : #fff;
 		height     : 15px;
 		padding    : 5px 10px;
 		background : url(../img/backgrounds/blackTransparent.png);
 	}
 }
+
 .meta a {
-	color: #55ccff;
-	float: right;
-	display: block;
-	margin-left: 5px;
+	color       : #5cf;
+	float       : right;
+	display     : block;
+	margin-left : 5px;
 }
 
 .more {
-	display: block;
-	margin-top: 10px;
-	padding: 10px;
-	text-align: center;
-	font-size: 14px;
-	border-top: 1px solid #bdd5ee;
-	color: #6b8999;
-	cursor: pointer;
+	display    : block;
+	margin-top : 10px;
+	padding    : 10px;
+	text-align : center;
+	font-size  : 14px;
+	border-top : 1px solid #bdd5ee;
+	color      : #6b8999;
+	cursor     : pointer;
 	&:hover {
-		background: #ddf5ff;
+		background : #ddf5ff;
 	}
 }
 
 .windowHolder.fillView {
-	padding: 0;
-	max-height: 95%;
+	padding    : 0;
+	max-height : 95%;
 	.photo {
-		display: block;
-		max-height: 100%;
+		display    : block;
+		max-height : 100%;
+		max-width  : 100%;
 	}
 }

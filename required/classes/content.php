@@ -54,13 +54,13 @@ class content {
 		$path = request::getPath(self::$pageName);
 
 
-		# Get page name
-		self::$pageName = request::getPageName(self::$pageName);
-
-
 		# Check if available
 		if(!empty(sky::$config["authenticate"]["use"]) && !auth::isLoggedIn() && !in_array($path, self::$noAuthPages))
-			sky::goToPage("./" . self::$noAuthPages[0]);
+			$path = request::setAddress(self::$noAuthPages[0]);
+
+
+		# Get page name
+		self::$pageName = request::getPageName(self::$pageName);
 
 
 		# Make page
