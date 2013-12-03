@@ -18,7 +18,7 @@ class userFolders {
 	 */
 	public static
 		$root = array(
-		"name"     => "Корень",
+		"name"     => "Все",
 		"id"       => 0,
 		"parentId" => false,
 		"folderId" => 0
@@ -47,6 +47,27 @@ class userFolders {
 			->insert();
 
 		return self::getById($id);
+
+	}
+
+	public static function getPath($folder) {
+
+		$path = array();
+
+
+		if($folder["parentId"] === false)
+			return array();
+
+		if($folder["parentId"] == 0)
+			return array(self::$root);
+
+		$parent =  self::getById($folder["parentId"]);
+
+		$path[] = $parent;
+
+		$path = array_merge($path, self::getPath($parent));
+
+		return array_reverse($path);
 
 	}
 
@@ -113,6 +134,11 @@ class userFolders {
 
 	}
 
+	/**
+	 * Changes specified album
+	 * @param array $data New data
+	 * @return array|Mixed
+	 */
 	public static function change($data) {
 
 		$record = $data;

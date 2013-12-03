@@ -48,6 +48,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 	// Date in the past to disabl
 
 try {
 
+	//sleep(1);
+
 	# No exceptions to output
 	# sky::$config["development"]["traceExceptions"] = false;
 

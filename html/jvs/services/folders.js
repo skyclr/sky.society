@@ -39,6 +39,8 @@ sky.services.folders = {
 			/* Render files list */
 			sky.services.files.render.files(current["files"]);
 
+			$(".toolbar .path").html(sky.templates.render("folders-path", current));
+
 			/* Set hash */
 			page.history.set({ album: page.gallery.current.folderId ? page.gallery.current.folderId : null });
 
@@ -148,6 +150,7 @@ sky.services.folders = {
 					/* Save current */
 					data.current.folders = data.folders;
 					data.current.files 	 = data.files;
+					data.current.path 	 = data.path;
 					page.gallery.current = data.current;
 
 					/* Render */

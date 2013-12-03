@@ -35,4 +35,13 @@
 	</form>
 </script>
 
+<!-- Holds edit folder form -->
+<script type="text/template" id="folders-path">
+	{{#each path}}
+		<a href="#album={{ folderId }}">{{ name }}</a>
+		<div class="arrow"></div>
+	{{/each}}
+		<span>{{ name }}</span>
+</script>
+
 {% endverbatim %}

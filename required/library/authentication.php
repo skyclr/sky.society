@@ -49,7 +49,7 @@ class auth {
 				self::authorisation($user, vars::post("autologin", "bool", "always"));
 
 				# After login redirect
-				if(self::isLoggedIn() && !is_null($redirect = validator::single(sky::$config["authenticate"], "redirect", "trim")))
+				if(self::isLoggedIn() && is_string($redirect = validator::single(sky::$config["authenticate"], "redirect", "trim", "null")))
 					sky::goToPage($redirect);
 
 			}

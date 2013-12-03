@@ -24,6 +24,7 @@ if($type == "delete")
 # Get folders list
 jSend(array(
 	"folders" => userFolders::getByParent($id),
-	"current" => userFolders::getById($id),
+	"current" => $current = userFolders::getById($id),
+	"path"    => userFolders::getPath($current),
 	"files"   => userFiles::getByFolder($id, false, vars::get("offset", "numeric", "always"))
 ));

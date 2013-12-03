@@ -1,11 +1,12 @@
 <div class="header">
-	<a class="logo s{{ random(10) }}" href="{{ base }}"></a>
-</div>
-<div class="toolbar">
-    <div class="holder">
-        <a href="{{ base }}">Новости</a>
-        <a href="{{ base }}files">Файлы</a>
-        <a href="{{ base }}">Как пользоваться</a>
-        <a href="?type=logout" style="float: right">Выйти</a>
+    <div class="content">
+        <a class="logo" href="{{ base }}"></a>
+        <div class="toolbar">
+            <a href="{{ base }}"><span>Лента</span></a>
+            <div class="separator"></div>
+            <a href="{{ base }}files"><span>Файлы</span></a>
+            <div class="separator"></div>
+            <a href="?type=logout"><span>Выйти</span></a>
+        </div>
     </div>
 </div>

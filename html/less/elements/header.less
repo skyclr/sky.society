@@ -1,4 +1,49 @@
 .header {
+	background : #f3f3f3;
+	height     : 70px;
+	.content {
+		width      : 900px;
+		padding    : 15px;
+		background : #fbfbfb;
+		margin     : auto;
+		overflow   : auto;
+	}
+	.logo {
+		width      : 80px;
+		height     : 40px;
+		display    : block;
+		float      : left;
+		background : url(../img/icons/logoColor.png) no-repeat;
+	}
+	.toolbar {
+		float : right;
+		a {
+			float           : left;
+			span {
+				display   : block;
+				height    : 20px;
+				padding   : 7px 15px 7px 10px;
+				font-size : 18px;
+				color     : #0073e5;
+			}
+			text-decoration : none;
+			display         : block;
+			padding-left    : 5px;
+			height          : 33px;
+		}
+		.separator {
+			width      : 1px;
+			height     : 30px;
+			background : #eee;
+			float      : left;
+			margin-top : 5px;
+
+		}
+	}
+}
+
+/*
+.header {
 	background : #16141b url(../img/backgrounds/funny2.png) center bottom;
 	height: 220px;
 	overflow: auto;
@@ -19,4 +64,4 @@
 		&.s9 { background-image: url(../img/slides/9.png); }
 		&.s10 { background-image: url(../img/slides/10.png); }
 	}
-}
+} */

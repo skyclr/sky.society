@@ -29,11 +29,16 @@ sky.services.files = {
 		/* Bind */
 		$(document).on("click", "a.more", function() {
 
+			/* In progress */
+			if(!more.hasClass("loading"))
+				return;
+
 			/* Load more */
-			sky.services.files.ajax.more(self.render.list.find(".file").length);
+			sky.services.files.ajax.more(self.render.list.find(".file").length)
+				.always(function() { more.removeClass("loading"); });
 
 			/* Add class */
-			more.addClass("clicked");
+			more.addClass("loading").addClass("clicked");
 
 		});
 
@@ -230,15 +235,7 @@ sky.services.files = {
 			/* Create new request */
 			this.ajax = sky.ajax("/ajax/files", {id: id ? id : 0})
 				.success(function(data) {
-
-					/* Save current */
-					data.current.files   = data.files;
-					data.current.files = data.files;
-					page.gallery.current = data.current;
-
-					/* Render */
-					sky.services.files.render.current(data.current);
-
+					page.services.files.render.file(data.file);
 				});
 
 			/* Set default ajax callbacks */

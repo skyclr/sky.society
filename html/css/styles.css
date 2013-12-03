@@ -209,50 +209,70 @@ label span.name {
   color: #727c7f;
 }
 .header {
-  background: #16141b url(../img/backgrounds/funny2.png) center bottom;
-  height: 220px;
+  background: #f3f3f3;
+  height: 70px;
+}
+.header .content {
+  width: 900px;
+  padding: 15px;
+  background: #fbfbfb;
+  margin: auto;
   overflow: auto;
 }
 .header .logo {
-  width: 230px;
-  height: 131px;
-  margin: 43px auto 0 auto;
+  width: 80px;
+  height: 40px;
   display: block;
+  float: left;
+  background: url(../img/icons/logoColor.png) no-repeat;
 }
-.header .logo.s0 {
-  background-image: url(../img/slides/0.png);
+.header .toolbar {
+  float: right;
 }
-.header .logo.s1 {
-  background-image: url(../img/slides/1.png);
+.header .toolbar a {
+  float: left;
+  text-decoration: none;
+  display: block;
+  padding-left: 5px;
+  height: 33px;
 }
-.header .logo.s2 {
-  background-image: url(../img/slides/2.png);
+.header .toolbar a span {
+  display: block;
+  height: 20px;
+  padding: 7px 15px 7px 10px;
+  font-size: 18px;
+  color: #0073e5;
 }
-.header .logo.s3 {
-  background-image: url(../img/slides/3.png);
+.header .toolbar .separator {
+  width: 1px;
+  height: 30px;
+  background: #eee;
+  float: left;
+  margin-top: 5px;
 }
-.header .logo.s4 {
-  background-image: url(../img/slides/4.png);
-}
-.header .logo.s5 {
-  background-image: url(../img/slides/5.png);
-}
-.header .logo.s6 {
-  background-image: url(../img/slides/6.png);
-}
-.header .logo.s7 {
-  background-image: url(../img/slides/7.png);
-}
-.header .logo.s8 {
-  background-image: url(../img/slides/8.png);
-}
-.header .logo.s9 {
-  background-image: url(../img/slides/9.png);
-}
-.header .logo.s10 {
-  background-image: url(../img/slides/10.png);
-}
-.notificationMessage {
+/*
+.header {
+	background : #16141b url(../img/backgrounds/funny2.png) center bottom;
+	height: 220px;
+	overflow: auto;
+	.logo {
+		width: 230px;
+		height: 131px;
+		margin: 43px auto 0 auto;
+		display: block;
+		&.s0 { background-image: url(../img/slides/0.png); }
+		&.s1 { background-image: url(../img/slides/1.png); }
+		&.s2 { background-image: url(../img/slides/2.png); }
+		&.s3 { background-image: url(../img/slides/3.png); }
+		&.s4 { background-image: url(../img/slides/4.png); }
+		&.s5 { background-image: url(../img/slides/5.png); }
+		&.s6 { background-image: url(../img/slides/6.png); }
+		&.s7 { background-image: url(../img/slides/7.png); }
+		&.s8 { background-image: url(../img/slides/8.png); }
+		&.s9 { background-image: url(../img/slides/9.png); }
+		&.s10 { background-image: url(../img/slides/10.png); }
+	}
+} */.notificationMessage {
   border: 1px solid #fa8464;
   background: #fbf0f0;
   color: #a90f0f;
@@ -291,30 +311,55 @@ label span.name {
 .notificationMessage.success .icon {
   background-position: -5px -5px;
 }
-.toolbar {
-  background: #16141b url(../img/backgrounds/funny.png) center top;
-}
 .toolbar.main {
-  background: #eee;
-}
-.toolbar.main .holder a {
-  color: #0066ff;
-}
-.toolbar .holder {
+  padding: 15px;
+  background: #f7f7f7;
+  border-top: 1px solid #f2f2f2;
   width: 900px;
   margin: auto;
-  padding: 10px 0;
+  border-radius: 0 0 10px 10px;
   overflow: auto;
+  color: #536d74;
 }
-.toolbar .holder a {
-  color: white;
-  font-size: 16px;
+.toolbar.main a {
+  color: #0073e5;
+  text-decoration: none;
+  font-size: 18px;
   display: block;
-  margin-right: 25px;
   float: left;
 }
-.toolbar .holder a:hover {
-  text-decoration: none;
+.toolbar.main .action {
+  float: right;
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #808080;
+  background: #eaeaea;
+  cursor: pointer;
+}
+.toolbar.main .action:hover {
+  background: #dedede;
+}
+.toolbar.main .separator {
+  width: 1px;
+  height: 20px;
+  background: #eee;
+  float: left;
+  margin: 0 10px;
+}
+.toolbar.main .path {
+  float: left;
+}
+.toolbar.main .path * {
+  display: block;
+  float: left;
+  font-size: 18px;
+}
+.toolbar.main .path .arrow {
+  width: 5px;
+  height: 10px;
+  background: url(../img/icons/patharrow.png) no-repeat;
+  margin: 7px 10px 0 10px;
 }
 h1 {
   border-bottom: 1px solid #eee;

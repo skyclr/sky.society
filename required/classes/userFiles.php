@@ -175,9 +175,11 @@ class userFiles {
 		if(!$files = $request->get())
 			return array();
 
+
+		# Shortcut
 		foreach($files as $i => $file) {
 			if(mb_strlen($file["name"]) > 30)
-				$files[$i]["name"] = substr($file["name"], 0 , 30) . "...";
+				$files[$i]["name"] = substr($file["name"], 0 , 30) . "…";
 		}
 
 		# Return
