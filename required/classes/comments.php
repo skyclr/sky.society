@@ -73,7 +73,6 @@ class comments {
 
 	public static function compile($comment) {
 
-
 		# Return
 		return $comment;
 
