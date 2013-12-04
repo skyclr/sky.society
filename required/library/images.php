@@ -427,9 +427,70 @@ class images  {
 	/**
 	 * Gets image file information 
 	 */
-	public static function getImageInfo() {
-		
-		
+	public static function getImageInfo($path) {
+
+
+		# Get EXIF data from image
+		$exif = @exif_read_data($path, 0, true);
+
+
+		# If no exif data gained
+		if($exif === false)
+			throw new systemErrorException("Can't read exif data from image: $path");
+
+
+		# If no data
+		if(empty($exif['GPS']))
+			throw new systemErrorException("No GPS data persists");
+
+
+		# If wrong data
+		if(empty($exif['GPS']['GPSLatitudeRef']) ||
+		   empty($exif['GPS']['GPSLatitude']) ||
+		   empty($exif['GPS']['GPSLongitudeRef']) ||
+		   empty($exif['GPS']['GPSLongitude']))
+			throw new systemErrorException("Wrong GPS data for $path: ".var_export($exif, true));
+
+
+		# Get reference and latitude
+		$reference = $exif['GPS']['GPSLatitudeRef'];
+		$latitude  = $exif['GPS']['GPSLatitude'];
+
+
+		# Count parts
+		list($num, $dec) = explode('/', $latitude[0]);
+		$seconds = $num / $dec;
+		list($num, $dec) = explode('/', $latitude[1]);
+		$minutes = $num / $dec;
+		list($num, $dec) = explode('/', $latitude[2]);
+		$degrees = $num / $dec;
+
+
+		# Recount
+		$latitude = ($seconds + $minutes / 60 + $degrees / 3600) * ($reference == "S" ? -1 : 1);
+
+
+		# Get reference and longitude
+		$reference  = $exif['GPS']['GPSLongitudeRef'];
+		$longitude = $exif['GPS']['GPSLongitude'];
+
+
+		# Count parts
+		list($num, $dec) = explode('/', $longitude[0]);
+		$seconds = $num / $dec;
+		list($num, $dec) = explode('/', $longitude[1]);
+		$minutes = $num / $dec;
+		list($num, $dec) = explode('/', $longitude[2]);
+		$degrees = $num / $dec;
+
+
+		# Recount
+		$longitude = ($seconds + $minutes / 60 + $degrees / 3600) * ($reference == "W" ? -1 : 1);
+
+
+		# Return
+		return array("gps" => array($latitude, $longitude, "latitude" => $latitude, "longitude" => $longitude));
+
 	}
-	
+
 }

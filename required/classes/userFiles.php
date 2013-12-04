@@ -194,7 +194,8 @@ class userFiles {
 	 */
 	public static function delete($id) {
 
-		# Get folder
+
+		# Get file
 		$file = self::getById($id);
 
 
@@ -212,6 +213,40 @@ class userFiles {
 
 		# Return
 		return "Deleted";
+
+	}
+
+	/**
+	 * Returns file full info
+	 * @param $id
+	 * @return array
+	 */
+	public static function getFullInfo($id) {
+
+		# Get base info
+		$image = self::getById($id);
+
+
+		# Get parent folder
+		$parent = userFiles::getById($image["folder"]);
+
+
+		# Path
+		$path = userFolders::getPath($parent);
+		$path[] = $parent;
+
+
+		# Comments
+		$comments = comments::get($id, "file");
+
+
+		# Return
+		return array(
+			"image" 	=> $image,
+			"path" 		=> $path,
+			"parent" 	=> $parent,
+			"comments"  => $comments
+ 		);
 
 	}
 
