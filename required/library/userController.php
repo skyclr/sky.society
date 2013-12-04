@@ -9,29 +9,42 @@ include_once 'userPreferences.php';
  */
 class userController implements arrayaccess {
 
-	/**
-	 * Main user info
-	 * @var array
-	 */
-	private $userData = array();
-	
-	/**
-	 * Holds additional user information
-	 * @var array
-	 */
-	public $info = array();
-	
-	/**
-	 * Keeps current user preferences class
-	 * @var userPreferences
-	 */
-	private $preferences = false;
 
-	/**
-	 * Indicates if user logged and not guest
-	 * @var bool
-	 */
-	public $isLoggedIn = false;
+	private
+
+		/**
+		 * Main user info
+		 * @var array
+		 */
+		$userData = array(),
+
+		/**
+		 * Keeps current user preferences class
+		 * @var userPreferences
+		 */
+		 $preferences = false;
+	
+
+	public
+
+		/**
+		 * Holds additional user information
+		 * @var array
+		 */
+		$info = array(),
+
+		/**
+		 * User individual folder folder
+		 * @var string
+		 */
+		$folder = "",
+
+		/**
+		 * Indicates if user logged and not guest
+		 * @var bool
+		 */
+		$isLoggedIn = false;
+
 
 	/**
 	 * User object construct
@@ -52,6 +65,10 @@ class userController implements arrayaccess {
 		}
 		else
 			$this->info = false;
+
+
+		# Set user folder
+		$this->folder = sky::location("files") . "users/" . $userData["name"] . "/";
 
 
 		# Get logged flag

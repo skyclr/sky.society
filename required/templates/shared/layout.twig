@@ -1,8 +1,8 @@
-<!doctype html>
-<html lang="en-US" ng-app="skyApp">
-<head>
 {% import "shared/elements.twig" as elements %}
 {% import "shared/tips.twig" as tips %}
+<!doctype html>
+<html lang="en-US">
+<head>
 <head>
     <meta charset="UTF-8">
     <title>{{ preferences.site.name }} : {{ page.title }}</title>
@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="{{ base }}css/styles.css" type="text/css"/>
     <link rel="stylesheet" href="{{ base }}css/{{ pagePath }}.css" type="text/css"/>
 </head>
-<body class="{% block bodyClass %}layout{% endblock %}" ng-app="skyApp">
-    <div id="pageContentHolder" ng-controller="pageController">
+<body class="{% block bodyClass %}layout{% endblock %}">
+    <div id="pageContentHolder">
 
         {# Content holder #}
         {% block content %}
@@ -61,15 +61,20 @@
     <script type="text/javascript" src="{{ base }}jvs/services/folders.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/services/files.js"></script>
 
+	{# Page specific #}
     <script type="text/javascript" src="{{ base }}jvs/pages/{{ pageName }}.js"></script>
-    {% for jsTemplate in page.jsTemplates %}
-        {% include "js/" ~ jsTemplate.realPath ~ "." ~ preferences.templates.jsTemplates.extension %}
-    {% endfor %}
+
+	{# Globals #}
     <script type="text/javascript">
         var page = page || { data: {} };
         page.data.templates =  {{ jsTemplates|raw }};
         page.data.url  		= "{{ (base ~ realPath)|escape("js") }}";
         page.data.base 		= "{{ base|escape("js") }}";
     </script>
+
+	{# JS templates #}
+	{% for jsTemplate in page.jsTemplates %}
+		{% include "js/" ~ jsTemplate.realPath ~ "." ~ preferences.templates.jsTemplates.extension %}
+	{% endfor %}
 </body>
 </html>
