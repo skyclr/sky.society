@@ -55,18 +55,20 @@ sky.services.files = {
 			return this.window = sky.windows.Modal("files-windows-add", page.gallery.current);
 
 		},
-		file: function(file) {
+		file: function(data) {
 
 			/* Close previous */
 			if(this.window)
 				this.window.close();
 
-			if(file.type == "video")
-				file.video = true;
-			else file.image = true;
+			if(data.file.type == "video")
+				data.file.video = true;
+			else data.file.image = true;
+
+			data.file.countedHeight = 900 / parseInt(data.file.width) * parseInt(data.file.height);
 
 			/* Create window */
-			this.window = sky.windows.Modal("files-windows-file", file);
+			this.window = sky.windows.Modal("files-windows-file", data);
 
 			/* Resize on image load */
 			this.window.holder.find("img").on("load", function() {
@@ -81,6 +83,7 @@ sky.services.files = {
 
 			/* Special class for file window */
 			this.window.dataContainer.addClass("fillView");
+			this.window.background.addClass("fillView");
 
 			/* Return */
 			return this.window;
@@ -233,9 +236,9 @@ sky.services.files = {
 				this.ajax.stop();
 
 			/* Create new request */
-			this.ajax = sky.ajax("/ajax/files", {id: id ? id : 0})
+			this.ajax = sky.ajax("/ajax/files?type=load", {id: id ? id : 0})
 				.success(function(data) {
-					page.services.files.render.file(data.file);
+					sky.services.files.windows.file(data);
 				});
 
 			/* Set default ajax callbacks */

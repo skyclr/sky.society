@@ -15,7 +15,12 @@ if($type == "delete")
 	jSend(userFiles::delete($id));
 
 
-# Delete folder
+# Get file info
+if($type == "load")
+	jSend(userFiles::getFullInfo($id));
+
+
+# Delete file
 if($type == "more")
 	jSend(userFiles::getByFolder($id, false, vars::post("offset", "numeric", "always")), "files");
 

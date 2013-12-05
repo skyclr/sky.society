@@ -231,24 +231,22 @@ label span.name {
 }
 .header .toolbar a {
   float: left;
-  text-decoration: none;
-  display: block;
-  padding-left: 5px;
-  height: 33px;
-}
-.header .toolbar a span {
   display: block;
   height: 20px;
-  padding: 7px 15px 7px 10px;
+  padding: 7px 0;
   font-size: 18px;
   color: #0073e5;
+  text-decoration: none;
+}
+.header .toolbar a.active {
+  color: #536d74;
 }
 .header .toolbar .separator {
   width: 1px;
   height: 30px;
   background: #eee;
   float: left;
-  margin-top: 5px;
+  margin: 5px 15px;
 }
 /*
 .header {
@@ -361,6 +359,10 @@ label span.name {
   height: 10px;
   background: url(../img/icons/patharrow.png) no-repeat;
   margin: 7px 10px 0 10px;
+}
+.toolbar.file {
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 h1 {
   border-bottom: 1px solid #eee;

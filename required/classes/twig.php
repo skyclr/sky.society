@@ -20,6 +20,7 @@ class twig {
 
 
 		# Add filter
+		sky::$twig->addFilter(new Twig_SimpleFilter("addClass", array("twig", "filterClass"),    array('is_safe' => array('html'))));
 		sky::$twig->addFilter(new Twig_SimpleFilter("selected", array("twig", "filterSelected"), array('is_safe' => array('html'))));
 		sky::$twig->addFilter(new Twig_SimpleFilter("checked",	array("twig", "filterChecked"),  array('is_safe' => array('html'))));
 		sky::$twig->addFilter(new Twig_SimpleFilter("disabled", array("twig", "filterDisabled"), array('is_safe' => array('html'))));
@@ -35,6 +36,9 @@ class twig {
 
 	}
 
+	public static function filterClass($expression, $class) {
+		return $expression ? 'class="'.$class.'"' : "";
+	}
 	public static function filterSelected($expression) {
 		return $expression ? 'selected="selected"' : "";
 	}

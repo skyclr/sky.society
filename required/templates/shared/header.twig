@@ -2,11 +2,11 @@
     <div class="content">
         <a class="logo" href="{{ base }}"></a>
         <div class="toolbar">
-            <a href="{{ base }}"><span>Лента</span></a>
+            <a href="{{ base }}" {{ (pageName == "index")|addClass("active") }}>Лента</a>
             <div class="separator"></div>
-            <a href="{{ base }}files"><span>Файлы</span></a>
+            <a href="{{ base }}files" {{ (pageName == "files")|addClass("active") }}>Файлы</a>
             <div class="separator"></div>
-            <a href="?type=logout"><span>Выйти</span></a>
+            <a href="?type=logout">Выйти</a>
         </div>
     </div>
 </div>

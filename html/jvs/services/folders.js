@@ -143,6 +143,15 @@ sky.services.folders = {
 			if(this.ajax)
 				this.ajax.stop();
 
+			/* Close */
+			if(sky.services.folders.windows.window)
+				sky.services.folders.windows.window.close();
+
+
+			/* Close */
+			if(sky.services.files.windows.window)
+				sky.services.files.windows.window.close();
+
 			/* Create new request */
 			this.ajax = sky.ajax("/ajax/folders", {id: id ? id : 0}, lock)
 				.success(function(data) {

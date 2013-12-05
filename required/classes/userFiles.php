@@ -223,13 +223,20 @@ class userFiles {
 	 */
 	public static function getFullInfo($id) {
 
-		# Get base info
-		$image = self::getById($id);
+		# Get folder
+		if(!$file = sky::$db->make("files")
+			->join("(" . self::$maxRevisionJoin .") as temp", "temp.fileId = files.id")
+			->join("filesRevisions", "filesRevisions.id = temp.id")
+			->where("temp.id", null, "!=")
+			->where($id)
+			->where("filesRevisions.deleted", 0)
+			->records(array("filesRevisions.*", "owner", "created", "thumb", "extension", "location", "type", "width", "height"))
+			->get("single"))
+			throw new userErrorException("Указанного файла не существует");
 
 
 		# Get parent folder
-		$parent = userFiles::getById($image["folder"]);
-
+		$parent = userFolders::getById($file["folderId"]);
 
 		# Path
 		$path = userFolders::getPath($parent);
@@ -242,7 +249,7 @@ class userFiles {
 
 		# Return
 		return array(
-			"image" 	=> $image,
+			"file" 	    => $file,
 			"path" 		=> $path,
 			"parent" 	=> $parent,
 			"comments"  => $comments

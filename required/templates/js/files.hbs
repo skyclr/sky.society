@@ -31,11 +31,20 @@
 
 <!-- Holds file info form -->
 <script type="text/template" id="files-windows-file">
-	{{#if video}}
-	<video src="../files/files/{{ location }}" autoplay="autoplay" class="photo" controls></video>
+	<div class="toolbar main file">
+		<div class="path">
+			{{#each path}}
+				<a href="#album={{ folderId }}">{{ name }}</a>
+				<div class="arrow"></div>
+			{{/each}}
+			<span>{{ file.name }}</span>
+		</div>
+	</div>
+	{{#if file.video}}
+	<video src="../files/files/{{ file.location }}" autoplay="autoplay" class="photo" controls></video>
 	{{/if}}
-	{{#if image}}
-	<img src="../files/files/{{ location }}" style="max-width: 100%" class="photo" />
+	{{#if file.image}}
+	<img src="../files/files/{{ file.location }}" class="photo" />
 	{{/if}}
 </script>
 

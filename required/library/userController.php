@@ -68,7 +68,7 @@ class userController implements arrayaccess {
 
 
 		# Set user folder
-		$this->folder = sky::location("files") . "users/" . $userData["name"] . "/";
+		$this->folder = sky::location("files") . "users/" . $userData["username"] . "/";
 
 
 		# Get logged flag
