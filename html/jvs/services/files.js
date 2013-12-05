@@ -30,7 +30,7 @@ sky.services.files = {
 		$(document).on("click", "a.more", function() {
 
 			/* In progress */
-			if(!more.hasClass("loading"))
+			if(more.hasClass("loading"))
 				return;
 
 			/* Load more */

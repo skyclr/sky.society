@@ -42,7 +42,7 @@ sky.services.folders = {
 			$(".toolbar .path").html(sky.templates.render("folders-path", current));
 
 			/* Set hash */
-			page.history.set({ album: page.gallery.current.folderId ? page.gallery.current.folderId : null });
+			page.history.set({ album: page.gallery.current.folderId });
 
 		},
 

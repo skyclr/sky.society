@@ -336,6 +336,7 @@ label span.name {
   color: #808080;
   background: #eaeaea;
   cursor: pointer;
+  border-radius: 5px;
 }
 .toolbar.main .action:hover {
   background: #dedede;
