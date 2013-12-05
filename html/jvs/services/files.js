@@ -85,6 +85,12 @@ sky.services.files = {
 			this.window.dataContainer.addClass("fillView");
 			this.window.background.addClass("fillView");
 
+			page.history.set({ file: data.file.fileId });
+
+			this.window.callbacks.on("close", function() {
+				page.history.set({ file: null });
+			});
+
 			/* Return */
 			return this.window;
 

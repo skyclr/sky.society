@@ -17,6 +17,8 @@ try {
 	$request = sky::$db->make("files")
 		->join("(" . userFiles::$maxRevisionJoin .") as temp", "temp.fileId = files.id")
 		->join("filesRevisions", "filesRevisions.id = temp.id")
+		->where("thumb", "", "!=")
+		->where("filesRevisions.fileId", null, "!=")
 		->where("created", sky::$config["export"]["vk"], ">");
 
 
@@ -26,7 +28,7 @@ try {
 
 
 	# get photos
-	$files = $request->limit(5)->get();
+	$files = $request->limit(5)->order("created")->get();
 
 
 	# If none
@@ -37,6 +39,7 @@ try {
 	# Upload photos
 	$uploaded = array();
 	foreach($files as $photo) {
+		echo "Upload {$photo["thumb"]}\n";
 		$data = vk::uploadWallPhotos(sky::location("files") . "thumbs/{$photo["thumb"]}");
 		$uploaded[] = $data[0]["id"];
 	}

@@ -24,7 +24,7 @@ $preferences = array(
 	 * Main site preferences
 	 */
 	"site"         => array(
-		"name" => "SKY.society",
+		"name" => "sky.cloud",
 		"base" => "/society/html/"
 	),
 

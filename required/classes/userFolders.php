@@ -117,10 +117,11 @@ class userFolders {
 		$folders = sky::$db->make("folders")
 			->join("(" . self::$maxRevisionJoin .") as temp", "temp.folderId = folders.id")
 			->join("foldersRevisions", "foldersRevisions.id = temp.id")
+			->join("users", "users.id = folders.owner")
 			->where("temp.id", null, "!=")
 			->where("foldersRevisions.deleted", 0)
 			->where("foldersRevisions.parentId", $id)
-			->records(array("foldersRevisions.*", "folders.owner", "folders.created"))
+			->records(array("foldersRevisions.*", "folders.owner", "folders.created", "users.username"))
 			->get();
 
 
@@ -213,6 +214,8 @@ class userFolders {
 		# Add thumb
 		if($thumb = userFiles::getByFolder($folder["folderId"], true))
 			$folder["thumb"] = $thumb[0]["thumb"];
+
+		$folder["created"] = AdvancedDateTime::make($folder["created"])->format(sky::DATE_TIME);
 
 		return $folder;
 

@@ -220,7 +220,7 @@ class network {
 				throw new userErrorException("Ваш URI('$url') имеет неверный формат.");
 
 			# Unknown error
-			throw new systemErrorException("CURL error: ".curl_error($curl));
+			throw new systemErrorException("CURL error: ".curl_errno($curl));
 
 		}
 		

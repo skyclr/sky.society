@@ -10,10 +10,24 @@ $(document)
 		sky.services.folders.init();
 		sky.services.files.init();
 
+		/* Load base */
+		sky.services.folders.ajax.load(0);
+
 		/* Enable hash history */
 		page.history = sky.History().on("change", function(difference) {
-			sky.services.folders.ajax.load(difference.album);
+
+			/* Load album from hash */
+			if(difference.album)
+				sky.services.folders.ajax.load(difference.album);
+
+			if(difference.file)
+				sky.services.files.ajax.load(difference.file);
+			else if(sky.services.files.windows.window)
+				sky.services.files.windows.window.close();
+
 		}).start();
+
+
 
 	})
 	.on("click", ".addFolder", function(event) {
@@ -35,7 +49,7 @@ $(document)
 		event.preventDefault();
 
 		/* No disabled buttons go */
-		if($(this).isDisabled())
+		if($(this).isDisabled() || !confirm("Вы точно хотите удалить этот альбом?"))
 			return;
 
 		/* Show add window */
@@ -79,6 +93,21 @@ $(document)
 
 		/* Show add window */
 		sky.services.files.ajax.remove($(this).parents(".file").attr("fileId"), $(this));
+
+	})
+
+	.on("click", ".icon.info", function(event) {
+
+		/* No # go */
+		event.preventDefault();
+
+		var bubble = $(this).parent().find(".infoBubble");
+
+		if(bubble.is(":visible"))
+			bubble.hide();
+		else
+			bubble.show();
+
 
 	})
 	.on("submit", "#addFilesForm", function() {

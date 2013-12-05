@@ -6,6 +6,17 @@
 	}
 }
 
+.icon {
+	background: url(../img/icons/thumb.png) no-repeat;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	&.info {
+		margin-left: 265px;
+		margin-top: 10px;
+	}
+}
+
 #folders .folder {
 	cursor     : pointer;
 	width      : 296px;
@@ -17,11 +28,24 @@
 	.meta {
 		width      : 276px;
 		position   : absolute;
-		margin-top : 175px;
+		margin-top : 166px;
 		color      : #fff;
-		height     : 15px;
-		padding    : 5px 10px;
+		height     : 20px;
+		padding    : 7px 10px;
+		font-size  : 18px;
 		background : url(../img/backgrounds/blackTransparent.png);
+	}
+}
+.infoBubble {
+	padding: 15px;
+	background : url(../img/backgrounds/blackTransparent.png);
+	position: absolute;
+	margin: 50px 10px 10px 10px;
+	color: #fff;
+	width: 245px;
+	display: none;
+	a {
+		color       : #5cf;
 	}
 }
 
@@ -59,13 +83,6 @@
 		padding    : 5px 10px;
 		background : url(../img/backgrounds/blackTransparent.png);
 	}
-}
-
-.meta a {
-	color       : #5cf;
-	float       : right;
-	display     : block;
-	margin-left : 5px;
 }
 
 .more {

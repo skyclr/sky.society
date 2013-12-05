@@ -93,7 +93,7 @@ class vk {
 		$params["access_token"] = self::$token;
 
 		# Perform request
-		if(!($result = network::curlRequest($method, array("request" => "POST", "ssl" => 1, "post" => $params))) || empty($result["response"]))
+		if(!($result = network::curlRequest($method, array("request" => "POST", "ssl" => 1, "post" => $params, "timeout" => 20))) || empty($result["response"]))
 			throw new systemErrorException("No result in response");
 
 		# Parse
