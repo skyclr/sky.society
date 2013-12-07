@@ -1,0 +1,26 @@
+{% import "shared/forms.twig" as forms %}
+{% import "shared/elements.twig" as elements %}
+<div class="block">
+    <a class="logo" href="{{ base }}">
+        <img alt="storage" src="{{ base }}img/icons/logo2.png"/>
+    </a>
+
+    <form action="" method="post">
+        <h1>Регистрация</h1>
+        <input type="hidden" name="type" value="{{ user ? "registration" : "nextStep" }}">
+        {# Output page information #}
+        {% for message in resultMessages %}
+            {{ elements.resultMessage(message) }}
+        {% endfor %}
+        {% if user %}
+            <div>Здравствуйте {{ user.name }},<br/> теперь вы можете зарегестрироваться</div>
+            <input type="hidden" name="code" value="{{ user.code }}"/>
+            <smart-label name="username" title="Логин" type="text" required></smart-label>
+            <smart-label name="password" title="Пароль" type="password" required></smart-label>
+            <smart-label name="email" title="E-mail" type="text" required></smart-label>
+        {% else %}
+            <smart-label name="code" title="Код активации" type="text" required></smart-label>
+        {% endif %}
+        <smart-button type="submit">Зарегестрироваться</smart-button>
+    </form>
+</div>
