@@ -43,3 +43,10 @@ body {
 .block form .button > * {
   width: 100px;
 }
+.links {
+  margin-top: 10px;
+}
+.links a {
+  font-size: 12px;
+  color: #5cf;
+}

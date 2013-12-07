@@ -307,7 +307,7 @@ $.extend(sky.History.prototype, {
 	start: function() {
 
 		/* If supported */
-		if(window.history) {
+		if(false && window.history) {
 
 			/* Set base if any */
 			if(this.options.base)
@@ -325,9 +325,9 @@ $.extend(sky.History.prototype, {
 			this.supported = false;
 
 			/* Timeout */
-			if(!this.intervalId)
+			if(!this.intervalId) {
 				this.intervalId = setInterval($.proxy(this.change, this), this.options.time || 500);
-
+			}
 		}
 
 		/* Immediately */

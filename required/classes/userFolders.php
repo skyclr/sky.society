@@ -167,12 +167,18 @@ class userFolders {
 	/**
 	 * Deletes specified folder
 	 * @param int $id Folder id
+	 * @throws userErrorException
 	 * @return string
 	 */
 	public static function delete($id) {
 
 		# Get folder
 		$folder = self::getById($id);
+
+
+		# Check permission
+		if($folder["owner"] != auth::$me["id"])
+			throw new userErrorException("У вас нет права удалять этот альбом");
 
 
 		# Delete all files
