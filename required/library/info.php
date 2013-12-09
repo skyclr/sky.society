@@ -9,7 +9,8 @@ class info {
 	 * Holds all messages
 	 * @var array
 	 */
-	private static $messages = array(),
+	private static
+		$messages = array(),
 		$last = "";
 
 	/**
