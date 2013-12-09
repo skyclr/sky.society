@@ -6,6 +6,11 @@ sky.templates = {
 	templates: {},
 
 	/**
+	 * Globals list
+	 */
+	globals : {},
+
+	/**
 	 * Stores compiled templates
 	 */
 	compiledTemplates: {},
@@ -31,6 +36,9 @@ sky.templates = {
 		if(dependencies) $.each(dependencies, function(_, dependency) {
 			sky.templates.compile(dependency);
 		});
+
+		/* Add globals */
+		data = jQuery.extend(true, data, this.globals);
 
 		/* Render */
 		var temp = $('<div/>').append(this.compiledTemplates[name](data));
