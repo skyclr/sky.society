@@ -6,12 +6,12 @@ sky.services = sky.services || {};
  * @type {{}}
  */
 sky.services.files = {
+
 	init: function() {
 
 		/* Get holder */
 		this.render.holder = $("#files");
 		this.render.list =  this.render.holder.find(".list");
-
 
 		/* Give me more button */
 		var more = this.render.more = $("<a/>").addClass("more").html("Показать еще"),
@@ -24,7 +24,6 @@ sky.services.files = {
 				if(more.is(":visible") && more.hasClass("clicked") && win.scrollTop() + win.innerHeight() > more.offset().top)
 					more.trigger("click");
 			});
-
 
 		/* Bind */
 		$(document).on("click", "a.more", function() {
@@ -44,6 +43,9 @@ sky.services.files = {
 
 	},
 
+	/**
+	 * Create modal windows
+	 */
 	windows: {
 		add: function() {
 
@@ -61,10 +63,13 @@ sky.services.files = {
 			if(this.window)
 				this.window.close();
 
+			/*  */
 			if(data.file.type == "video")
 				data.file.video = true;
-			else data.file.image = true;
+			else
+				data.file.image = true;
 
+			/* Count proportions */
 			data.file.countedHeight = 900 / parseInt(data.file.width) * parseInt(data.file.height);
 
 			/* Create window */
@@ -76,6 +81,7 @@ sky.services.files = {
 					$(window).trigger("resize").trigger("resize");
 			});
 
+			/* Resize on video */
 			this.window.holder.find("video").on("loadeddata", function() {
 				if($(this).is(":visible"))
 					$(window).trigger("resize").trigger("resize");
@@ -85,8 +91,10 @@ sky.services.files = {
 			this.window.dataContainer.addClass("fillView");
 			this.window.background.addClass("fillView");
 
-			page.history.set({ file: data.file.fileId });
+			/* Set hash */
+			page.history.set({ file: data.file["fileId"] });
 
+			/* Close */
 			this.window.callbacks.on("close", function() {
 				page.history.set({ file: null });
 			});
@@ -113,10 +121,13 @@ sky.services.files = {
 
 		},
 
+		/**
+		 * Draws more button
+		 */
 		drawMore: function() {
 
 			/* Append */
-			this.more.appendTo(this.holder).removeClass("clicked");
+			this.more.appendTo(this.holder).removeClass("clicked").removeClass("loading");
 
 		},
 
@@ -133,8 +144,9 @@ sky.services.files = {
 			if(!files.length)
 				this.holder.addClass("hidden");
 
+			/* Draws more button */
 			if(files.length > 29)
-				this.drawMore(); /* Draws more button */
+				this.drawMore();
 			else this.more.remove();
 
 			/* Append thumbs */
@@ -207,6 +219,11 @@ sky.services.files = {
 
 		},
 
+		/**
+		 * Loads more photos
+		 * @param offset
+		 * @returns {*}
+		 */
 		more: function(offset) {
 
 			/* Stop previous request */
