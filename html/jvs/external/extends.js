@@ -82,13 +82,14 @@ $.extend(jQuery.fn,
 
 	/**
 	 * Centers object inside window or other one
-	 * @param {object} 	obj 		Object to put this in center of or with limits { top:, left:, width:, height: }
-	 * @param {boolean}	noAbsolute	Indicates that we should center inside parent
 	 */
-    center: function(obj, noAbsolute) {
+    center: function(options) {
 
         /* Default are zeros */
-        var sizes = {
+        var obj = options.object,
+			noAbsolute = options.noAbsolute || false,
+			noTop = options.noTop || false
+			sizes = {
             left 	: 0,
             top 	: 0,
             width 	: 0,
@@ -124,8 +125,11 @@ $.extend(jQuery.fn,
 			
 			if(sizes.width  > this.outerWidth()  + 50) this.css("marginLeft", (sizes.width  - this.outerWidth() )  / 2 + "px");
 			else this.css("marginLeft", 25);
-            if(sizes.height > this.outerHeight() + 50) this.css("marginTop" , (sizes.height - this.outerHeight() ) / 2 + "px");
-			else this.css("marginTop", "");
+
+			if(!noTop) {
+				if(sizes.height > this.outerHeight() + 50) this.css("marginTop" , (sizes.height - this.outerHeight() ) / 2 + "px");
+				else this.css("marginTop", "");
+			}
 
 		/* If absolute we just center */
         } else {

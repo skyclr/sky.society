@@ -17,9 +17,14 @@ sky.ajax = function(url, data, object, options, callbackData) {
 		object 		 = undefined;
 	}
 
+	if(url.charAt(0) == "/")
+		url = url.substr(1);
+
 	/* Add base */
 	if(page.data.base)
-		url = page.data.base + "/" + url;
+		url = page.data.base + url;
+
+
 
 	/* If no options */
 	if(!options)

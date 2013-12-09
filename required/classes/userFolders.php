@@ -5,7 +5,7 @@
  */
 class userFolders {
 
-	private static
+	public static
 		/**
 		 * Max revision query
 		 * @var string
@@ -39,6 +39,7 @@ class userFolders {
 			->insert();
 
 		sky::$db->make("foldersRevisions")
+			->set("revision", versionControl::getRevision())
 			->set("folderId", $id)
 			->set("name", $record["name"])
 			->set("parentId", $record["parentId"])
@@ -138,6 +139,7 @@ class userFolders {
 	/**
 	 * Changes specified album
 	 * @param array $data New data
+	 * @throws userErrorException
 	 * @return array|Mixed
 	 */
 	public static function change($data) {
@@ -149,8 +151,13 @@ class userFolders {
 		$folder = self::getById($data["folderId"]);
 
 
+		# Check permission
+		if($folder["owner"] != auth::$me["id"])
+			throw new userErrorException("У вас нет права удалять этот альбом");
+
 		# Add revision
 		sky::$db->make("foldersRevisions")
+			->set("revision", versionControl::getRevision())
 			->set("folderId", $folder["folderId"])
 			->set("name", $record["name"])
 			->set("parentId", $folder["parentId"])
@@ -197,6 +204,7 @@ class userFolders {
 
 		# Add revision
 		sky::$db->make("foldersRevisions")
+			->set("revision", versionControl::getRevision())
 			->set("folderId", $id)
 			->set("name", $folder["name"])
 			->set("parentId", $folder["parentId"])

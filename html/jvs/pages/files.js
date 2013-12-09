@@ -166,7 +166,7 @@ $(document)
 
 		/* Load folder */
 		if(!element.is("a"))
-			sky.services.files.ajax.load($(this).data("file")["fileId"])
+			sky.services.files.ajax.load($(this).data("file")["fileId"]);
 
 	})
 	.on("submit", "#addFolderForm", function(event) {

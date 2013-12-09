@@ -219,6 +219,7 @@ class userFiles {
 	/**
 	 * Returns file full info
 	 * @param $id
+	 * @throws userErrorException
 	 * @return array
 	 */
 	public static function getFullInfo($id) {
@@ -233,6 +234,19 @@ class userFiles {
 			->records(array("filesRevisions.*", "owner", "created", "thumb", "extension", "location", "type", "width", "height"))
 			->get("single"))
 			throw new userErrorException("Указанного файла не существует");
+
+
+		# Get next
+		$file["next"] = sky::$db->make("files")
+			->join("(" . self::$maxRevisionJoin .") as temp", "temp.fileId = files.id")
+			->join("filesRevisions", "filesRevisions.id = temp.id")
+			->where("filesRevisions.deleted", 0)
+			->where("filesRevisions.folderId", $file["folderId"])
+			->where("id", $file["fileId"], "<")
+			->order("id")
+			->limit(1)
+			->records("id")
+			->get("value");
 
 
 		# Get parent folder

@@ -70,20 +70,22 @@ sky.services.files = {
 			/* Create window */
 			this.window = sky.windows.Modal("files-windows-file", data);
 
-			/* Resize on image load */
-			this.window.holder.find("img").on("load", function() {
-				if($(this).is(":visible"))
-					$(window).trigger("resize").trigger("resize");
-			});
+			/* Disable centering */
+			this.window.disableCentering();
 
-			this.window.holder.find("video").on("loadeddata", function() {
-				if($(this).is(":visible"))
-					$(window).trigger("resize").trigger("resize");
-			});
+			this.window.dataContainer.css("marginTop", 25);
+
+			if(data.file.next) {
+				this.window.holder.find("img.photo").on("click", function() {
+					sky.services.files.ajax.load(data.file["next"]);
+				});
+			}
 
 			/* Special class for file window */
 			this.window.dataContainer.addClass("fillView");
 			this.window.background.addClass("fillView");
+
+			$(window).trigger("resize").trigger("resize")
 
 			page.history.set({ file: data.file.fileId });
 

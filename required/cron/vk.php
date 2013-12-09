@@ -27,13 +27,30 @@ try {
 		die("Nothing to export");
 
 
-	# get photos
-	$files = $request->limit(5)->order("created")->get();
+		# get photos
+	$files = $request->same()->limit(5)->order("created")->get();
+
 
 
 	# If none
 	if(!$files)
 		die("Nothing to export");
+
+
+
+	# Get albums
+	$albumIds = $request->same()->records("filesRevisions.folderId")->get();
+
+
+	# Get albums
+	$albums = sky::$db->make("folders")
+		->join("(" . userFolders::$maxRevisionJoin .") as temp", "temp.folderId = folders.id")
+		->join("foldersRevisions", "foldersRevisions.id = temp.id")
+		->join("users", "users.id = folders.owner")
+		->where("temp.id", null, "!=")
+		->where("id", $albumIds)
+		->records(array("foldersRevisions.*", "folders.owner", "folders.created", "users.username"))
+		->get();
 
 
 	# Upload photos
@@ -45,8 +62,18 @@ try {
 	}
 
 
+	# Message
+	$message = "Загружены новые фотографии(всего $total)\nАльбомы:\n";
+
+
+	# Add albums links
+	foreach($albums as $album)
+		$message .= $album["name"] . " (http://unitedsky.ru/" . sky::$config["site"]["base"] . "files/#album={$album["folderId"]})\n";
+
+
+
 	# Make post
-	$post = vk::wallPost("Загружены новые фотографии(всего $total)", array("from_group" => 1, "owner_id" => -60733873, "attachments" => implode($uploaded, ",")));
+	$post = vk::wallPost($message, array("from_group" => 1, "owner_id" => -60733873, "attachments" => implode($uploaded, ",")));
 
 
 	# Dump

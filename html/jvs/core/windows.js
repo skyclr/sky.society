@@ -89,6 +89,10 @@ $.extend(sky.windows.Modal.prototype, {
 		background: "modalWindowDarkness"
 	},
 
+	disableCentering: function() {
+		this.noCentering = true;
+	},
+
 	/**
 	 * Closes current window
 	 * @param {boolean} byUser Indicates that window was closed not by user
@@ -185,6 +189,7 @@ $(window)
 		/* Apply for windows */
 		$.each(sky.windows.list, function(_, modal) {
 
+
 			/* Min values set because of this field document may be bigger */
 			modal.background.css({ height: jWindow.height(), width: jWindow.width(), top: topOffset });
 
@@ -194,7 +199,7 @@ $(window)
 			/* Set width */
 			modal.dataContainer
 				.width(modal.holder.outerWidth())
-				.center(modal.background, true);
+				.center({ object:modal.background, noAbsolute: true, noTop: modal["noCentering"] });
 
 		});
 
@@ -209,7 +214,6 @@ $(document)
 
 		/* Get window */
 		var modal = element.data("modalWindow")
-
 
 		/* Hide window */
 		if(modal)
