@@ -1,0 +1,16 @@
+{% verbatim %}
+
+<script type="text/template" id="users-avatar">
+	<a class="avatar" href="{{preferences.site.base}}/{{id}}/">
+		{{#if small}}
+		<div class="border"></div>
+		{{/if}}
+		<img src="{{#if hasAvatar}}
+			{{preferences.site.base}}files/users/{{name}}/avatar/{{size}}.{{ avatarExtension }}
+		{{else}}
+			{{preferences.site.base}}img/avatar/{{size}}.png
+		{{/if}}"/>
+	</a>
+</script>
+
+{% endverbatim %}

@@ -7,8 +7,54 @@ class users {
 
 	public static function saveSettings($data) {
 
+
 	}
 
+
+	public static function uploadAvatar() {
+
+
+		# If no uploaded
+		if(!files::filesUploaded("avatar"))
+			return;
+
+
+		# If no
+		if(!$file = files::uploadFiles(sky::location("temp"), "random", 0, 1, "avatar", "image"))
+			throw new userErrorException("Невозможно загрузить изображение");
+
+
+		# Make big
+		images::makeSmallFromFiles($file, self::getUserPath() . "avatars/", 200, 200, "big", 	0, true);
+		images::makeSmallFromFiles($file, self::getUserPath() . "avatars/", 100, 100, "medium", 0, true);
+		images::makeSmallFromFiles($file, self::getUserPath() . "avatars/",  50,  50, "small", 	0, true);
+
+
+		# Update
+		auth::$me["hasAvatar"] = 1;
+		auth::$me["avatarExtension"] = $file["extension"];
+		auth::$me->save();
+
+	}
+
+	public static function getUserPath($user = false) {
+
+
+		# Get self if none
+		if(!$user) {
+
+			# If not logged
+			if(!auth::isLoggedIn())
+				throw new systemErrorException("Try to get info of non logged in user");
+
+			# Get current
+			$user = auth::$me;
+		}
+
+		# Return path
+		return sky::location("users") . $user["name"] . "/";
+
+	}
 
 	public static function register($id, $data) {
 
