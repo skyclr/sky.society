@@ -245,7 +245,7 @@ sky.AjaxFiles = function(input, url, data, callbacks) {
 		var id = 0;
 
 		/* Set sending next after this one */
-		this.callbacks.on("always", function() {
+		this.callbacks.on("error, success", function() {
 			id++;
 			if(self.files[id])
 				handler.send(id);

@@ -209,5 +209,8 @@ jQuery.extend(sky.AjaxFiles.XHR.prototype, {
 			this.ajax.stop();
 		});
 
+		/* Call always method */
+		this.callbacks.fire("abort", this.extend({}));
+
 	}
 });

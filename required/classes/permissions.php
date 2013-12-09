@@ -1,95 +1,181 @@
 <?php
 
+
 class permissions {
 
-	public static
-		$full = array(
-			"read" => true,
-			"write" => true
-		),
-		$cache = array();
+	const
+		WRITE = "w",
+		EDIT = "w",
+		READ = "r";
+
+	private static $cache = array(
+		"folders" => array(),
+		"files"   => array()
+	);
 
 	/**
-	 * Gets folder permissions
+	 * Gets folder permission for current user
+	 * @param int $id Folder id
+	 * @return array
 	 */
-	public static function forFolder($folder) {
+	public static function getFilePermissions($id) {
+
+		# If in cache
+		if(isset(self::$cache["files"][$id]))
+			return self::$cache["files"][$id];
 
 
-		# Get folder data
-		if(!is_array($folder))
-			$folder = userFolders::getById($folder);
+		# Get data
+		$permission  = self::getDefault();
+		$file 	 	 = userFiles::getById($id);
+		$permissions = sky::$db->make("permissions")->where("type", "file")->where("resourceId", $id)->get();
 
 
-		# Return full
-		if($folder["folderId"] == 0)
-			return self::$full;
+		# Compile
+		if($permissions)
+			$permission = self::compile($permissions);
 
 
-		# Get permissions
-		if(!$permissions = sky::$db->make("permissions")
-			->where("resourceType", "folder")
-			->where("resourceId", $folder["folderId"]))
-			$permissions = array();
+		# get parent permissions
+		$parent = self::getFolderPermissions($file["folderId"]);
 
 
-		# Get parent permissions
-		$parent = self::forFolder($folder["parentId"]);
+		# Merge
+		$permission = self::merge($permission, $parent);
 
 
-		# Count total
-		return self::compile(array_merge($parent, $permissions));
+		# Cache
+		return self::$cache["folders"][$id] = $permission;
 
 	}
 
 	/**
-	 * Compiles permissions
-	 * @param $permissions
+	 * Gets folder permission for current user
+	 * @param int $id Folder id
 	 * @return array
 	 */
-	private static function compile($permissions) {
+	public static function getFolderPermissions($id) {
+
+		# If in cache
+		if(isset(self::$cache["folders"][$id]))
+			return self::$cache["folders"][$id];
 
 
-		# Compiled result
-		$result = self::$full;
+		# Get data
+		$permission  = self::getDefault();
 
 
-		# Go through
-		foreach($permissions as $permission) {
-			if(self::canApply($permission)) {
-				foreach($permission["permission"] as $name => $p)
-					if($p == false)
-						$result[$name] = false;
-			}
+		# Get folder
+		if($id != 0)
+			$folder = userFolders::getById($id);
+		else
+			$folder = userFolders::$root;
+
+
+		# Get permission
+		$permissions = sky::$db->make("permissions")->where("type", "folder")->where("resourceId", $id)->get();
+
+
+		# Compile
+		if($permissions)
+			$permission = self::compile($permissions);
+
+
+		# Get parent permission
+		if($folder["parentId"]) {
+
+			# get parent permissions
+			$parent = self::getFolderPermissions($folder["parentId"]);
+
+			# Merge
+			$permission = self::merge($permission, $parent);
+
 		}
 
 
-		# Return
+		# Cache
+		return self::$cache["folders"][$id] = $permission;
+
+	}
+
+	/**
+	 * Gets single permission form array of permissions of object
+	 * @param array $permissions array of permissions data
+	 * @return array
+	 */
+	public static function compile($permissions) {
+
+		# Prepare result
+		$result = self::getDefault();
+
+		# Go through
+		foreach($permissions as $permission) {
+			if(self::canApply($permission))
+				$result = self::merge($result, json_decode($permission["permission"], true));
+		}
+
+		# Return;
 		return $result;
 
 	}
 
 	/**
-	 * returns true if rule can be applied for current user
+	 * Checks if permission restriction should be applied for current user
 	 * @param array $permission Permission data
 	 * @return bool
 	 */
 	public static function canApply($permission) {
 
-		# Specified users only
-		if($permission["restrictionType"] == "user") {
-			if(auth::$me["id"] != $permission["restrictionId"])
-				return false;
+		switch($permission["permissionType"]) {
+			case "group":
+				return auth::$me->inGroup($permission["applyId"]);
+			case "user":
+				return auth::$me["id"] == $permission["applyId"];
+			default: return true;
 		}
 
-		# Specified users only
-		if($permission["restrictionType"] == "group") {
-			if(auth::$me->inGroup($permission["restrictionId"]))
-				return false;
+	}
+
+	/**
+	 * Returns default permissions
+	 * @return array
+	 */
+	public static function getDefault() {
+		return array(
+			self::WRITE => "true",
+			self::READ  => "true",
+		);
+	}
+
+	/**
+	 * Merges two permissions
+	 * @param array $what Base permission
+	 * @param array $with Permission to add
+	 * @return array Merged permission
+	 */
+	public static function merge($what, $with) {
+
+		# Prepare result
+		$result = array();
+
+		# Go through
+		foreach($what as $name => $p) {
+			if(!empty($with[$name]))
+				$result[$name] = $p;
 		}
 
-		# BAse restrictions are appliable
-		return true;
+		# Return result
+		return $result;
+	}
 
+	/**
+	 * Check operation available according to permission
+	 * @param array $permission Permission data
+	 * @param string $what Operation
+	 * @return bool
+	 */
+	public static function available($permission, $what) {
+		return !empty($permission[$what]);
 	}
 
 }
