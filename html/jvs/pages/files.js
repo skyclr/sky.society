@@ -95,7 +95,6 @@ $(document)
 		sky.services.files.ajax.remove($(this).parents(".file").attr("fileId"), $(this));
 
 	})
-
 	.on("click", ".icon.info", function(event) {
 
 		/* No # go */

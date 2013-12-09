@@ -54,6 +54,10 @@ $preferences = array(
 		"guest"       => array(     # Guest account parameters
 			"username" => "Гость"
 		),
+		"changeable" => array(
+			"hasAvatar",
+			"avatarExtension"
+		),
 		"preferencesTable" => "userSettings",
 		"preferences" => array(
 			"perPage" => 30

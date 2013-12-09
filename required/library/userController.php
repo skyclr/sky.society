@@ -183,7 +183,8 @@ class userController implements arrayaccess {
 	 * Saves current user data
 	 */
 	public function save() {
-		
+
+
 		# If nothing to change
 		if(empty(sky::$config['login']['changeable']))
 			return;
@@ -194,7 +195,7 @@ class userController implements arrayaccess {
 		
 		
 		# Compile
-		foreach(sky::$config['login']['changeable'] as $change)
+		foreach(sky::$config['authenticate']['changeable'] as $change)
 			$changes[$change] = $this->userData[$change];
 		
 		

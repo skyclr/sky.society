@@ -7,6 +7,9 @@ sky.services = sky.services || {};
  */
 sky.services.files = {
 
+	/**
+	 * Base inits
+	 */
 	init: function() {
 
 		/* Get holder */
