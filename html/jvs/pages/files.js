@@ -13,6 +13,11 @@ $(document)
 		/* Load base */
 		sky.services.folders.ajax.load(0);
 
+		sky.templates.globals = {
+			base: page.data.base,
+			me: page.data.me
+		};
+
 		/* Enable hash history */
 		page.history = sky.History().on("change", function(difference) {
 
@@ -194,6 +199,23 @@ $(document)
 			this.play();
 		else
 			this.pause();
+
+	})
+	.on("submit", ".comment.new", function(event) {
+
+		/* No default submit */
+		event.preventDefault();
+
+		var area = $(this).find("textarea");
+
+		/* Send request */
+		sky.ajax("ajax/comments/?type=add", $(this).readForm(), $(this).find(".button"))
+			.success(function(data) {
+				sky.templates.render("user-comment", data.comment).prependTo(".comments .list");
+				area.val("");
+			})
+			.error(function(error) { alert(error); });
+
 	})
 	.on("keypress", "body", function(event) {
 

@@ -18,7 +18,10 @@ class comments {
 		# Prepare request
 		$request= sky::$db->make("comments")
 			->where("resourceId", $id)
-			->where("resourceType", $type);
+			->where("resourceType", $type)
+			->join("users", "comments.ownerId = users.id")
+			->records(array("comments.*", "users.name", "users.lastname", "users.username"))
+			->order("created");
 
 
 		# Set page offset
@@ -53,7 +56,8 @@ class comments {
 		$data = validator::init($data)
 			->rule("type", "trim", "Неверно указано к чему добавить комментарий")
 			->rule("id", "positive", "Неверно указано к чему добавить комментарий")
-			->rule("text", "trim", "Не указан текст комментария");
+			->rule("text", "trim", "Не указан текст комментария")
+			->get();
 
 
 		# Add
@@ -61,17 +65,20 @@ class comments {
 			->set("text", $data["text"])
 			->set("resourceId", $data["id"])
 			->set("resourceType", $data["type"])
-			->set("owner", auth::$me["id"])
+			->set("ownerId", auth::$me["id"])
 			->set("created", "", "now")
 			->insert();
 
 
 		# Return
-		return $id;
+		return self::compile(sky::$db->make("comments")->where($id)->join("users", "comments.ownerId = users.id")
+			->records(array("comments.*", "users.name", "users.lastname", "users.username"))->get("single"));
 
 	}
 
 	public static function compile($comment) {
+
+		$comment["created"] = AdvancedDateTime::make($comment["created"])->format(sky::DATE_TIME);
 
 		# Return
 		return $comment;

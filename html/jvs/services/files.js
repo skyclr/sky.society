@@ -161,6 +161,11 @@ sky.services.files = {
 			/* Render */
 			file.render = sky.templates.render("files-thumb", file).data("file", file);
 
+			/* No slow show */
+			var img = file.render.find("img").hide().on("load", function() {
+				img.show();
+			});
+
 			/* Append */
 			if(first)
 				this.list.prepend(file.render);

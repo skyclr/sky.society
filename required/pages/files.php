@@ -20,7 +20,7 @@ class page extends basePage {
 		 * List of templates used in page
 		 * @var array
 		 */
-		$jsTemplates = array("folders", "files");
+		$jsTemplates = array("folders", "files", "users");
 
 	/**
 	 * Page creation

@@ -6,6 +6,7 @@
 
 $preferences["pages"] = array(
 	"synonyms" => array(
-		'ajax.*' => "ajax"
+		'ajax.*' => "ajax",
+		'\d'     => "me"
 	)
 );

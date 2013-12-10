@@ -38,7 +38,7 @@ sky.templates = {
 		});
 
 		/* Add globals */
-		data = jQuery.extend(true, data, this.globals);
+		data = jQuery.extend(true, data, { globals: this.globals });
 
 		/* Render */
 		var temp = $('<div/>').append(this.compiledTemplates[name](data));

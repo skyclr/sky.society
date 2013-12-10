@@ -74,6 +74,9 @@ class userController implements arrayaccess {
 		# Get logged flag
 		$this->isLoggedIn = auth::isLoggedIn();
 
+		if(auth::isLoggedIn())
+			sky::$db->make(auth::$usersTable)->set("last", "", "now")->where($this->userData["id"])->update();
+
 	}
 	
 	/**

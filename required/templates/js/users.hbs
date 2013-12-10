@@ -1,16 +1,24 @@
 {% verbatim %}
 
-<script type="text/template" id="users-avatar">
-	<a class="avatar" href="{{preferences.site.base}}/{{id}}/">
+<script type="text/template" id="user-avatar">
+	<a class="avatar" href="{{globals.base}}{{id}}/">
 		{{#if small}}
 		<div class="border"></div>
 		{{/if}}
-		<img src="{{#if hasAvatar}}
-			{{preferences.site.base}}files/users/{{name}}/avatar/{{size}}.{{ avatarExtension }}
-		{{else}}
-			{{preferences.site.base}}img/avatar/{{size}}.png
-		{{/if}}"/>
+		<img src="{{#if hasAvatar}}{{globals.base}}files/users/{{name}}/avatar/{{size}}.{{ avatarExtension }}{{else}}{{globals.base}}img/avatar/{{size}}.png{{/if}}"/>
 	</a>
+</script>
+
+<script type="text/template" id="user-comment">
+	<div class="comment">
+		<user-avatar></user-avatar>
+		<div class="bubble">
+			<div class="head">
+				<a href="{{ globals.base }}{{ ownerid }}">{{ name }}</a> @ {{created}}
+			</div>
+			{{ text }}
+		</div>
+	</div>
 </script>
 
 {% endverbatim %}

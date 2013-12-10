@@ -45,6 +45,23 @@
 	{{#if file.image}}
 	<img src="../files/files/{{ file.location }}" class="photo" />
 	{{/if}}
+	<div class="comments">
+		<h1>Комментарии</h1>
+		<form class="comment new">
+			<input type="hidden" name="type" value="file"/>
+			<input type="hidden" name="id" value="{{ file.fileId }}"/>
+			<user-avatar></user-avatar>
+			<div class="bubble">
+				<textarea name="text"></textarea>
+				<smart-button type="submit">Добавить</smart-button>
+			</div>
+		</form>
+		<div class="list">
+		{{#each comments}}
+		<user-comment ownerId="{{ ownerId }}" name="{{ name }} {{ lastname }}" created="{{ created }}">{{ text }}</user-comment>
+		{{/each}}
+		</div>
+	</div>
 </script>
 
 
