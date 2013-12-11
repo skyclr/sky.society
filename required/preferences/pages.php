@@ -6,7 +6,10 @@
 
 $preferences["pages"] = array(
 	"synonyms" => array(
-		'ajax.*' => "ajax",
-		'\d'     => "me"
+		'ajax.*' 	=> "ajax",
+		'\d'     	=> "me",
+		'me'	 	=> "profile/settings",
+		"santa"	 	=> "profile/santa",
+		"settings" 	=> "profile/settings"
 	)
 );

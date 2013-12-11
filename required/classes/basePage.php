@@ -172,6 +172,10 @@ abstract class basePage {
 			throw new systemErrorException("Try to render not existing template: $templatePath");
 
 
+		# Get page name
+		$parameters["pageName"] = content::$pageName;
+
+
 		# Get ordered result messages
 		$parameters["resultMessages"] = info::getOrdered();
 

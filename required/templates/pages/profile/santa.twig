@@ -1,0 +1,37 @@
+{% extends "/shared/basePage.twig" %}
+
+{# Toolbar elements #}
+{% block toolbar %}{% include "shared/profileMenu.twig" %}{% endblock %}
+
+{# Content #}
+{% block content %}
+
+	{% if not santa.decision %}
+		{{ _self.choose() }}
+	{% else %}
+		<script type="text/javascript">
+			$(document).on('ready', function() {
+				$('body').addClass("{% if santa.decision == "accept" %}accept{% else %}decline{% endif %}");
+			});
+		</script>
+	{% endif %}
+
+
+{% endblock %}
+
+
+{# Choose form #}
+{% macro choose() %}
+	<div class="choose">
+		<form action="" method="post">
+			<input type="hidden" name="type" value="decision"/>
+			<input type="hidden" name="decision" value="accept"/>
+			<input type="submit" value="Участвую" class="blue" />
+		</form>
+		<form action="" method="post">
+			<input type="hidden" name="type" value="decision"/>
+			<input type="hidden" name="decision" value="decline"/>
+			<input type="submit" value="В этот раз без меня" />
+		</form>
+	</div>
+{% endmacro %}

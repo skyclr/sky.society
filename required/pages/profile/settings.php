@@ -10,7 +10,7 @@ class page extends basePage {
 	 * Page title
 	 * @var string|boolean
 	 */
-	public $title 	 = "тайный Санта";
+	public $title 	 = "профиль";
 
 	/**
 	 * Page creation

@@ -135,7 +135,7 @@ class content {
 				"page"        => self::$page,
 				"pageName"    => self::$pageName,
 				"pagePath"    => self::$pagePath,
-				"realPath"	  => request::getPath(""),
+				"pathElements"=> request::getAddress(),
 				"jsTemplates" => $jsTemplates ? json_encode($jsTemplates, true) : "{}"
 			));
 

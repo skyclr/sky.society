@@ -347,6 +347,9 @@ label span.name {
   display: block;
   float: left;
 }
+.toolbar.main a.active {
+  color: #536d74;
+}
 .toolbar.main .action {
   float: right;
   margin-left: 10px;

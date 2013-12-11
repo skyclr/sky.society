@@ -8,7 +8,8 @@
     <title>{{ preferences.site.name }} : {{ page.title }}</title>
     <link rel="shortcut icon" href="{{ base }}img/icons/fav.png" />
     <link rel="stylesheet" href="{{ base }}css/styles.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ base }}css/{{ pagePath }}.css" type="text/css"/>
+    <link rel="stylesheet" href="{{ base }}css/{{ pageName }}.css" type="text/css"/>
+	<script type="text/javascript" src="{{ base }}jvs/external/jquery.js"></script>
 </head>
 <body class="{% block bodyClass %}layout{% endblock %}">
     <div id="pageContentHolder">
@@ -36,7 +37,6 @@
     </div>
 
     {# Externals #}
-    <script type="text/javascript" src="{{ base }}jvs/external/jquery.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/jquery.cookie.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/extends.js"></script>
     <script type="text/javascript" src="{{ base }}jvs/external/handlebars.js"></script>
