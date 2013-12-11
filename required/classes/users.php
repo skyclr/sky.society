@@ -30,6 +30,10 @@ class users {
 		images::makeSmallFromFiles($file, self::getUserPath() . "avatars/",  50,  50, "small", 	0, true);
 
 
+		# Array to one
+		$file = $file[0];
+
+
 		# Update
 		auth::$me["hasAvatar"] = 1;
 		auth::$me["avatarExtension"] = $file["extension"];
@@ -48,11 +52,11 @@ class users {
 				throw new systemErrorException("Try to get info of non logged in user");
 
 			# Get current
-			$user = auth::$me;
+			$user = auth::$me->get();
 		}
 
 		# Return path
-		return sky::location("users") . $user["name"] . "/";
+		return sky::location("users") . $user["username"] . "/";
 
 	}
 

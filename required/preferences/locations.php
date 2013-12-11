@@ -39,6 +39,8 @@ $preferences['locations'] += array(
 	"twigJs"      => $preferences['locations']['required'] . "templates/js/",
 
 	# Storage
-	"files"       => $preferences['locations']['html'] . "files/"
+	"files"       => $preferences['locations']['html'] . "files/",
+	"users"       => $preferences['locations']['html'] . "files/users/",
+	"temp"       => "/tmp/"
 
 );

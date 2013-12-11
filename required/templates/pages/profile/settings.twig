@@ -4,4 +4,9 @@
 {% block toolbar %}{% include "shared/profileMenu.twig" %}{% endblock %}
 
 {% block content %}
+	<form method="post" enctype="multipart/form-data">
+		<input type="hidden" name="type" value="avatar"/>
+		<input type="file" name="avatar"/>
+		<smart-button type="submit">Загрузить</smart-button>
+	</form>
 {% endblock %}

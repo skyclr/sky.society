@@ -17,6 +17,10 @@ class page extends basePage {
 	 */
 	public function main() {
 
+		if(vars::type() == "avatar") {
+			users::uploadAvatar();
+		}
+
 		# render page
 		$this->content = $this->render();
 
