@@ -58,7 +58,7 @@
 		</form>
 		<div class="list">
 		{{#each comments}}
-		<user-comment ownerId="{{ ownerId }}" name="{{ name }} {{ lastname }}" created="{{ created }}">{{ text }}</user-comment>
+		<user-comment ownerId="{{ ownerId }}" hasAvatar="{{ hasAvatar }}" avatarExtension="{{ avatarExtension }}" name="{{ name }} {{ lastname }}" created="{{ created }}">{{ text }}</user-comment>
 		{{/each}}
 		</div>
 	</div>

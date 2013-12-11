@@ -5,13 +5,13 @@
 		{{#if small}}
 		<div class="border"></div>
 		{{/if}}
-		<img src="{{#if hasAvatar}}{{globals.base}}files/users/{{name}}/avatar/{{size}}.{{ avatarExtension }}{{else}}{{globals.base}}img/avatar/{{size}}.png{{/if}}"/>
+		<img src="{{#if hasAvatar}}{{globals.base}}files/users/{{name}}/avatar/{{size}}.{{ avatarextension }}{{else}}{{globals.base}}img/avatar/{{size}}.png{{/if}}"/>
 	</a>
 </script>
 
 <script type="text/template" id="user-comment">
 	<div class="comment">
-		<user-avatar></user-avatar>
+		<user-avatar hasAvatar="{{ hasavatar }}" avatarExtension="{{ avatarextension }}"></user-avatar>
 		<div class="bubble">
 			<div class="head">
 				<a href="{{ globals.base }}{{ ownerid }}">{{ name }}</a> @ {{created}}

@@ -71,6 +71,12 @@
         page.data.templates =  {{ jsTemplates|raw }};
         page.data.url  		= "{{ (base ~ realPath)|escape("js") }}";
         page.data.base 		= "{{ base|escape("js") }}";
+
+		page.data.me = {
+			hasAvatar: {{ me.hasAvatar }},
+			avatarExtension: {{ me.avatarExtension }}
+		}
+
     </script>
 
 	{# JS templates #}

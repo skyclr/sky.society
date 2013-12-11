@@ -20,7 +20,7 @@ class comments {
 			->where("resourceId", $id)
 			->where("resourceType", $type)
 			->join("users", "comments.ownerId = users.id")
-			->records(array("comments.*", "users.name", "users.lastname", "users.username"))
+			->records(array("comments.*", "users.name", "users.lastname", "users.username", "users.hasAvatar", "users.avatarExtension"))
 			->order("created");
 
 

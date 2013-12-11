@@ -24,6 +24,12 @@ class users {
 			throw new userErrorException("Невозможно загрузить изображение");
 
 
+		if(auth::$me["hasAvatar"]) {
+			files::deleteFile(self::getUserPath() . "avatars/big." . auth::$me["avatarExtension"]);
+			files::deleteFile(self::getUserPath() . "avatars/medium." . auth::$me["avatarExtension"]);
+			files::deleteFile(self::getUserPath() . "avatars/small." . auth::$me["avatarExtension"]);
+		}
+
 		# Make big
 		images::makeSmallFromFiles($file, self::getUserPath() . "avatars/", 200, 200, "big", 	0, true);
 		images::makeSmallFromFiles($file, self::getUserPath() . "avatars/", 100, 100, "medium", 0, true);
