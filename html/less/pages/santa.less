@@ -1,20 +1,29 @@
 .choose {
 	background    : #f0f0f0;
-	padding       : 25px;
-	width         : 260px;
+	padding       : 20px 25px;
+	width         : 210px;
 	margin        : auto;
 	border        : 1px soild #ddd;
 	border-radius : 10px;
 	input {
 		display       : block;
 		padding       : 10px 25px;
-		background    : #3f94e9;
+		background    : #ddd;
 		border-radius : 5px;
 		width         : 200px;
-		color         : white;
-		margin        : 5px auto;
+		color         : #666;
+		margin        : 10px auto;
 		font-size     : 14px;
-		border        : 1px solid #0063d5;
+		border        : 1px solid #ccc;
 		cursor        : pointer;
+		&.blue {
+			background    : #3f94e9 url(../img/backgrounds/frost.png);
+			border        : 1px solid #0063d5;
+			color         : white;
+			text-shadow: 0 1px 0 #0063d5;
+		}
 	}
+}
+contentHolder .content {
+	background: url(../img/santa/background.png) no-repeat;
 }

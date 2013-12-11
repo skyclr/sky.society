@@ -14,11 +14,16 @@
 	{{ _self.choose() }}
 {% endblock %}
 
+
+{% block content %}
+	{{ _self.choose() }}
+{% endblock %}
+
 {# Choose form #}
 {% macro choose() %}
 	<div class="choose">
 		<form action="">
-			<input type="submit" value="Участвую" />
+			<input type="submit" value="Участвую" class="blue" />
 			<input type="submit" value="В этот раз без меня" />
 		</form>
 	</div>
