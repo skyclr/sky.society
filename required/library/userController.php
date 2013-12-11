@@ -189,7 +189,7 @@ class userController implements arrayaccess {
 
 
 		# If nothing to change
-		if(empty(sky::$config['login']['changeable']))
+		if(empty(sky::$config['authenticate']['changeable']))
 			return;
 		
 		
