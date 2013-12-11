@@ -4,6 +4,7 @@
 {% block toolbar %}{% include "shared/profileMenu.twig" %}{% endblock %}
 
 {% block content %}
+	<h1>Обновить аватар</h1>
 	<form method="post" enctype="multipart/form-data">
 		<input type="hidden" name="type" value="avatar"/>
 		<input type="file" name="avatar"/>
