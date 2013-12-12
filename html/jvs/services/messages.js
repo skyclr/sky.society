@@ -7,7 +7,11 @@ sky.services = sky.services || {};
  */
 sky.services.messages = {
 
+	/**
+	 * Ajax fn
+	 */
 	ajax: {
+
 		/**
 		 * Sets default callbacks
 		 * @param ajax
