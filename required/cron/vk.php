@@ -13,6 +13,7 @@ new sky('console');
 
 try {
 
+
 	# Prepare photos request
 	$request = sky::$db->make("files")
 		->join("(" . userFiles::$maxRevisionJoin .") as temp", "temp.fileId = files.id")
@@ -27,15 +28,13 @@ try {
 		die("Nothing to export");
 
 
-		# get photos
+	# Get photos
 	$files = $request->same()->limit(5)->order("created")->get();
-
 
 
 	# If none
 	if(!$files)
 		die("Nothing to export");
-
 
 
 	# Get albums
@@ -71,7 +70,6 @@ try {
 		$message .= $album["name"] . " (http://unitedsky.ru/" . sky::$config["site"]["base"] . "files/#album={$album["folderId"]})\n";
 
 
-
 	# Make post
 	$post = vk::wallPost($message, array("from_group" => 1, "owner_id" => -60733873, "attachments" => implode($uploaded, ",")));
 
@@ -82,6 +80,7 @@ try {
 		->where("section", "export")
 		->where("name", "vk")
 		->update();
+
 
 } catch(Exception $e) {
 

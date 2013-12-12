@@ -1,7 +1,56 @@
 <?php
 
+/**
+ * Class messages
+ */
 class messages {
 
+	/**
+	 * Returns dialog with specified user
+	 * @param int $partner Partner id
+	 * @return array
+	 */
+	public static function getDialog($partner) {
+
+
+		# Prepare result
+		$result = array("messages" => array());
+
+
+		# Get user
+		$result["user"] = users::getById($partner);
+
+
+		# Join
+		$dialog = sky::$db->make("messages")
+			->where("to", auth::$me["id"], "sender")
+			->where("from", $partner, "sender")
+			->where("to", $partner, "OR", "recipient")
+			->where("from", auth::$me["id"], "recipient")
+			->order("created")
+			->get();
+
+
+		# If no dialog
+		if(!$dialog)
+			return $result;
+
+
+		# Go through
+		foreach($dialog as $message)
+			$result["messages"][] = self::compile($message);
+
+
+		# Return result
+		return $result;
+
+	}
+
+	/**
+	 * Adds new message
+	 * @param array $data Message data
+	 * @return Int
+	 */
 	public static function add($data) {
 
 
@@ -22,6 +71,10 @@ class messages {
 
 	}
 
+	/**
+	 * Gets number of unread messages
+	 * @return Mixed
+	 */
 	public static function getUnreadCount() {
 
 		# Get number of messages
@@ -33,7 +86,12 @@ class messages {
 
 	}
 
+	/**
+	 * Gets list of dialogs
+	 * @return array
+	 */
 	public static function getList() {
+
 
 		# Prepare result
 		$result = array("pages" => 0, "list" => array());
@@ -65,6 +123,11 @@ class messages {
 
 	}
 
+	/**
+	 * Compiles single message
+	 * @param $message
+	 * @return mixed
+	 */
 	private static function compile($message) {
 		return $message;
 	}

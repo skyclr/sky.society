@@ -86,6 +86,11 @@ try {
 			require_once "ajax/comments.php";
 			break;
 
+		# Comments operations
+		case "messages":
+			require_once "ajax/messages.php";
+			break;
+
 		# If no proper type
 		default: throw new userErrorException("Не указан тип выполняемой операции");
 

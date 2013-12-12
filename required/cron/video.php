@@ -23,6 +23,7 @@ try {
 	# Go through
 	foreach($videos as $video) {
 
+		# Find extension
 		preg_match('/(\d{2,5})x(\d{2,5})/', $video["meta"], $matches);
 
 		# If none
