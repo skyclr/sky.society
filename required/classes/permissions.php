@@ -1,13 +1,18 @@
 <?php
 
-
+/**
+ * Class permissions
+ */
 class permissions {
 
 	const
 		WRITE = "w",
-		EDIT = "w",
-		READ = "r";
+		EDIT  = "w",
+		READ  = "r";
 
+	/**
+	 * @var array
+	 */
 	private static $cache = array(
 		"folders" => array(),
 		"files"   => array()
@@ -19,6 +24,7 @@ class permissions {
 	 * @return array
 	 */
 	public static function getFilePermissions($id) {
+
 
 		# If in cache
 		if(isset(self::$cache["files"][$id]))
@@ -55,6 +61,7 @@ class permissions {
 	 * @return array
 	 */
 	public static function getFolderPermissions($id) {
+
 
 		# If in cache
 		if(isset(self::$cache["folders"][$id]))
@@ -105,14 +112,17 @@ class permissions {
 	 */
 	public static function compile($permissions) {
 
+
 		# Prepare result
 		$result = self::getDefault();
+
 
 		# Go through
 		foreach($permissions as $permission) {
 			if(self::canApply($permission))
 				$result = self::merge($result, json_decode($permission["permission"], true));
 		}
+
 
 		# Return;
 		return $result;
@@ -155,8 +165,10 @@ class permissions {
 	 */
 	public static function merge($what, $with) {
 
+
 		# Prepare result
 		$result = array();
+
 
 		# Go through
 		foreach($what as $name => $p) {
@@ -164,8 +176,10 @@ class permissions {
 				$result[$name] = $p;
 		}
 
+
 		# Return result
 		return $result;
+
 	}
 
 	/**
